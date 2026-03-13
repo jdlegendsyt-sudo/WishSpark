@@ -1,0 +1,131 @@
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Heart, Share2 } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import AdBanner from "@/components/AdBanner";
+import JsonLd from "@/components/JsonLd";
+
+const calcLove = (a: string, b: string) => {
+  const combined = (a + "loves" + b).toLowerCase().replace(/\s/g, "");
+  let hash = 0;
+  for (let i = 0; i < combined.length; i++) { hash = ((hash << 5) - hash) + combined.charCodeAt(i); hash |= 0; }
+  return Math.abs(hash % 61) + 40; // 40-100%
+};
+
+const getMessage = (pct: number) => {
+  if (pct >= 90) return { msg: "You two are a match made in heaven! 💕 The stars have aligned perfectly for this love.", emoji: "😍" };
+  if (pct >= 80) return { msg: "Wow, incredible chemistry! You two have a strong and beautiful connection. Keep nurturing it!", emoji: "🥰" };
+  if (pct >= 70) return { msg: "Great compatibility! There's real potential for something wonderful here. Go for it!", emoji: "💖" };
+  if (pct >= 60) return { msg: "A good match with plenty of room to grow together. Communication is the key!", emoji: "💝" };
+  if (pct >= 50) return { msg: "There's a spark there! With some effort and understanding, this could blossom into something beautiful.", emoji: "💗" };
+  return { msg: "Every great love story has humble beginnings! Don't give up — sometimes the best things take time.", emoji: "💫" };
+};
+
+const LoveCalculator = () => {
+  const [name1, setName1] = useState("");
+  const [name2, setName2] = useState("");
+  const [result, setResult] = useState<{ pct: number; msg: string; emoji: string } | null>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const calculate = () => {
+    if (!name1.trim() || !name2.trim()) return;
+    const pct = calcLove(name1, name2);
+    const info = getMessage(pct);
+    setResult({ pct, ...info });
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const share = () => {
+    if (!result) return;
+    const text = `💕 Love Calculator Result!\n${name1} ❤️ ${name2} = ${result.pct}%\n\n${result.msg}\n\nTry yours: ${window.location.origin}/tools/love-calculator`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  useEffect(() => {
+    document.title = "Love Calculator by Name — True Love Percentage Test Free Online | WishSpark";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free love calculator by name online. Find your true love percentage and love compatibility score. Best love calculator test with name — check love match percentage instantly!");
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Love Calculator by Name", "url": "https://wishspark.xyz/tools/love-calculator", "description": "Free love calculator by name online. Find your true love percentage and love compatibility score instantly.", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How does the love calculator work?", "acceptedAnswer": { "@type": "Answer", "text": "Our love calculator uses a name-based compatibility algorithm to generate a fun love percentage between two people. Enter both names and get your love score instantly!" }}, { "@type": "Question", "name": "Is the love calculator accurate?", "acceptedAnswer": { "@type": "Answer", "text": "The love calculator is a fun entertainment tool that generates a compatibility percentage based on names. It's meant for fun and sharing with your partner or crush!" }}, { "@type": "Question", "name": "Can I share my love calculator result?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! After calculating your love percentage, click the Share button to send your result directly via WhatsApp to your partner or friends." }}] }} />
+      <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <div className="text-center mb-8">
+          <motion.div className="text-6xl mb-4" animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 1.2 }}>💕</motion.div>
+          <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Love Calculator — True Love Percentage Test</h1>
+          <p className="text-muted-foreground">Free love calculator by name — find your true love compatibility percentage online!</p>
+        </div>
+
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">Your Name</label>
+            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Enter your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <div className="text-center text-3xl">❤️</div>
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">Partner's Name</label>
+            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Enter their name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <Button onClick={calculate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
+            <Heart className="w-4 h-4 mr-2" /> Calculate Love
+          </Button>
+        </div>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
+
+        {result && (
+          <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4">
+            <p className="text-muted-foreground">{name1} ❤️ {name2}</p>
+            <motion.p className="text-7xl font-bold text-primary" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}>
+              {result.pct}%
+            </motion.p>
+            <p className="text-4xl">{result.emoji}</p>
+            <p className="text-foreground leading-relaxed max-w-md mx-auto">{result.msg}</p>
+            <Button onClick={share} variant="outline" className="border-gold/20">
+              <Share2 className="w-4 h-4 mr-2" /> Share Result
+            </Button>
+          </motion.div>
+        )}
+
+        <section className="mt-16 space-y-6">
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Love Calculator Online — Discover Your True Love Compatibility</h2>
+            <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+              <p>Love calculators have been a beloved internet tradition for over two decades, and for good reason — there's something irresistibly fun about typing in two names and seeing what "destiny" has in store. Our love calculator takes this classic concept and wraps it in a beautiful, modern experience that's perfect for sharing with your partner, crush, or friends.</p>
+              <p>Here's how it works: you enter your name and your partner's (or crush's) name, and our algorithm generates a love compatibility percentage between 40% and 100%. But we didn't stop at just a number. Each score comes with a personalized message that describes your compatibility. Scores above 90% get the "match made in heaven" treatment, while lower scores get encouraging messages about building connection over time. Every result feels positive and fun — because that's what love should be!</p>
+              <p>The love calculator is designed for entertainment and social sharing. It's the kind of tool that sparks conversations — "I got 95% with you!" — and creates playful moments between couples. Valentine's Day, date nights, slumber parties, or just a random Tuesday when you're curious — there's never a wrong time to check your love score.</p>
+              <p>One thing we love about this tool is how it brings people together. When you share your result via WhatsApp, the recipient can click the link and try it themselves. Before you know it, your entire friend group is calculating their love scores and comparing results. It's innocent, fun, and creates memories — and isn't that what love is all about?</p>
+            </div>
+          </div>
+
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">How to Use the Love Calculator</h2>
+            <ol className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">1</span><span><strong className="text-foreground">Enter your name</strong> — Type your first name in the "Your Name" field.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">2</span><span><strong className="text-foreground">Enter your partner's name</strong> — Type the name of your partner, crush, or the person you're curious about.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">3</span><span><strong className="text-foreground">Click "Calculate Love"</strong> — Watch as your love percentage appears with a beautiful animation and a personalized compatibility message.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">4</span><span><strong className="text-foreground">Share the result</strong> — Click "Share Result" to send your love score via WhatsApp. Let them know how compatible you are!</span></li>
+            </ol>
+          </div>
+
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Love Calculator FAQ</h2>
+            <div className="space-y-4 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Is the love calculator scientifically accurate?</p><p>The love calculator is a fun entertainment tool, not a scientific measurement. It uses a name-based algorithm to generate consistent, amusing results. Real love compatibility involves much more than names — but sometimes a playful percentage is all you need to start a great conversation!</p></div>
+              <div><p className="font-medium text-foreground">Will I get the same result every time?</p><p>Yes! The same two names will always produce the same percentage. This consistency is part of the fun — you can verify your score with friends and it stays the same.</p></div>
+              <div><p className="font-medium text-foreground">Does the order of names matter?</p><p>Yes, swapping the order of names may produce a slightly different result. Try both combinations and go with whichever one you like better — we won't judge!</p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default LoveCalculator;

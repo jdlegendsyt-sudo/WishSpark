@@ -1,0 +1,147 @@
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Cake, Copy, Share2, RefreshCw } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import AdBanner from "@/components/AdBanner";
+import JsonLd from "@/components/JsonLd";
+
+const wishes = [
+  (n: string) => `💕 Happy Birthday, my dearest ${n}! You are the most precious gift in my life. Every moment with you feels like a beautiful dream. May your day be filled with all the love you deserve! 🎂✨`,
+  (n: string) => `💖 ${n}, you make my heart skip a beat every single day. On your special day, I want you to know how deeply you are loved. Happy Birthday, my love! 🌹💫`,
+  (n: string) => `🥰 To the one who holds my heart — Happy Birthday, ${n}! You are my sunshine, my happiness, and my everything. May this year bring you endless joy and all your heart desires! 💝`,
+  (n: string) => `💗 ${n}, words cannot express how much you mean to me. You are my favorite person in this whole world. Wishing you the most magical birthday filled with love! 🎀✨`,
+  (n: string) => `🌹 Happy Birthday to the most amazing soul, ${n}! Your smile is my favorite thing, and your happiness is all I wish for. I love you more than words can say! 💕🎂`,
+  (n: string) => `💞 ${n}, every day with you is a blessing, and today we celebrate the day an angel was born. Happy Birthday, sweetheart! May all your dreams come true! 🌟💖`,
+  (n: string) => `😘 To my beloved ${n} — Happy Birthday! You deserve all the love, happiness, and beautiful moments life has to offer. You are truly one in a million! 💝🎉`,
+  (n: string) => `💓 ${n}, you light up my world like nobody else. On your birthday, I wish you infinite love, endless happiness, and a lifetime of beautiful memories! 🎂💕`,
+  (n: string) => `🥹 Happy Birthday, precious ${n}! My heart overflows with love for you. Thank you for being you — the most wonderful person I know. May this year be your best yet! 💖✨`,
+  (n: string) => `💘 ${n}, you are the reason I believe in magic. Happy Birthday to my favorite human! May your day be as extraordinary and beautiful as you are! 🌈💗`,
+  (n: string) => `🌸 Wishing the happiest birthday to ${n}! You are loved beyond measure and cherished more than you know. Here's to another year of making beautiful memories together! 💕🎀`,
+  (n: string) => `💝 ${n}, on your special day, I want you to feel all the love that surrounds you. You are a treasure, and the world is better because you're in it. Happy Birthday! 🎂💖`,
+];
+
+const BirthdayWishesGenerator = () => {
+  const [name, setName] = useState("");
+  const [generated, setGenerated] = useState<string[]>([]);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const generate = () => {
+    if (!name.trim()) return;
+    const shuffled = [...wishes].sort(() => Math.random() - 0.5);
+    setGenerated(shuffled.slice(0, 5).map((fn) => fn(name.trim())));
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const copy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({ title: "Copied!", description: "Wish copied to clipboard" });
+  };
+
+  const share = (text: string) => {
+    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
+  };
+
+  useEffect(() => {
+    document.title = "Birthday Wishes with Name Generator Free Online | WishSpark";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Generate personalized happy birthday wishes with name free online. Create unique heartfelt birthday messages, birthday greetings with name to share on WhatsApp, Facebook & Instagram.");
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Birthday Wishes with Name Generator", "url": "https://wishspark.xyz/tools/birthday-wishes-generator", "description": "Free birthday wishes generator with name. Create personalized happy birthday messages ready to share on WhatsApp & social media.", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to create birthday wishes with name?", "acceptedAnswer": { "@type": "Answer", "text": "Simply enter the birthday person's name and click Generate. Our tool creates multiple personalized birthday wishes with their name included, ready to copy and share!" }}, { "@type": "Question", "name": "Can I share birthday wishes on WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Each generated birthday wish has a WhatsApp share button. Click it to instantly send the personalized birthday message to your loved one." }}, { "@type": "Question", "name": "Are these birthday wishes free?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Our birthday wishes generator is 100% free with no signup required. Generate unlimited personalized birthday messages anytime." }}] }} />
+      <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <div className="text-center mb-8">
+          <motion.div className="text-6xl mb-4" animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 2 }}>🎂</motion.div>
+          <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Wishes with Name Generator</h1>
+          <p className="text-muted-foreground">Create personalized happy birthday wishes with name — unique, heartfelt birthday messages ready to share on WhatsApp & social media!</p>
+        </div>
+
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
+          <label className="text-sm font-medium text-foreground block mb-2">Enter Birthday Person's Name</label>
+          <div className="flex gap-3">
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Arun" maxLength={50} className="bg-secondary/50 border-gold/20" />
+            <Button onClick={generate} className="bg-gold-gradient text-primary-foreground hover:opacity-90 shrink-0">
+              <Cake className="w-4 h-4 mr-2" /> Generate
+            </Button>
+          </div>
+        </div>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
+
+        <AnimatePresence>
+          {generated.length > 0 && (
+            <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-display font-semibold text-foreground">Your Wishes for {name}</h2>
+                <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
+              </div>
+              {generated.map((wish, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: i * 0.12, type: "spring", stiffness: 100 }}
+                  className="relative overflow-hidden rounded-2xl border border-gold/30 shadow-gold bg-gradient-to-br from-secondary/80 via-card to-secondary/60 backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gold-gradient" />
+                  <div className="relative p-5">
+                    <div className="flex items-start gap-3 mb-4">
+                      <span className="text-2xl">💕</span>
+                      <p className="text-sm text-foreground leading-relaxed font-medium">{wish}</p>
+                    </div>
+                    <div className="flex gap-2 pt-2 border-t border-gold/10">
+                      <Button variant="outline" size="sm" onClick={() => copy(wish)} className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all">
+                        <Copy className="w-3 h-3 mr-1" /> Copy
+                      </Button>
+                      <Button size="sm" onClick={() => share(wish)} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                        <Share2 className="w-3 h-3 mr-1" /> WhatsApp
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <section className="mt-16 space-y-6">
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Birthday Wishes Generator — Personalized Happy Birthday Messages with Name</h2>
+            <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+              <p>We've all been there — it's someone's birthday, you want to send something meaningful, but you're staring at a blank screen wondering what to write beyond "Happy Birthday!" Sound familiar? That's exactly why we built this birthday wishes generator. It takes the stress out of finding the right words and creates beautiful, heartfelt messages personalized with the birthday person's name.</p>
+              <p>What makes our birthday wishes different from generic messages? Every wish includes the recipient's name woven naturally into the message. This isn't just "Happy Birthday, [Name]" — the person's name is integrated throughout the wish in a way that feels genuine and thoughtful. When someone reads a message that mentions them by name multiple times, it creates a deeper emotional connection.</p>
+              <p>Our collection includes a variety of tones and styles. Some wishes are romantic and deeply emotional — perfect for partners and close loved ones. Others are warm and celebratory, ideal for friends and family. Each time you click Generate, you get a fresh set of 5 unique wishes to choose from. Don't love the options? Hit Refresh and get 5 more. You can generate unlimited wishes until you find the one that perfectly captures what you want to say.</p>
+              <p>The best part? Every wish comes with two action buttons — Copy to clipboard for pasting anywhere, and Share via WhatsApp for instant sending. You can go from "I need to wish someone" to "Done!" in literally 15 seconds. No typing, no thinking, no stress. Just genuine, beautiful birthday messages that make people feel special.</p>
+            </div>
+          </div>
+
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">How to Generate Birthday Wishes — Step by Step</h2>
+            <ol className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">1</span><span><strong className="text-foreground">Enter the birthday person's name</strong> — Type their name in the input field. Use the name they're most commonly called — "Priya" feels more personal than "Priya Sharma."</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">2</span><span><strong className="text-foreground">Click "Generate"</strong> — Hit the Generate button to create 5 unique birthday wishes personalized with their name.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">3</span><span><strong className="text-foreground">Browse your wishes</strong> — Scroll through the beautifully designed wish cards. Each has a different message style and emotional tone.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">4</span><span><strong className="text-foreground">Copy or Share</strong> — Found the perfect wish? Click "Copy" to paste it in any app, or click "WhatsApp" to share it directly.</span></li>
+              <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">5</span><span><strong className="text-foreground">Refresh for more</strong> — Not satisfied? Click the Refresh button to generate 5 completely new wishes. Keep refreshing until you find the perfect one!</span></li>
+            </ol>
+          </div>
+
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Wishes FAQ</h2>
+            <div className="space-y-4 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Are the birthday wishes unique each time?</p><p>Yes! We have a large collection of birthday wishes, and each time you generate, you get a random selection of 5. The shuffle ensures you get different combinations every time, so no two sessions feel the same.</p></div>
+              <div><p className="font-medium text-foreground">Can I use these wishes on platforms other than WhatsApp?</p><p>Absolutely. The Copy button copies the wish as plain text, so you can paste it on Facebook, Instagram, Twitter, SMS, email, or any messaging app. The wishes work beautifully anywhere.</p></div>
+              <div><p className="font-medium text-foreground">Are these wishes suitable for all ages?</p><p>Yes, all our birthday wishes are warm, positive, and appropriate for all ages. They express love, appreciation, and celebration — universal sentiments that work for anyone from a teenager to a grandparent.</p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default BirthdayWishesGenerator;
