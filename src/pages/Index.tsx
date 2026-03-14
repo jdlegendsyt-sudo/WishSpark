@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Gift, ArrowDown, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import FestivalCard from "@/components/FestivalCard";
 import { festivals } from "@/data/festivals";
@@ -20,6 +20,16 @@ const tools = [
 ];
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth" });
+  }, [location.hash]);
+
   return (
     <div className="min-h-screen bg-background relative">
       <Header />
@@ -86,7 +96,7 @@ const Index = () => {
       </div>
 
       {/* Festival Grid */}
-      <section className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 800px" }}>
+      <section id="choose-festival" className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 800px" }}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">
             Choose Your <span className="text-gold-gradient">Festival</span>
