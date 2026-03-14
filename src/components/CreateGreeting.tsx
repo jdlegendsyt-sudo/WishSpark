@@ -181,10 +181,6 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
     }
   };
 
-  const handleExploreMore = () => {
-    // Navigate back to home and scroll to the festival chooser section
-  };
-
   return (
     <>
       <PartyPopperEffect active={showPartyEffect} />
@@ -282,13 +278,6 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
               </Button>
             </div>
 
-            <Button
-              onClick={handleExploreMore}
-              variant="outline"
-              className="w-full text-foreground hover:bg-secondary/50 font-semibold"
-            >
-              Explore more wishes
-            </Button>
             <Button
               onClick={() => navigate("/")}
               variant="ghost"
