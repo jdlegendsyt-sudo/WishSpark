@@ -279,9 +279,9 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
             </div>
 
             <Button
-              onClick={() => navigate("/")}
-              variant="ghost"
-              className="w-full text-muted-foreground hover:text-foreground"
+              onClick={() => navigate("/#choose-festival")}
+              className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90 font-semibold shadow-gold"
+              size="lg"
             >
               Create another greeting
             </Button>
