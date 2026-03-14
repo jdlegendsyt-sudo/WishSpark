@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Gift, Menu, X, ChevronDown } from "lucide-react";
 import { festivals } from "@/data/festivals";
 
 const tools = [
@@ -24,7 +23,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center shadow-gold">
-            <Gift className="w-5 h-5 text-primary-foreground" />
+            <span aria-hidden="true" className="text-lg text-primary-foreground">🎁</span>
           </div>
           <span className="text-xl font-display font-bold text-gold-gradient">WishSpark</span>
         </Link>
@@ -34,7 +33,7 @@ const Header = () => {
           <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
           <div className="relative group">
             <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-              Festival Wishes <ChevronDown className="w-3 h-3" />
+              Festival Wishes <span aria-hidden="true">▾</span>
             </button>
             <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[250px] max-h-[380px] overflow-y-auto">
@@ -48,7 +47,7 @@ const Header = () => {
           </div>
           <div className="relative group">
             <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-              Tools <ChevronDown className="w-3 h-3" />
+              Tools <span aria-hidden="true">▾</span>
             </button>
             <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[220px]">
@@ -69,7 +68,7 @@ const Header = () => {
 
         {/* Mobile toggle */}
         <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <span aria-hidden="true" className="text-2xl leading-none">{mobileOpen ? "✕" : "☰"}</span>
         </button>
       </div>
 
@@ -79,7 +78,8 @@ const Header = () => {
           <nav className="container mx-auto px-4 py-4 space-y-1">
             <Link to="/" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">Home</Link>
             <button onClick={() => setFestivalOpen(!festivalOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
-              Festival Wishes <ChevronDown className={`w-3 h-3 transition-transform ${festivalOpen ? "rotate-180" : ""}`} />
+              <span>Festival Wishes</span>
+              <span aria-hidden="true" className={`transition-transform ${festivalOpen ? "rotate-180" : ""}`}>▾</span>
             </button>
             {festivalOpen && (
               <div className="pl-4 space-y-1 max-h-[260px] overflow-y-auto">
@@ -91,7 +91,8 @@ const Header = () => {
               </div>
             )}
             <button onClick={() => setToolsOpen(!toolsOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
-              Tools <ChevronDown className={`w-3 h-3 transition-transform ${toolsOpen ? "rotate-180" : ""}`} />
+              <span>Tools</span>
+              <span aria-hidden="true" className={`transition-transform ${toolsOpen ? "rotate-180" : ""}`}>▾</span>
             </button>
             {toolsOpen && (
               <div className="pl-4 space-y-1">

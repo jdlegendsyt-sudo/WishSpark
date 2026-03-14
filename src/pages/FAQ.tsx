@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -60,11 +59,6 @@ const faqs = [
 ];
 
 const FAQ = () => {
-  useEffect(() => {
-    document.title = "FAQ — WishSpark | Frequently Asked Questions";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Find answers to common questions about WishSpark. Learn how to create free festival greeting cards, share wishes via WhatsApp, and more.");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

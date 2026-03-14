@@ -1,14 +1,8 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 
 const About = () => {
-  useEffect(() => {
-    document.title = "About WishSpark — Free Festival Greeting Card Maker";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Learn about WishSpark — a free online platform to create and share personalized festival greetings for 35+ occasions. Our mission is to spread joy through beautiful animated wishes!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

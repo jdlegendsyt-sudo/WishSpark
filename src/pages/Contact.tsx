@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Send, Mail, MessageCircle, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,11 +12,6 @@ const WEB3FORMS_KEY = "775e0d8e-4a35-4c6c-a847-ca467fdfe402";
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    document.title = "Contact Us — WishSpark | Get in Touch";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Contact the WishSpark team. Have questions, feedback, or suggestions about our festival greeting card maker? Reach out via our contact form or email us at support@wishspark.xyz.");
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

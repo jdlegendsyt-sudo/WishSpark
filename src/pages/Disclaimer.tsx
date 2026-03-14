@@ -1,13 +1,7 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Disclaimer = () => {
-  useEffect(() => {
-    document.title = "Disclaimer — WishSpark | Important Information";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Read WishSpark's disclaimer. Important information about our free greeting card platform, accuracy of content, external links, and third-party advertisements.");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

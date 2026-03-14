@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
+import SeoManager from "@/components/SeoManager";
 import Index from "./pages/Index";
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
@@ -32,6 +33,7 @@ const FriendshipCalculator = lazy(() => import("./pages/tools/FriendshipCalculat
 const App = () => (
   <BrowserRouter>
     <ScrollToTop />
+    <SeoManager />
     <Suspense fallback={<div className="min-h-screen bg-background" />}>
       <Routes>
         <Route path="/" element={<Index />} />

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Gift, Share2, Sparkles, Heart, Users, Zap } from "lucide-react";
 import Header from "@/components/Header";
@@ -40,11 +39,6 @@ const steps = [
 ];
 
 const HowItWorks = () => {
-  useEffect(() => {
-    document.title = "How WishSpark Works — Create & Share Festival Greetings";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Learn how WishSpark works in 6 simple steps. Choose a festival, enter your name, share the magic link, and delight your loved ones with animated greeting cards!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

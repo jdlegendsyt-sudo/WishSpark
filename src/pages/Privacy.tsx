@@ -1,13 +1,7 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Privacy = () => {
-  useEffect(() => {
-    document.title = "Privacy Policy — WishSpark | How We Protect Your Data";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Read WishSpark's privacy policy. Learn how we collect, use, and protect your data. We use Google AdSense for ads and respect GDPR & CCPA privacy rights.");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

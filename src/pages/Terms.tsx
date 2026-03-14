@@ -1,13 +1,7 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Terms = () => {
-  useEffect(() => {
-    document.title = "Terms of Use — WishSpark | Usage Guidelines";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Read the terms of use for WishSpark. Understand how to use our free festival greeting card maker, user content guidelines, and intellectual property policies.");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

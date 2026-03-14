@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import { Calendar, Clock, User, ArrowLeft, Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getBlogPostBySlug, blogPosts } from "@/data/blogPosts";
@@ -52,7 +51,7 @@ const BlogPost = () => {
           to="/blog"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Blog
+          <span aria-hidden="true">←</span> Back to Blog
         </Link>
 
         {/* Article header */}
@@ -70,13 +69,13 @@ const BlogPost = () => {
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <User className="w-4 h-4" /> {post.author}
+                  <span aria-hidden="true">👤</span> {post.author}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" /> {post.date}
+                  <span aria-hidden="true">📅</span> {post.date}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4" /> {post.readTime}
+                  <span aria-hidden="true">⏱️</span> {post.readTime}
                 </span>
               </div>
               <Button
@@ -85,7 +84,7 @@ const BlogPost = () => {
                 onClick={handleShare}
                 className="border-gold/20 text-muted-foreground hover:text-primary"
               >
-                <Share2 className="w-4 h-4 mr-1" /> Share
+                <span aria-hidden="true" className="mr-1">🔗</span> Share
               </Button>
             </div>
           </header>
@@ -188,7 +187,7 @@ const BlogPost = () => {
               publisher: {
                 "@type": "Organization",
                 name: "WishSpark",
-                url: "https://festival-card-maker.lovable.app",
+                url: "https://wishspark.xyz",
               },
             }),
           }}

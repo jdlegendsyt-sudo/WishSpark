@@ -1,6 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { Home, Search } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,6 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Page Not Found — WishSpark";
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
@@ -29,12 +27,12 @@ const NotFound = () => {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/">
             <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90 font-semibold shadow-gold" size="lg">
-              <Home className="w-4 h-4 mr-2" /> Go to Homepage
+              <span aria-hidden="true" className="mr-2">🏠</span> Go to Homepage
             </Button>
           </Link>
           <Link to="/sitemap">
             <Button variant="outline" size="lg" className="border-gold/20">
-              <Search className="w-4 h-4 mr-2" /> View Sitemap
+              <span aria-hidden="true" className="mr-2">🔎</span> View Sitemap
             </Button>
           </Link>
         </div>
