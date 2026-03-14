@@ -200,26 +200,35 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
         </div>
 
         {!generatedLink ? (
-          <div className="bg-glass rounded-2xl p-6 space-y-4 shadow-gold border border-gold/20">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Your Name</label>
-              <Input
-                placeholder="Enter your name..."
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleCreate()}
-                className="bg-secondary/50 border-gold/20 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary"
-              />
+          <>
+            <div className="bg-glass rounded-2xl p-6 space-y-4 shadow-gold border border-gold/20">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Your Name</label>
+                <Input
+                  placeholder="Enter your name..."
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleCreate()}
+                  className="bg-secondary/50 border-gold/20 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary"
+                />
+              </div>
+              <Button
+                onClick={handleCreate}
+                className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90 font-semibold shadow-gold"
+                size="lg"
+              >
+                <Send className="w-4 h-4 mr-2" />
+                Create Greeting
+              </Button>
             </div>
             <Button
-              onClick={handleCreate}
+              onClick={() => navigate("/#choose-festival")}
               className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90 font-semibold shadow-gold"
               size="lg"
             >
-              <Send className="w-4 h-4 mr-2" />
-              Create Greeting
+              Create another greeting
             </Button>
-          </div>
+          </>
         ) : (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
