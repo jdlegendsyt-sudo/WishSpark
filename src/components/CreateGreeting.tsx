@@ -143,7 +143,10 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
       toast({ title: "Please enter your name", variant: "destructive" });
       return;
     }
-    const baseUrl = "https://wishspark.xyz";
+
+    // Use the current origin when running locally or from a custom domain.
+    // Fall back to the production URL if `window` is unavailable.
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://wishspark.xyz";
     const link = `${baseUrl}/${festival.slug}?from=${encodeURIComponent(name.trim())}`;
     setGeneratedLink(link);
     setShowPartyEffect(true);

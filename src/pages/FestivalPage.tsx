@@ -20,7 +20,7 @@ const FestivalPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const senderName = searchParams.get("from");
-  const slug = location.pathname.replace("/", "");
+  const slug = location.pathname.replace(/^\/+|\/+$/g, "");
   const festival = getFestivalBySlug(slug);
 
   const [giftOpened, setGiftOpened] = useState(false);
