@@ -183,7 +183,6 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
 
   const handleExploreMore = () => {
     // Navigate back to home and scroll to the festival chooser section
-    navigate("/#choose-festival");
   };
 
   return (
