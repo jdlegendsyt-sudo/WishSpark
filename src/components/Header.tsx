@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Gift, Menu, X, ChevronDown } from "lucide-react";
+import { festivals } from "@/data/festivals";
 
 const tools = [
   { to: "/tools/birthday-wishes-generator", label: "🎂 Birthday Wishes" },
@@ -16,6 +17,7 @@ const tools = [
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [festivalOpen, setFestivalOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-card border-b border-gold/20">
@@ -30,6 +32,20 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
+          <div className="relative group">
+            <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+              Festival Wishes <ChevronDown className="w-3 h-3" />
+            </button>
+            <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[250px] max-h-[380px] overflow-y-auto">
+                {festivals.map((festival) => (
+                  <Link key={festival.slug} to={`/${festival.slug}`} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+                    {festival.emoji} {festival.name} Wishes
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
           <div className="relative group">
             <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
               Tools <ChevronDown className="w-3 h-3" />
@@ -62,6 +78,18 @@ const Header = () => {
         <div className="md:hidden border-t border-gold/10 bg-card">
           <nav className="container mx-auto px-4 py-4 space-y-1">
             <Link to="/" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">Home</Link>
+            <button onClick={() => setFestivalOpen(!festivalOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
+              Festival Wishes <ChevronDown className={`w-3 h-3 transition-transform ${festivalOpen ? "rotate-180" : ""}`} />
+            </button>
+            {festivalOpen && (
+              <div className="pl-4 space-y-1 max-h-[260px] overflow-y-auto">
+                {festivals.map((festival) => (
+                  <Link key={festival.slug} to={`/${festival.slug}`} onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
+                    {festival.emoji} {festival.name} Wishes
+                  </Link>
+                ))}
+              </div>
+            )}
             <button onClick={() => setToolsOpen(!toolsOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
               Tools <ChevronDown className={`w-3 h-3 transition-transform ${toolsOpen ? "rotate-180" : ""}`} />
             </button>
