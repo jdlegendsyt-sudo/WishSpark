@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Heart, Copy, Share2, RefreshCw } from "lucide-react";
+import { Heart, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -38,15 +39,42 @@ const generateNames = (a: string, b: string): string[] => {
 };
 
 const CoupleNameGenerator = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [names, setNames] = useState<string[]>([]);
+  const [isSharedView, setIsSharedView] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const generate = () => {
     const result = generateNames(name1, name2);
     setNames(result);
+    setIsSharedView(false);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const getShareLink = () => {
+    if (names.length === 0) return "";
+    const url = new URL(`${window.location.origin}/tools/couple-name-generator`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("n1", name1.trim());
+    url.searchParams.set("n2", name2.trim());
+    return url.toString();
+  };
+
+  const copyShareLink = async () => {
+    const link = getShareLink();
+    if (!link) return;
+    await navigator.clipboard.writeText(link);
+    toast({ title: "Link copied", description: "Share link is ready to send" });
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setName1("");
+    setName2("");
+    setNames([]);
+    setIsSharedView(false);
   };
 
   const copy = (n: string) => {
@@ -58,6 +86,21 @@ const CoupleNameGenerator = () => {
     document.title = "Couple Name Generator — Ship Name Creator Free Online | WishSpark";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Free couple name generator online. Create the perfect ship name, couple name, or relationship name by combining two names. Best couple name combiner for Instagram bios & hashtags!");
   }, []);
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    const n1 = searchParams.get("n1") || "";
+    const n2 = searchParams.get("n2") || "";
+    if (!shared || !n1 || !n2) {
+      return;
+    }
+
+    setName1(n1);
+    setName2(n2);
+    setNames(generateNames(n1, n2));
+    setIsSharedView(true);
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,7 +135,13 @@ const CoupleNameGenerator = () => {
           <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-display font-semibold text-foreground">Your Couple Names 💕</h2>
-              <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
+                <Button variant="outline" size="sm" onClick={copyShareLink} className="border-gold/20"><Link2 className="w-4 h-4 mr-1" /> Copy Share Link</Button>
+                {isSharedView && (
+                  <Button size="sm" onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">Create Your Own</Button>
+                )}
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {names.map((name, i) => (
@@ -102,7 +151,7 @@ const CoupleNameGenerator = () => {
                   <div className="flex gap-2 justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button variant="ghost" size="sm" onClick={() => copy(name)}><Copy className="w-3 h-3" /></Button>
                     <Button variant="ghost" size="sm" onClick={() => {
-                      const text = `💕 Our couple name is #${name}!\n\nGenerate yours: ${window.location.origin}/tools/couple-name-generator`;
+                      const text = `💕 Our couple name is #${name}!\n\nView all generated names: ${getShareLink()}`;
                       window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
                     }}><Share2 className="w-3 h-3" /></Button>
                   </div>

@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator } from "lucide-react";
+import { Calculator, Share2, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import { toast } from "@/hooks/use-toast";
 
 interface AgeResult {
   years: number;
@@ -35,8 +37,10 @@ const getZodiac = (month: number, day: number) => {
 };
 
 const AgeCalculator = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [dob, setDob] = useState("");
   const [result, setResult] = useState<AgeResult | null>(null);
+  const [isSharedView, setIsSharedView] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const calculate = () => {
@@ -64,13 +68,79 @@ const AgeCalculator = () => {
       nextBirthday: daysUntilBday,
       zodiac: getZodiac(birth.getMonth() + 1, birth.getDate()),
     });
+    setIsSharedView(false);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const calculateFromDob = (value: string) => {
+    if (!value) return;
+    const birth = new Date(value);
+    const now = new Date();
+    if (birth > now) return;
+
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+
+    if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (months < 0) { years--; months += 12; }
+
+    const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+    const nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
+    if (nextBday <= now) nextBday.setFullYear(nextBday.getFullYear() + 1);
+    const daysUntilBday = Math.ceil((nextBday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+    setResult({
+      years, months, days, totalDays,
+      totalWeeks: Math.floor(totalDays / 7),
+      totalHours: totalDays * 24,
+      nextBirthday: daysUntilBday,
+      zodiac: getZodiac(birth.getMonth() + 1, birth.getDate()),
+    });
+  };
+
+  const getShareLink = () => {
+    const url = new URL(`${window.location.origin}/tools/age-calculator`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("dob", dob);
+    return url.toString();
+  };
+
+  const shareResult = () => {
+    if (!result) return;
+    const text = `🧮 My age is ${result.years} years, ${result.months} months, ${result.days} days.\nNext birthday in ${result.nextBirthday} days.\n\nView this result: ${getShareLink()}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const copyShareLink = async () => {
+    await navigator.clipboard.writeText(getShareLink());
+    toast({ title: "Link copied", description: "Share link is ready to send" });
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setDob("");
+    setResult(null);
+    setIsSharedView(false);
   };
 
   useEffect(() => {
     document.title = "Age Calculator Online Free | Calculate Exact Age from Date of Birth | WishSpark";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Free age calculator online. Calculate your exact age from date of birth in years, months, days, hours. Find zodiac sign, birthday countdown & age in days calculator.");
   }, []);
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    const sharedDob = searchParams.get("dob") || "";
+    if (!shared || !sharedDob) {
+      return;
+    }
+
+    setDob(sharedDob);
+    calculateFromDob(sharedDob);
+    setIsSharedView(true);
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -129,6 +199,13 @@ const AgeCalculator = () => {
                   <p className="text-lg font-semibold text-foreground">{item.value}</p>
                 </motion.div>
               ))}
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <Button variant="outline" onClick={shareResult} className="border-gold/20"><Share2 className="w-4 h-4 mr-2" /> Share</Button>
+              <Button variant="outline" onClick={copyShareLink} className="border-gold/20"><Link2 className="w-4 h-4 mr-2" /> Copy Share Link</Button>
+              {isSharedView && (
+                <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">Create Your Own</Button>
+              )}
             </div>
           </motion.div>
         )}

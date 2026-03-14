@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Download, Share2 } from "lucide-react";
+import { Share2, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import { toast } from "@/hooks/use-toast";
 
 const themes = [
   { name: "Classic Gold", bg: "from-amber-600 via-yellow-500 to-orange-500", emoji: "🎂", text: "text-white" },
@@ -19,21 +21,63 @@ const themes = [
 ];
 
 const BirthdayCardMaker = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("Wishing you a day filled with love, laughter, and all your favorite things!");
   const [selectedTheme, setSelectedTheme] = useState(0);
+  const [isSharedView, setIsSharedView] = useState(false);
 
   const theme = themes[selectedTheme];
 
+  const getShareLink = () => {
+    const url = new URL(`${window.location.origin}/tools/birthday-card-maker`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("name", name.trim());
+    url.searchParams.set("msg", message);
+    url.searchParams.set("theme", String(selectedTheme));
+    return url.toString();
+  };
+
+  const copyShareLink = async () => {
+    const link = getShareLink();
+    await navigator.clipboard.writeText(link);
+    toast({ title: "Link copied", description: "Share link is ready to send" });
+  };
+
   const shareCard = () => {
-    const text = `🎂 Happy Birthday, ${name}!\n\n${message}\n\nCreate your own birthday card: ${window.location.origin}/tools/birthday-card-maker`;
+    const text = `🎂 Happy Birthday, ${name || "Friend"}!\n\n${message}\n\nView this card: ${getShareLink()}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setName("");
+    setMessage("Wishing you a day filled with love, laughter, and all your favorite things!");
+    setSelectedTheme(0);
+    setIsSharedView(false);
   };
 
   useEffect(() => {
     document.title = "Birthday Card Maker Online Free | Create Birthday Greeting Cards | WishSpark";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Free birthday card maker online. Create beautiful birthday greeting cards with name and custom message. Design birthday wishes card online free — no signup required!");
   }, []);
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    if (!shared) {
+      return;
+    }
+
+    const sharedName = searchParams.get("name") || "";
+    const sharedMsg = searchParams.get("msg") || "Wishing you a day filled with love, laughter, and all your favorite things!";
+    const themeParam = Number(searchParams.get("theme") || "0");
+    const safeTheme = Number.isFinite(themeParam) ? Math.min(Math.max(themeParam, 0), themes.length - 1) : 0;
+
+    setName(sharedName);
+    setMessage(sharedMsg);
+    setSelectedTheme(safeTheme);
+    setIsSharedView(true);
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,9 +113,19 @@ const BirthdayCardMaker = () => {
                   ))}
                 </div>
               </div>
-              <Button onClick={shareCard} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90">
-                <Share2 className="w-4 h-4 mr-2" /> Share via WhatsApp
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button onClick={shareCard} className="flex-1 bg-gold-gradient text-primary-foreground hover:opacity-90">
+                  <Share2 className="w-4 h-4 mr-2" /> Share via WhatsApp
+                </Button>
+                <Button onClick={copyShareLink} variant="outline" className="border-gold/20">
+                  <Link2 className="w-4 h-4 mr-2" /> Copy Share Link
+                </Button>
+                {isSharedView && (
+                  <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                    Create Your Own
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
 

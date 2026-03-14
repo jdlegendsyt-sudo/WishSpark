@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Share2, RefreshCw } from "lucide-react";
+import { Flame, Share2, RefreshCw, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import { toast } from "@/hooks/use-toast";
 
 const calcCrush = (a: string, b: string) => {
   const s = (a + "crush" + b).toLowerCase().replace(/\s/g, "");
@@ -24,10 +26,12 @@ const getVerdict = (pct: number) => {
 };
 
 const CrushCalculator = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [myName, setMyName] = useState("");
   const [crushName, setCrushName] = useState("");
   const [result, setResult] = useState<{ pct: number; verdict: string; desc: string; color: string } | null>(null);
   const [animating, setAnimating] = useState(false);
+  const [isSharedView, setIsSharedView] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const calculate = () => {
@@ -37,10 +41,53 @@ const CrushCalculator = () => {
     setTimeout(() => {
       const pct = calcCrush(myName, crushName);
       setResult({ pct, ...getVerdict(pct) });
+      setIsSharedView(false);
       setAnimating(false);
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     }, 1500);
   };
+
+  const getShareLink = () => {
+    if (!result) return "";
+    const url = new URL(`${window.location.origin}/tools/crush-calculator`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("me", myName.trim());
+    url.searchParams.set("crush", crushName.trim());
+    return url.toString();
+  };
+
+  const copyShareLink = async () => {
+    const link = getShareLink();
+    if (!link) return;
+    await navigator.clipboard.writeText(link);
+    toast({ title: "Link copied", description: "Share link is ready to send" });
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setMyName("");
+    setCrushName("");
+    setResult(null);
+    setAnimating(false);
+    setIsSharedView(false);
+  };
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    const me = searchParams.get("me") || "";
+    const crush = searchParams.get("crush") || "";
+    if (!shared || !me || !crush) {
+      return;
+    }
+
+    const pct = calcCrush(me, crush);
+    setMyName(me);
+    setCrushName(crush);
+    setResult({ pct, ...getVerdict(pct) });
+    setAnimating(false);
+    setIsSharedView(true);
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }, [searchParams]);
 
   useEffect(() => {
     document.title = "Crush Calculator — Does My Crush Like Me? Free Test Online | WishSpark";
@@ -97,9 +144,13 @@ const CrushCalculator = () => {
               <div className="flex gap-3 justify-center">
                 <Button variant="outline" onClick={calculate} className="border-gold/20"><RefreshCw className="w-3 h-3 mr-1" /> Try Again</Button>
                 <Button variant="outline" className="border-gold/20" onClick={() => {
-                  const text = `🔥 Crush Calculator Result!\n${myName} 💘 ${crushName} = ${result.pct}%\n${result.verdict}\n\nTry yours: ${window.location.origin}/tools/crush-calculator`;
+                  const text = `🔥 Crush Calculator Result!\n${myName} 💘 ${crushName} = ${result.pct}%\n${result.verdict}\n\nView this result: ${getShareLink()}`;
                   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
                 }}><Share2 className="w-3 h-3 mr-1" /> Share</Button>
+                <Button variant="outline" className="border-gold/20" onClick={copyShareLink}><Link2 className="w-3 h-3 mr-1" /> Copy Link</Button>
+                {isSharedView && (
+                  <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90" onClick={createYourOwn}>Create Your Own</Button>
+                )}
               </div>
             </motion.div>
           )}

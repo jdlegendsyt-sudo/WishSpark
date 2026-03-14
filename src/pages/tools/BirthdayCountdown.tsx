@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Clock } from "lucide-react";
+import { Clock, Share2, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import { toast } from "@/hooks/use-toast";
 
 const BirthdayCountdown = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [dob, setDob] = useState("");
   const [name, setName] = useState("");
   const [countdown, setCountdown] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
   const [started, setStarted] = useState(false);
+  const [isSharedView, setIsSharedView] = useState(false);
 
   useEffect(() => {
     document.title = "Birthday Countdown Timer Online Free | How Many Days Until My Birthday | WishSpark";
@@ -22,6 +26,37 @@ const BirthdayCountdown = () => {
   const start = () => {
     if (!dob) return;
     setStarted(true);
+    setIsSharedView(false);
+  };
+
+  const getShareLink = () => {
+    const url = new URL(`${window.location.origin}/tools/birthday-countdown`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("dob", dob);
+    if (name.trim()) {
+      url.searchParams.set("name", name.trim());
+    }
+    return url.toString();
+  };
+
+  const shareCountdown = () => {
+    if (!countdown) return;
+    const text = `⏳ ${name ? `${name}'s` : "My"} birthday is in ${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes and ${countdown.seconds} seconds!\n\nTrack it here: ${getShareLink()}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const copyShareLink = async () => {
+    await navigator.clipboard.writeText(getShareLink());
+    toast({ title: "Link copied", description: "Share link is ready to send" });
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setDob("");
+    setName("");
+    setCountdown(null);
+    setStarted(false);
+    setIsSharedView(false);
   };
 
   useEffect(() => {
@@ -41,6 +76,20 @@ const BirthdayCountdown = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, [started, dob]);
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    const sharedDob = searchParams.get("dob") || "";
+    const sharedName = searchParams.get("name") || "";
+    if (!shared || !sharedDob) {
+      return;
+    }
+
+    setDob(sharedDob);
+    setName(sharedName);
+    setStarted(true);
+    setIsSharedView(true);
+  }, [searchParams]);
 
   useEffect(() => {
     document.title = "Birthday Countdown Timer Online Free | How Many Days Until My Birthday | WishSpark";
@@ -96,7 +145,14 @@ const BirthdayCountdown = () => {
               </div>
               <p className="text-sm text-muted-foreground">🎂 Get ready to celebrate!</p>
             </div>
-            <Button variant="outline" onClick={() => setStarted(false)} className="border-gold/20">Reset</Button>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <Button variant="outline" onClick={() => setStarted(false)} className="border-gold/20">Reset</Button>
+              <Button variant="outline" onClick={shareCountdown} className="border-gold/20"><Share2 className="w-4 h-4 mr-2" /> Share</Button>
+              <Button variant="outline" onClick={copyShareLink} className="border-gold/20"><Link2 className="w-4 h-4 mr-2" /> Copy Share Link</Button>
+              {isSharedView && (
+                <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">Create Your Own</Button>
+              )}
+            </div>
           </motion.div>
         ) : null}
 

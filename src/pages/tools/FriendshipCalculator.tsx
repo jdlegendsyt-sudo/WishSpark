@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Share2 } from "lucide-react";
+import { Users, Share2, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import { toast } from "@/hooks/use-toast";
 
 const calcFriendship = (a: string, b: string) => {
   const s = (a + "bff" + b).toLowerCase().replace(/\s/g, "");
@@ -24,23 +26,66 @@ const getLevel = (pct: number) => {
 };
 
 const FriendshipCalculator = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [result, setResult] = useState<{ pct: number; title: string; msg: string; emoji: string } | null>(null);
+  const [isSharedView, setIsSharedView] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const calculate = () => {
     if (!name1.trim() || !name2.trim()) return;
     const pct = calcFriendship(name1, name2);
     setResult({ pct, ...getLevel(pct) });
+    setIsSharedView(false);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const getShareLink = () => {
+    if (!result) return "";
+    const url = new URL(`${window.location.origin}/tools/friendship-calculator`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("n1", name1.trim());
+    url.searchParams.set("n2", name2.trim());
+    return url.toString();
+  };
+
+  const copyShareLink = async () => {
+    const link = getShareLink();
+    if (!link) return;
+    await navigator.clipboard.writeText(link);
+    toast({ title: "Link copied", description: "Share link is ready to send" });
   };
 
   const share = () => {
     if (!result) return;
-    const text = `👯 Friendship Calculator!\n${name1} 🤝 ${name2} = ${result.pct}%\n${result.title}\n\nCheck yours: ${window.location.origin}/tools/friendship-calculator`;
+    const text = `👯 Friendship Calculator!\n${name1} 🤝 ${name2} = ${result.pct}%\n${result.title}\n\nView this result: ${getShareLink()}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
   };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setName1("");
+    setName2("");
+    setResult(null);
+    setIsSharedView(false);
+  };
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    const n1 = searchParams.get("n1") || "";
+    const n2 = searchParams.get("n2") || "";
+    if (!shared || !n1 || !n2) {
+      return;
+    }
+
+    const pct = calcFriendship(n1, n2);
+    setName1(n1);
+    setName2(n2);
+    setResult({ pct, ...getLevel(pct) });
+    setIsSharedView(true);
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }, [searchParams]);
 
   useEffect(() => {
     document.title = "Friendship Calculator — Friendship Percentage Test Free Online | WishSpark";
@@ -88,9 +133,19 @@ const FriendshipCalculator = () => {
               <p className="text-4xl">{result.emoji}</p>
               <p className="text-xl font-display font-bold text-foreground">{result.title}</p>
               <p className="text-foreground max-w-md mx-auto">{result.msg}</p>
-              <Button onClick={share} variant="outline" className="border-gold/20">
-                <Share2 className="w-4 h-4 mr-2" /> Share with Friends
-              </Button>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <Button onClick={share} variant="outline" className="border-gold/20">
+                  <Share2 className="w-4 h-4 mr-2" /> Share with Friends
+                </Button>
+                <Button onClick={copyShareLink} variant="outline" className="border-gold/20">
+                  <Link2 className="w-4 h-4 mr-2" /> Copy Share Link
+                </Button>
+                {isSharedView && (
+                  <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                    Create Your Own
+                  </Button>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

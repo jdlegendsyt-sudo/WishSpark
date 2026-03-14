@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cake, Copy, Share2, RefreshCw } from "lucide-react";
+import { Cake, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -25,15 +26,33 @@ const wishes = [
 ];
 
 const BirthdayWishesGenerator = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [name, setName] = useState("");
   const [generated, setGenerated] = useState<string[]>([]);
+  const [isSharedView, setIsSharedView] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const generate = () => {
     if (!name.trim()) return;
     const shuffled = [...wishes].sort(() => Math.random() - 0.5);
     setGenerated(shuffled.slice(0, 5).map((fn) => fn(name.trim())));
+    setIsSharedView(false);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const getShareLink = (wish?: string) => {
+    const url = new URL(`${window.location.origin}/tools/birthday-wishes-generator`);
+    url.searchParams.set("shared", "1");
+    url.searchParams.set("name", name.trim());
+    if (wish) {
+      url.searchParams.set("wish", wish);
+    }
+    return url.toString();
+  };
+
+  const copyShareLink = async (wish: string) => {
+    await navigator.clipboard.writeText(getShareLink(wish));
+    toast({ title: "Link copied", description: "Share link is ready to send" });
   };
 
   const copy = (text: string) => {
@@ -42,14 +61,41 @@ const BirthdayWishesGenerator = () => {
   };
 
   const share = (text: string) => {
-    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(`${text}\n\nView this wish: ${getShareLink(text)}`)}`;
     window.open(url, "_blank");
+  };
+
+  const createYourOwn = () => {
+    setSearchParams({});
+    setName("");
+    setGenerated([]);
+    setIsSharedView(false);
   };
 
   useEffect(() => {
     document.title = "Birthday Wishes with Name Generator Free Online | WishSpark";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Generate personalized happy birthday wishes with name free online. Create unique heartfelt birthday messages, birthday greetings with name to share on WhatsApp, Facebook & Instagram.");
   }, []);
+
+  useEffect(() => {
+    const shared = searchParams.get("shared") === "1";
+    if (!shared) {
+      return;
+    }
+
+    const sharedName = searchParams.get("name") || "Friend";
+    const sharedWish = searchParams.get("wish");
+
+    setName(sharedName);
+    if (sharedWish) {
+      setGenerated([sharedWish]);
+    } else {
+      const shuffled = [...wishes].sort(() => Math.random() - 0.5);
+      setGenerated(shuffled.slice(0, 5).map((fn) => fn(sharedName.trim())));
+    }
+    setIsSharedView(true);
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -80,7 +126,14 @@ const BirthdayWishesGenerator = () => {
             <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-display font-semibold text-foreground">Your Wishes for {name}</h2>
-                <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
+                  {isSharedView && (
+                    <Button size="sm" onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                      Create Your Own
+                    </Button>
+                  )}
+                </div>
               </div>
               {generated.map((wish, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: i * 0.12, type: "spring", stiffness: 100 }}
@@ -98,6 +151,9 @@ const BirthdayWishesGenerator = () => {
                       </Button>
                       <Button size="sm" onClick={() => share(wish)} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
                         <Share2 className="w-3 h-3 mr-1" /> WhatsApp
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => copyShareLink(wish)} className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all">
+                        <Link2 className="w-3 h-3 mr-1" /> Share Link
                       </Button>
                     </div>
                   </div>
