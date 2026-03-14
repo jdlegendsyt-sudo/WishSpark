@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Share2, Link2 } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
-import { toast } from "@/hooks/use-toast";
 
 const themes = [
   { name: "Classic Gold", bg: "from-amber-600 via-yellow-500 to-orange-500", emoji: "🎂", text: "text-white" },
@@ -36,12 +35,6 @@ const BirthdayCardMaker = () => {
     url.searchParams.set("msg", message);
     url.searchParams.set("theme", String(selectedTheme));
     return url.toString();
-  };
-
-  const copyShareLink = async () => {
-    const link = getShareLink();
-    await navigator.clipboard.writeText(link);
-    toast({ title: "Link copied", description: "Share link is ready to send" });
   };
 
   const shareCard = () => {
@@ -116,9 +109,6 @@ const BirthdayCardMaker = () => {
               <div className="flex flex-wrap gap-2">
                 <Button onClick={shareCard} className="flex-1 bg-gold-gradient text-primary-foreground hover:opacity-90">
                   <Share2 className="w-4 h-4 mr-2" /> Share via WhatsApp
-                </Button>
-                <Button onClick={copyShareLink} variant="outline" className="border-gold/20">
-                  <Link2 className="w-4 h-4 mr-2" /> Copy Share Link
                 </Button>
                 {isSharedView && (
                   <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">

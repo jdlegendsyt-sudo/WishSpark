@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Heart, Share2, Link2 } from "lucide-react";
+import { Heart, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -132,11 +132,11 @@ const LoveCalculator = () => {
             <p className="text-4xl">{result.emoji}</p>
             <p className="text-foreground leading-relaxed max-w-md mx-auto">{result.msg}</p>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <Button onClick={share} variant="outline" className="border-gold/20">
-                <Share2 className="w-4 h-4 mr-2" /> Share Result
+              <Button onClick={copyShareLink} variant="outline" size="sm" className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all">
+                <Copy className="w-3 h-3 mr-1" /> Copy
               </Button>
-              <Button onClick={copyShareLink} variant="outline" className="border-gold/20">
-                <Link2 className="w-4 h-4 mr-2" /> Copy Share Link
+              <Button onClick={share} size="sm" className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                <Share2 className="w-3 h-3 mr-1" /> WhatsApp
               </Button>
               {isSharedView && (
                 <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">

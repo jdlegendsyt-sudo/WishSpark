@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Share2, Link2 } from "lucide-react";
+import { Calculator, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -201,8 +201,8 @@ const AgeCalculator = () => {
               ))}
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <Button variant="outline" onClick={shareResult} className="border-gold/20"><Share2 className="w-4 h-4 mr-2" /> Share</Button>
-              <Button variant="outline" onClick={copyShareLink} className="border-gold/20"><Link2 className="w-4 h-4 mr-2" /> Copy Share Link</Button>
+              <Button variant="outline" size="sm" onClick={copyShareLink} className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all"><Copy className="w-3 h-3 mr-1" /> Copy</Button>
+              <Button size="sm" onClick={shareResult} className="bg-gold-gradient text-primary-foreground hover:opacity-90"><Share2 className="w-3 h-3 mr-1" /> WhatsApp</Button>
               {isSharedView && (
                 <Button onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">Create Your Own</Button>
               )}

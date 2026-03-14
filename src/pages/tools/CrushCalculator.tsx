@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Share2, RefreshCw, Link2 } from "lucide-react";
+import { Flame, Share2, RefreshCw, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -143,11 +143,11 @@ const CrushCalculator = () => {
               <p className="text-foreground max-w-md mx-auto">{result.desc}</p>
               <div className="flex gap-3 justify-center">
                 <Button variant="outline" onClick={calculate} className="border-gold/20"><RefreshCw className="w-3 h-3 mr-1" /> Try Again</Button>
-                <Button variant="outline" className="border-gold/20" onClick={() => {
+                <Button size="sm" className="bg-gold-gradient text-primary-foreground hover:opacity-90" onClick={() => {
                   const text = `🔥 Crush Calculator Result!\n${myName} 💘 ${crushName} = ${result.pct}%\n${result.verdict}\n\nView this result: ${getShareLink()}`;
                   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
-                }}><Share2 className="w-3 h-3 mr-1" /> Share</Button>
-                <Button variant="outline" className="border-gold/20" onClick={copyShareLink}><Link2 className="w-3 h-3 mr-1" /> Copy Link</Button>
+                }}><Share2 className="w-3 h-3 mr-1" /> WhatsApp</Button>
+                <Button variant="outline" size="sm" className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all" onClick={copyShareLink}><Copy className="w-3 h-3 mr-1" /> Copy</Button>
                 {isSharedView && (
                   <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90" onClick={createYourOwn}>Create Your Own</Button>
                 )}
