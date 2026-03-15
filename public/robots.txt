@@ -19,4 +19,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://festival-card-maker.lovable.app/sitemap.xml
+Sitemap: https://wishspark.xyz/sitemap.xml
