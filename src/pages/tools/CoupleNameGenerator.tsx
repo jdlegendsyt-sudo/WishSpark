@@ -75,6 +75,7 @@ const CoupleNameGenerator = () => {
     setName2("");
     setNames([]);
     setIsSharedView(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const copy = (n: string) => {

@@ -70,6 +70,7 @@ const BirthdayWishesGenerator = () => {
     setName("");
     setGenerated([]);
     setIsSharedView(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {

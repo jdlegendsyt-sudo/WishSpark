@@ -57,6 +57,7 @@ const BirthdayCountdown = () => {
     setCountdown(null);
     setStarted(false);
     setIsSharedView(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {

@@ -48,6 +48,7 @@ const BirthdayCardMaker = () => {
     setMessage("Wishing you a day filled with love, laughter, and all your favorite things!");
     setSelectedTheme(0);
     setIsSharedView(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
