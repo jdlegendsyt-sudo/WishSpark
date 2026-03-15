@@ -187,7 +187,7 @@ const BlogPost = () => {
               publisher: {
                 "@type": "Organization",
                 name: "WishSpark",
-                url: "https://wishspark.xyz",
+                url: "https://www.wishspark.xyz",
               },
             }),
           }}

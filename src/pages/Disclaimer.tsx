@@ -13,7 +13,7 @@ const Disclaimer = () => {
 
           <h2 className="text-xl font-display font-semibold text-foreground">General Information</h2>
           <p>
-            The information provided on WishSpark (https://wishspark.xyz) is for general
+            The information provided on WishSpark (https://www.wishspark.xyz) is for general
             informational and entertainment purposes only. WishSpark is a free greeting card creation platform
             that allows users to create and share personalized festival greetings.
           </p>

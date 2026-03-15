@@ -14,7 +14,7 @@ type SeoMeta = {
   articleAuthor?: string;
 };
 
-const SITE_URL = "https://wishspark.xyz";
+const SITE_URL = "https://www.wishspark.xyz";
 const SITE_NAME = "WishSpark";
 const DEFAULT_ROBOTS = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
 const BASE_KEYWORDS = [

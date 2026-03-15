@@ -187,15 +187,15 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "WishSpark",
-            url: "https://wishspark.xyz",
+            url: "https://www.wishspark.xyz",
             description: "Create and share beautiful personalized festival greetings for 35+ occasions. Free animated gift box wishes!",
             publisher: {
               "@type": "Organization",
               name: "WishSpark",
-              url: "https://wishspark.xyz",
+              url: "https://www.wishspark.xyz",
               logo: {
                 "@type": "ImageObject",
-                url: "https://wishspark.xyz/favicon.ico",
+                url: "https://www.wishspark.xyz/favicon.svg",
               },
               contactPoint: {
                 "@type": "ContactPoint",
@@ -205,7 +205,7 @@ const Index = () => {
             },
             potentialAction: {
               "@type": "SearchAction",
-              target: "https://wishspark.xyz/?q={search_term_string}",
+              target: "https://www.wishspark.xyz/?q={search_term_string}",
               "query-input": "required name=search_term_string",
             },
           }),

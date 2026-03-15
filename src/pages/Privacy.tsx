@@ -13,8 +13,8 @@ const Privacy = () => {
 
           <p>
             WishSpark ("we", "our", or "us") operates the website{" "}
-            <a href="https://wishspark.xyz" className="text-primary underline">
-              https://wishspark.xyz
+            <a href="https://www.wishspark.xyz" className="text-primary underline">
+              https://www.wishspark.xyz
             </a>{" "}
             (the "Service"). This page informs you of our policies regarding the collection, use, and
             disclosure of personal data when you use our Service.

@@ -146,7 +146,7 @@ const CreateGreeting = ({ festival }: CreateGreetingProps) => {
 
     // Use the current origin when running locally or from a custom domain.
     // Fall back to the production URL if `window` is unavailable.
-    const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://wishspark.xyz";
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://www.wishspark.xyz";
     const link = `${baseUrl}/${festival.slug}?from=${encodeURIComponent(name.trim())}`;
     setGeneratedLink(link);
     setShowPartyEffect(true);
