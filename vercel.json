@@ -1,17 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.wishspark.xyz"
-        }
-      ],
-      "destination": "https://wishspark.xyz/:path*",
-      "permanent": true
-    }
-  ],
   "routes": [
     {
       "handle": "filesystem"
