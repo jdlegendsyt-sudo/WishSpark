@@ -18,6 +18,9 @@ const SITE_URL = "https://www.wishspark.xyz";
 const SITE_NAME = "WishSpark";
 const SITE_OG_IMAGE = `${SITE_URL}/og-image.svg`;
 const DEFAULT_ROBOTS = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
+const TITLE_MAX_LENGTH = 60;
+const DESCRIPTION_MAX_LENGTH = 160;
+const DESCRIPTION_MIN_TARGET = 145;
 const BASE_KEYWORDS = [
   "WishSpark",
   "festival greeting card maker",
@@ -147,6 +150,66 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
 
 const dedupeKeywords = (keywords: string[]) => Array.from(new Set([...BASE_KEYWORDS, ...keywords]));
 
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const normalizeSpace = (value: string) => value.replace(/\s+/g, " ").trim();
+
+const trimToWordBoundary = (value: string, maxLength: number) => {
+  const clean = normalizeSpace(value);
+  if (clean.length <= maxLength) return clean;
+
+  const trimmed = clean.slice(0, maxLength);
+  const lastSpace = trimmed.lastIndexOf(" ");
+  if (lastSpace > Math.floor(maxLength * 0.6)) {
+    return `${trimmed.slice(0, lastSpace).trim()}...`;
+  }
+  return `${trimmed.trim()}...`;
+};
+
+const includesPhrase = (text: string, phrase: string) => {
+  if (!phrase) return false;
+  const re = new RegExp(escapeRegExp(phrase), "i");
+  return re.test(text);
+};
+
+const buildSeoTitle = (rawTitle: string, primaryKeyword: string) => {
+  const keyword = normalizeSpace(primaryKeyword || "festival wishes");
+  let title = normalizeSpace(rawTitle);
+
+  if (!includesPhrase(title, keyword)) {
+    title = `${keyword} | WishSpark`;
+  }
+
+  if (title.length > TITLE_MAX_LENGTH) {
+    const compact = trimToWordBoundary(`${keyword} | WishSpark`, TITLE_MAX_LENGTH);
+    if (compact.length <= TITLE_MAX_LENGTH) {
+      return compact;
+    }
+    return trimToWordBoundary(title, TITLE_MAX_LENGTH);
+  }
+
+  return title;
+};
+
+const buildSeoDescription = (rawDescription: string, primaryKeyword: string) => {
+  const keyword = normalizeSpace(primaryKeyword || "festival wishes");
+  let description = normalizeSpace(rawDescription);
+
+  if (!includesPhrase(description, keyword)) {
+    description = `${description} Explore ${keyword} now.`;
+  }
+
+  if (!/(create|discover|explore|try|read|share|generate)/i.test(description)) {
+    description = `${description} Explore now.`;
+  }
+
+  if (description.length < DESCRIPTION_MIN_TARGET) {
+    description = `${description} Create and share instantly.`;
+  }
+
+  return trimToWordBoundary(description, DESCRIPTION_MAX_LENGTH);
+};
+
 const ensureMetaByName = (name: string) => {
   let meta = document.head.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
   if (!meta) {
@@ -263,16 +326,19 @@ const SeoManager = () => {
   useEffect(() => {
     const canonicalUrl = `${SITE_URL}${meta.canonicalPath === "/" ? "/" : meta.canonicalPath}`;
     const keywords = dedupeKeywords(meta.keywords).join(", ");
+    const primaryKeyword = meta.keywords[0] ?? "festival wishes";
+    const optimizedTitle = buildSeoTitle(meta.title, primaryKeyword);
+    const optimizedDescription = buildSeoDescription(meta.description, primaryKeyword);
     const robots = meta.robots ?? DEFAULT_ROBOTS;
 
-    document.title = meta.title;
+    document.title = optimizedTitle;
 
-    ensureMetaByName("description").setAttribute("content", meta.description);
+    ensureMetaByName("description").setAttribute("content", optimizedDescription);
     ensureMetaByName("keywords").setAttribute("content", keywords);
     ensureMetaByName("robots").setAttribute("content", robots);
 
-    ensureMetaByProperty("og:title").setAttribute("content", meta.title);
-    ensureMetaByProperty("og:description").setAttribute("content", meta.description);
+    ensureMetaByProperty("og:title").setAttribute("content", optimizedTitle);
+    ensureMetaByProperty("og:description").setAttribute("content", optimizedDescription);
     ensureMetaByProperty("og:url").setAttribute("content", canonicalUrl);
     ensureMetaByProperty("og:type").setAttribute("content", meta.type ?? "website");
     ensureMetaByProperty("og:site_name").setAttribute("content", SITE_NAME);
@@ -284,8 +350,8 @@ const SeoManager = () => {
     ensureMetaByProperty("og:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
 
     ensureMetaByName("twitter:card").setAttribute("content", "summary_large_image");
-    ensureMetaByName("twitter:title").setAttribute("content", meta.title);
-    ensureMetaByName("twitter:description").setAttribute("content", meta.description);
+    ensureMetaByName("twitter:title").setAttribute("content", optimizedTitle);
+    ensureMetaByName("twitter:description").setAttribute("content", optimizedDescription);
     ensureMetaByName("twitter:image").setAttribute("content", SITE_OG_IMAGE);
     ensureMetaByName("twitter:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
 
