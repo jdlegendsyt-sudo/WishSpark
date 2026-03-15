@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Heart, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
+import { Heart, Copy, Share2, RefreshCw } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -137,7 +137,7 @@ const CoupleNameGenerator = () => {
               <h2 className="text-lg font-display font-semibold text-foreground">Your Couple Names 💕</h2>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={generate}><RefreshCw className="w-4 h-4 mr-1" /> Refresh</Button>
-                <Button variant="outline" size="sm" onClick={copyShareLink} className="border-gold/20"><Link2 className="w-4 h-4 mr-1" /> Copy Share Link</Button>
+                <Button variant="outline" size="sm" onClick={copyShareLink} className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 transition-all"><Copy className="w-4 h-4 mr-1" /> Copy</Button>
                 {isSharedView && (
                   <Button size="sm" onClick={createYourOwn} className="bg-gold-gradient text-primary-foreground hover:opacity-90">Create Your Own</Button>
                 )}

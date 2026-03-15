@@ -91,11 +91,6 @@ const BirthdayCountdown = () => {
     setIsSharedView(true);
   }, [searchParams]);
 
-  useEffect(() => {
-    document.title = "Birthday Countdown Timer Online Free | How Many Days Until My Birthday | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free birthday countdown timer online. Find out how many days until your next birthday with our live countdown clock. Birthday countdown in days, hours, minutes & seconds!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
