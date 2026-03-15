@@ -15,7 +15,8 @@ type SeoMeta = {
 };
 
 const SITE_URL = "https://www.wishspark.xyz";
-const SITE_NAME = "WishSpark";
+const SITE_NAME = "WishSpark Personalized Festival Wishes";
+const SITE_OG_IMAGE = `${SITE_URL}/og-image.svg`;
 const DEFAULT_ROBOTS = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
 const BASE_KEYWORDS = [
   "WishSpark",
@@ -83,7 +84,7 @@ const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
 
 const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   "/": {
-    title: "WishSpark | Free Festival Greeting Card Maker Online",
+    title: "WishSpark Personalized Festival Wishes",
     description: "Create personalized festival wishes with your name for Onam, Diwali, Christmas, Eid, birthdays, anniversaries, and 35+ occasions. Share animated greeting links instantly.",
     keywords: ["festival greeting card maker", "create wishes card online", "festival wishes with name", "personalized greeting card", "free online greeting maker"],
     type: "website",
@@ -275,10 +276,18 @@ const SeoManager = () => {
     ensureMetaByProperty("og:url").setAttribute("content", canonicalUrl);
     ensureMetaByProperty("og:type").setAttribute("content", meta.type ?? "website");
     ensureMetaByProperty("og:site_name").setAttribute("content", SITE_NAME);
+    ensureMetaByProperty("og:image").setAttribute("content", SITE_OG_IMAGE);
+    ensureMetaByProperty("og:image:secure_url").setAttribute("content", SITE_OG_IMAGE);
+    ensureMetaByProperty("og:image:type").setAttribute("content", "image/svg+xml");
+    ensureMetaByProperty("og:image:width").setAttribute("content", "1200");
+    ensureMetaByProperty("og:image:height").setAttribute("content", "630");
+    ensureMetaByProperty("og:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
 
     ensureMetaByName("twitter:card").setAttribute("content", "summary_large_image");
     ensureMetaByName("twitter:title").setAttribute("content", meta.title);
     ensureMetaByName("twitter:description").setAttribute("content", meta.description);
+    ensureMetaByName("twitter:image").setAttribute("content", SITE_OG_IMAGE);
+    ensureMetaByName("twitter:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
 
     const canonicalLink = ensureCanonicalLink();
     canonicalLink.setAttribute("href", canonicalUrl);
