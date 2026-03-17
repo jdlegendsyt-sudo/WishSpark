@@ -17,7 +17,7 @@ type SeoMeta = {
 const SITE_URL = "https://www.wishspark.xyz";
 const SITE_NAME = "WishSpark";
 const SITE_OG_IMAGE = `${SITE_URL}/og-image.svg`;
-const DEFAULT_ROBOTS = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
+const DEFAULT_ROBOTS = "index, follow, max-snippet:160, max-image-preview:large, max-video-preview:-1";
 const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 160;
 const DESCRIPTION_MIN_TARGET = 145;
@@ -88,7 +88,7 @@ const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
 const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   "/": {
     title: "WishSpark | Free Festival Greeting Card Maker Online",
-    description: "Create personalized festival wishes with your name for Onam, Diwali, Christmas, Eid, birthdays, anniversaries, and 35+ occasions. Share animated greeting links instantly.",
+    description: "Create personalized festival wishes with your name for 35+ occasions including Onam, Diwali, Christmas, Eid, and birthdays. Make and share greeting links instantly.",
     keywords: ["festival greeting card maker", "create wishes card online", "festival wishes with name", "personalized greeting card", "free online greeting maker"],
     type: "website",
   },
@@ -118,7 +118,7 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   },
   "/contact": {
     title: "Contact WishSpark | Festival Greeting Support and Feedback",
-    description: "Contact WishSpark for support, feedback, partnerships, or festival suggestions. Reach the team about greeting cards, tools, and website issues.",
+    description: "Contact WishSpark for support, feedback, partnerships, and festival suggestions. Get help with greeting cards, tools, and website questions.",
     keywords: ["contact WishSpark", "festival greeting support", "WishSpark feedback", "greeting website contact", "festival suggestion contact"],
     type: "website",
   },
@@ -336,6 +336,8 @@ const SeoManager = () => {
     ensureMetaByName("description").setAttribute("content", optimizedDescription);
     ensureMetaByName("keywords").setAttribute("content", keywords);
     ensureMetaByName("robots").setAttribute("content", robots);
+    ensureMetaByName("googlebot").setAttribute("content", robots);
+    ensureMetaByName("google").setAttribute("content", "notranslate");
 
     ensureMetaByProperty("og:title").setAttribute("content", optimizedTitle);
     ensureMetaByProperty("og:description").setAttribute("content", optimizedDescription);
