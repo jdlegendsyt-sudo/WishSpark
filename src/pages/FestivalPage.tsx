@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
@@ -150,6 +150,12 @@ const FestivalPage = () => {
 
         <CreateGreeting festival={festival} />
 
+        <div className="max-w-4xl mx-auto my-8">
+          <Suspense fallback={null}>
+            <AdBanner adSlot="FESTIVAL_TOP" adFormat="horizontal" className="max-w-4xl mx-auto" />
+          </Suspense>
+        </div>
+
         <section className="max-w-2xl mx-auto mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">
@@ -182,6 +188,12 @@ const FestivalPage = () => {
                 <span>Your friend opens the link and sees a surprise gift from you!</span>
               </li>
             </ol>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <Suspense fallback={null}>
+              <AdBanner adSlot="FESTIVAL_MID" adFormat="horizontal" className="max-w-2xl mx-auto" />
+            </Suspense>
           </div>
 
           {(() => {
