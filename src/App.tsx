@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "@/components/ScrollToTop";
 import SeoManager from "@/components/SeoManager";
 import Index from "./pages/Index";
@@ -63,6 +64,7 @@ const App = () => (
       <Toaster />
       <CookieConsent />
     </Suspense>
+    <Analytics />
   </BrowserRouter>
 );
 
