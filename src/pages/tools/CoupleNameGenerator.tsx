@@ -183,10 +183,10 @@ const CoupleNameGenerator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Name Blending Produces Better Couple Tags</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Remember "Brangelina"? That iconic blend of Brad and Angelina's names started a global trend that's still going strong today. Couple names — also known as ship names — have become a cultural phenomenon. From celebrity couples to your best friends' relationship, everyone wants a creative combination of two names that represents their bond. Our couple name generator makes creating the perfect ship name effortless and fun.</p>
-              <p>The concept behind a couple name is beautifully simple: take parts of two names and blend them into something new. But doing it well? That's where it gets tricky. Some combinations sound great, while others are... let's say, less flattering. Our algorithm takes the guesswork out by generating up to 8 creative combinations using different blending techniques — syllable mixing, initial combinations, and even hashtag-style mashups.</p>
-              <p>Each generated name is displayed with a hashtag (#) format, making them instantly ready for Instagram bios, captions, and social media profiles. Whether you're looking for a cute username for a joint social media account, a wedding hashtag, or just a fun way to reference your relationship, these generated names give you plenty of options to choose from.</p>
-              <p>The tool also encourages interaction — hover over any generated name to reveal Copy and Share buttons. Copy the name to your clipboard with one click, or share it directly via WhatsApp to let your partner weigh in on which combination they love most. It's a small, playful activity that couples can enjoy together.</p>
+              <p>Blended couple names, often called ship names, are commonly used for usernames, event hashtags, and private nicknames. The idea is simple, but manually combining names can be inconsistent and time-consuming.</p>
+              <p>This generator creates up to eight options using different blending patterns, so users can compare readability, style, and pronunciation before choosing one. Having multiple options helps avoid awkward combinations.</p>
+              <p>Results are shown in hashtag-ready format because many users apply them directly to social profiles, wedding content, or shared posts. This makes the output practical beyond just trying one random name.</p>
+              <p>If you are deciding between options with someone else, the copy and share actions make comparison easier without repeating the generation process.</p>
             </div>
           </div>
 

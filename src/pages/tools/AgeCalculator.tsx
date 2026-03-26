@@ -235,8 +235,8 @@ const AgeCalculator = () => {
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Age Calculation Works and Why It Matters</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Have you ever wondered exactly how old you are — not just in years, but down to the very day? This calculator gives you a clear breakdown quickly. Whether you need age details for a document, a visa application, or simple personal reference, the result is presented in a practical format.</p>
-              <p>Calculating your age manually can get tricky. You have to account for leap years, months with different numbers of days, and whether your birthday has already passed this year. Our age calculator handles all of this automatically. Just enter your date of birth, click "Calculate," and you'll instantly see your exact age broken down into years, months, and days.</p>
-              <p>But that's not all — our calculator goes beyond the basics. It also shows you interesting facts about your age that you might never have thought about:</p>
+              <p>Manual age calculation can be error-prone because leap years, month lengths, and current-date offsets all affect the final number. This page automates those checks and presents the result as years, months, and days.</p>
+              <p>Beyond basic age, the result card also includes extra context that many users find useful:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong className="text-foreground">Total days lived:</strong> Ever wondered how many days you've been alive? It's a number that puts your life into perspective. If you're 25 years old, you've lived over 9,000 days — each one a page in your story.</li>
                 <li><strong className="text-foreground">Total weeks and hours:</strong> These numbers are fascinating conversation starters. Imagine telling a friend, "I've been alive for over 200,000 hours!"</li>

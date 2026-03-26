@@ -186,10 +186,10 @@ const BirthdayWishesGenerator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Creating Better Birthday Wishes in Less Time</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>We've all been there — it's someone's birthday, you want to send something meaningful, but you're staring at a blank screen wondering what to write beyond "Happy Birthday!" Sound familiar? That's exactly why we built this birthday wishes generator. It takes the stress out of finding the right words and creates beautiful, heartfelt messages personalized with the birthday person's name.</p>
+              <p>Most people want to send a thoughtful birthday message, but writing one quickly is not always easy. This generator helps by offering ready-to-use lines that already include the recipient's name.</p>
               <p>What makes our birthday wishes different from generic messages? Every wish includes the recipient's name woven naturally into the message. This isn't just "Happy Birthday, [Name]" — the person's name is integrated throughout the wish in a way that feels genuine and thoughtful. When someone reads a message that mentions them by name multiple times, it creates a deeper emotional connection.</p>
-              <p>Our collection includes a variety of tones and styles. Some wishes are romantic and deeply emotional — perfect for partners and close loved ones. Others are warm and celebratory, ideal for friends and family. Each time you click Generate, you get a fresh set of 5 unique wishes to choose from. Don't love the options? Hit Refresh and get 5 more. You can generate unlimited wishes until you find the one that perfectly captures what you want to say.</p>
-              <p>The best part? Every wish comes with two action buttons — Copy to clipboard for pasting anywhere, and Share via WhatsApp for instant sending. You can go from "I need to wish someone" to "Done!" in literally 15 seconds. No typing, no thinking, no stress. Just genuine, beautiful birthday messages that make people feel special.</p>
+              <p>The collection includes different tones, including romantic, warm, and celebratory formats, so users can pick a style that matches the relationship. Each generation returns five options, and refresh gives a new set for comparison.</p>
+              <p>After selecting a message, users can copy it for any app or share it directly on WhatsApp. This keeps the flow simple when time is limited and a message needs to be sent quickly.</p>
             </div>
           </div>
 

@@ -172,10 +172,10 @@ const FriendshipCalculator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Measuring and Sharing Friendship Scores</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Friendships are some of the most important relationships in our lives, yet we rarely celebrate them the same way we celebrate romantic relationships. Our friendship calculator is here to change that. It's a fun, lighthearted tool that lets you and your friends test your friendship compatibility and share the results in group chats for laughs and bonding.</p>
-              <p>The calculator generates friendship percentages between 60% and 100% — because every friendship has value, and our tool reflects that. Scores are categorized into friendship levels: "Growing Friendship" for newer bonds, "Good Buddies" for solid connections, "Great Friends" for the ones you can count on, "Ride or Die" for the truly loyal ones, and "BEST FRIENDS FOREVER" for that one person who knows ALL your secrets.</p>
-              <p>What makes the friendship calculator especially fun is its social nature. Unlike a love calculator that you might use privately, the friendship calculator is designed to be used WITH your friends. Try it in a group setting — calculate everyone's friendship percentage with each other and see who gets the highest score. It creates playful debates, inside jokes, and memorable moments that actually strengthen your friendships.</p>
-              <p>The tool is particularly popular around Friendship Day, when people want fun ways to celebrate their friends. But honestly, you don't need a special occasion to tell your friends they matter. Use the Share button to send your friendship score via WhatsApp, and brighten someone's day with a message that says, "Look, we're officially 95% compatible as friends!"</p>
+              <p>Friendships are a major part of daily life, but most people do not get many occasions to celebrate them. This calculator gives friends a quick, playful way to run a name pair, view a score, and share a light result in chat.</p>
+              <p>The score range is 60% to 100%, and each range maps to a simple friendship label. The labels are meant to keep the output friendly and easy to interpret, especially when multiple friends are comparing results.</p>
+              <p>The tool works best in social use cases: group chats, campus activities, Friendship Day campaigns, or just casual evening fun. Because each run is quick, users can test several combinations without leaving the page.</p>
+              <p>Sharing is optional, but when people do share results, it often leads to playful back-and-forth and more interaction inside the group.</p>
             </div>
           </div>
 

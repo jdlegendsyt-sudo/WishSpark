@@ -169,10 +169,10 @@ const LoveCalculator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Interpreting Love Scores as Entertainment</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Love calculators have been a beloved internet tradition for over two decades, and for good reason — there's something irresistibly fun about typing in two names and seeing what "destiny" has in store. Our love calculator takes this classic concept and wraps it in a beautiful, modern experience that's perfect for sharing with your partner, crush, or friends.</p>
-              <p>Here's how it works: you enter your name and your partner's (or crush's) name, and our algorithm generates a love compatibility percentage between 40% and 100%. But we didn't stop at just a number. Each score comes with a personalized message that describes your compatibility. Scores above 90% get the "match made in heaven" treatment, while lower scores get encouraging messages about building connection over time. Every result feels positive and fun — because that's what love should be!</p>
-              <p>The love calculator is designed for entertainment and social sharing. It's the kind of tool that sparks conversations — "I got 95% with you!" — and creates playful moments between couples. Valentine's Day, date nights, slumber parties, or just a random Tuesday when you're curious — there's never a wrong time to check your love score.</p>
-              <p>One thing we love about this tool is how it brings people together. When you share your result via WhatsApp, the recipient can click the link and try it themselves. Before you know it, your entire friend group is calculating their love scores and comparing results. It's innocent, fun, and creates memories — and isn't that what love is all about?</p>
+              <p>Love calculators have stayed popular online for years because they are simple, playful, and easy to use in conversations. You enter two names, get a score, and use that result as a light social activity with a partner, crush, or friend group.</p>
+              <p>This version generates a compatibility-style percentage between 40% and 100% and pairs it with a short interpretation message. The intention is not prediction; it is entertainment with a clear format that people can understand quickly.</p>
+              <p>Because the output is short and visual, many users use it as a conversation starter in chats. It works well in casual situations such as date-night games, group challenges, or simple curiosity.</p>
+              <p>If you share the result link, others can open the page and try their own combinations right away. That makes it a repeatable social activity instead of a one-time interaction.</p>
             </div>
           </div>
 

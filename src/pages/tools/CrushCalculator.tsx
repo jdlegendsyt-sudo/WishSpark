@@ -178,10 +178,10 @@ const CrushCalculator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Using a Crush Calculator for Social Engagement</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Having a crush is one of life's most thrilling experiences. That flutter in your stomach when they walk by, the way you overanalyze every text message, the constant wondering — "Do they like me back?" Our crush calculator doesn't have the real answer (nobody does, except maybe your crush), but it gives you a fun, exciting way to explore the possibility.</p>
-              <p>The crush calculator works differently from a love calculator. While a love calculator measures general compatibility between two people, our crush calculator is specifically designed for that early-stage, butterflies-in-your-stomach phase. The percentage range starts at 50% because let's be honest — if you're already thinking about someone enough to use a crush calculator, there's already SOMETHING there.</p>
-              <p>What makes our crush calculator extra special is the dramatic reveal. After you enter both names and click "Find Out!", there's a 1.5-second animation where a spinning heart builds suspense before your result appears. It's that brief moment of excitement that makes the experience memorable — like opening a fortune cookie or shaking a Magic 8 Ball.</p>
-              <p>Each result comes with a crush verdict (from "Slow Burn" to "SOULMATES!"), a personalized message, and sharing options. The verdicts are designed to be positive and encouraging regardless of the score, because having a crush should always feel exciting, never discouraging. Share your result with friends for laughs, or send it to your crush as a bold conversation starter!</p>
+              <p>Crush calculators are popular because they turn a private question into a light social game. You enter two names, get a score, and use the result as a playful prompt for conversation.</p>
+              <p>This tool is positioned for early-stage curiosity rather than serious compatibility analysis. The score starts from 50% to keep results positive and entertainment-focused, and each score comes with a short verdict line.</p>
+              <p>After clicking "Find Out!", a brief animation appears before the result card. That small delay adds anticipation and makes the interaction feel more like a reveal than a plain number output.</p>
+              <p>You can keep the result private, share it with friends, or use it as a casual conversation starter. The goal is simple: fun interaction without overpromising accuracy.</p>
             </div>
           </div>
 
