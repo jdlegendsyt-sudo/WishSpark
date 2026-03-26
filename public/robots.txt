@@ -1,3 +1,16 @@
+Sitemap: https://www.wishspark.xyz/sitemap.xml
+
 User-agent: *
 Allow: /
-Sitemap: https://www.wishspark.xyz/sitemap.xml
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
