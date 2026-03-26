@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, Share2, Copy } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -121,23 +121,6 @@ const LoveCalculator = () => {
               repeatable, and easy to understand for first-time visitors.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🔥</span><span>Crush Calculator</span>
-              </Link>
-              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💑</span><span>Couple Names</span>
-              </Link>
-              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>👯</span><span>Friendship Test</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
@@ -204,10 +187,27 @@ const LoveCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Love Calculator FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Is the love calculator scientifically accurate?</p><p>The love calculator is a fun entertainment tool, not a scientific measurement. It uses a name-based algorithm to generate consistent, amusing results. Real love compatibility involves much more than names — but sometimes a playful percentage is all you need to start a great conversation!</p></div>
-              <div><p className="font-medium text-foreground">Will I get the same result every time?</p><p>Yes! The same two names will always produce the same percentage. This consistency is part of the fun — you can verify your score with friends and it stays the same.</p></div>
-              <div><p className="font-medium text-foreground">Does the order of names matter?</p><p>Yes, swapping the order of names may produce a slightly different result. Try both combinations and go with whichever one you like better — we won't judge!</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Is this love calculator scientifically accurate?</p>
+                <p className="text-muted-foreground">No. It is a fun entertainment tool that uses a name-based formula for playful results.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Will I get the same result every time?</p>
+                <p className="text-muted-foreground">Yes. The same name pair usually gives the same percentage for consistency.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Does the order of names matter?</p>
+                <p className="text-muted-foreground">Yes, switching order can produce a different value. You can test both combinations.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I share my love result with friends?</p>
+                <p className="text-muted-foreground">Yes. You can copy the result link or share instantly on WhatsApp.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Is this tool free to use?</p>
+                <p className="text-muted-foreground">Yes, it is fully free with unlimited usage and no account required.</p>
+              </div>
             </div>
           </div>
         </section>

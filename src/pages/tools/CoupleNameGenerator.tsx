@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, Copy, Share2, RefreshCw } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -129,23 +129,6 @@ const CoupleNameGenerator = () => {
               The tool reduces trial-and-error and helps users select options that are memorable and easy to type.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🔥</span><span>Crush Calculator</span>
-              </Link>
-              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>👯</span><span>Friendship Test</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
@@ -219,10 +202,27 @@ const CoupleNameGenerator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Couple Name Generator FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">What's the difference between a couple name and a ship name?</p><p>They're the same thing! "Ship name" comes from the word "relationship" (ship) and is commonly used in fan communities. "Couple name" is the more general term. Both refer to a creative blend of two people's names.</p></div>
-              <div><p className="font-medium text-foreground">Can I use these for a wedding hashtag?</p><p>Absolutely! Many of the generated names make excellent wedding hashtags. Just add # before the name and use it across your wedding-related social media posts, invitations, and event pages.</p></div>
-              <div><p className="font-medium text-foreground">Does the order of names matter?</p><p>Yes! Entering "Arun + Priya" produces different combinations than "Priya + Arun." We recommend trying both orders to get the widest variety of options. One order might produce names that sound better than the other.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. What is the difference between a couple name and ship name?</p>
+                <p className="text-muted-foreground">They mean the same thing: a creative blend of two names to represent a relationship or pair.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Can I use generated names as wedding hashtags?</p>
+                <p className="text-muted-foreground">Yes. Most generated names are hashtag-ready and useful for wedding invites and social posts.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Does name order matter when generating results?</p>
+                <p className="text-muted-foreground">Yes. Swapping the order can produce different and sometimes better sounding combinations.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. How many couple names are generated at once?</p>
+                <p className="text-muted-foreground">The tool generates up to eight options so you can compare and choose your favorite quickly.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Is this couple name generator free?</p>
+                <p className="text-muted-foreground">Yes, it is fully free and can be used unlimited times without signup.</p>
+              </div>
             </div>
           </div>
         </section>

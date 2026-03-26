@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flame, Share2, RefreshCw, Copy } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -121,23 +121,6 @@ const CrushCalculator = () => {
               clear output language and straightforward sharing controls.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💑</span><span>Couple Names</span>
-              </Link>
-              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>👯</span><span>Friendship Test</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
@@ -214,10 +197,27 @@ const CrushCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Crush Calculator FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Will my crush find out I used this calculator?</p><p>Only if you share the result with them! Everything happens in your browser — no data is stored, no notifications are sent. Your crush secret is completely safe with us.</p></div>
-              <div><p className="font-medium text-foreground">Why does the crush calculator start at 50%?</p><p>Because if you're already thinking about someone enough to check, there's clearly some interest! We designed the calculator to reflect that initial spark. Scores range from 50% to 100% with encouraging messages at every level.</p></div>
-              <div><p className="font-medium text-foreground">Should I send the result to my crush?</p><p>That's entirely up to you! Some people use it as a playful ice-breaker, while others keep it private. If you got a high score, it could be a fun and flirty way to start a conversation. Life's too short not to shoot your shot!</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Will my crush know I used this calculator?</p>
+                <p className="text-muted-foreground">No, unless you choose to share it. The tool runs in your browser and does not notify anyone.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Why do scores start from 50%?</p>
+                <p className="text-muted-foreground">The calculator is designed as playful entertainment with a positive baseline range from 50% to 100%.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Should I send the result to my crush?</p>
+                <p className="text-muted-foreground">That is your choice. Many users share results as a fun ice-breaker in chats.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I try with different names repeatedly?</p>
+                <p className="text-muted-foreground">Yes, you can test unlimited name combinations anytime.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Is the crush calculator scientifically accurate?</p>
+                <p className="text-muted-foreground">No. It is made for fun and social engagement, not as a real relationship prediction tool.</p>
+              </div>
             </div>
           </div>
         </section>

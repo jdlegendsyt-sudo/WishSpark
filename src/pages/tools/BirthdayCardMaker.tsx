@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Share2 } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -99,23 +99,6 @@ const BirthdayCardMaker = () => {
               messages must be sent in a short time window.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>⏳</span><span>Birthday Countdown</span>
-              </Link>
-              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🧮</span><span>Age Calculator</span>
-              </Link>
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -199,11 +182,27 @@ const BirthdayCardMaker = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Card FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Can I download the birthday card as an image?</p><p>Currently, the card is designed for instant sharing via WhatsApp. The sharing feature sends the card as a beautifully formatted text message with the person's name and your custom message. We're working on adding image download in a future update.</p></div>
-              <div><p className="font-medium text-foreground">Is there a limit on how many cards I can create?</p><p>No limits at all! Create as many birthday cards as you want for as many people as you like. Every card is free, forever.</p></div>
-              <div><p className="font-medium text-foreground">Do I need to sign up or create an account?</p><p>No signup required. Just open the birthday card maker, customize your card, and share it. No email, no registration, no passwords.</p></div>
-              <div><p className="font-medium text-foreground">What makes this better than a regular WhatsApp birthday message?</p><p>A personalized card with a custom theme, the person's name, and a thoughtful message shows much more effort than a plain text "Happy Birthday." It's the digital equivalent of buying a real card instead of just saying it verbally.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Can I download this birthday card as an image?</p>
+                <p className="text-muted-foreground">Right now, the tool is focused on instant sharing. Download support can be added in a later update.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Is there a limit on how many cards I can create?</p>
+                <p className="text-muted-foreground">No limit. You can generate as many birthday cards as you want, completely free.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Do I need to sign up or create an account?</p>
+                <p className="text-muted-foreground">No signup is required. Open the page, customize your card, and share it instantly.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I edit message and theme before sharing?</p>
+                <p className="text-muted-foreground">Yes. You can change name, message, and theme any number of times before sharing.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Why use this instead of plain birthday text?</p>
+                <p className="text-muted-foreground">A personalized visual card feels more thoughtful and stands out compared to a generic one-line wish.</p>
+              </div>
             </div>
           </div>
         </section>

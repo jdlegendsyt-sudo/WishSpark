@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cake, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -125,23 +125,6 @@ const BirthdayWishesGenerator = () => {
               sharing controls, the tool supports high-quality communication at scale.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎨</span><span>Birthday Card Maker</span>
-              </Link>
-              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>⏳</span><span>Birthday Countdown</span>
-              </Link>
-              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🧮</span><span>Age Calculator</span>
-              </Link>
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
@@ -222,10 +205,27 @@ const BirthdayWishesGenerator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Wishes FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Are the birthday wishes unique each time?</p><p>Yes! We have a large collection of birthday wishes, and each time you generate, you get a random selection of 5. The shuffle ensures you get different combinations every time, so no two sessions feel the same.</p></div>
-              <div><p className="font-medium text-foreground">Can I use these wishes on platforms other than WhatsApp?</p><p>Absolutely. The Copy button copies the wish as plain text, so you can paste it on Facebook, Instagram, Twitter, SMS, email, or any messaging app. The wishes work beautifully anywhere.</p></div>
-              <div><p className="font-medium text-foreground">Are these wishes suitable for all ages?</p><p>Yes, all our birthday wishes are warm, positive, and appropriate for all ages. They express love, appreciation, and celebration — universal sentiments that work for anyone from a teenager to a grandparent.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Are wishes different every time I click Generate?</p>
+                <p className="text-muted-foreground">Yes. The generator shuffles templates and gives you a fresh set of five wishes each time.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Can I use these wishes outside WhatsApp?</p>
+                <p className="text-muted-foreground">Yes. Copy any wish and paste it into Instagram, SMS, email, Facebook, or any chat app.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Are these wishes suitable for all age groups?</p>
+                <p className="text-muted-foreground">They are written in a positive tone and work for friends, family members, and colleagues.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I personalize wishes with a specific name?</p>
+                <p className="text-muted-foreground">Yes. Enter the person name once and all generated wishes are personalized automatically.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Is this birthday wishes generator free?</p>
+                <p className="text-muted-foreground">Yes, the tool is fully free to use with no signup required.</p>
+              </div>
             </div>
           </div>
         </section>

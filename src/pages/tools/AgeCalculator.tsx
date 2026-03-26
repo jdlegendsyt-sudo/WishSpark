@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calculator, Share2, Copy } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -171,23 +171,6 @@ const AgeCalculator = () => {
               personal use.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>⏳</span><span>Birthday Countdown</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎨</span><span>Birthday Card Maker</span>
-              </Link>
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
@@ -274,11 +257,27 @@ const AgeCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions About Age Calculation</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Does this age calculator account for leap years?</p><p>Yes! Our calculator accurately handles leap years (years divisible by 4, except century years unless divisible by 400). This means your age calculation is precise down to the exact day, even if you were born on February 29th.</p></div>
-              <div><p className="font-medium text-foreground">Can I calculate the age of someone else?</p><p>Absolutely. Just enter any valid date of birth and the calculator will show the exact age. This is useful for calculating ages of family members, friends, or historical figures.</p></div>
-              <div><p className="font-medium text-foreground">Why is knowing my exact age in days useful?</p><p>Many people celebrate milestone days — like their 10,000th day alive. It's also useful for certain legal or medical calculations that require age in days rather than years. Plus, it's a fun fact to share!</p></div>
-              <div><p className="font-medium text-foreground">Is my data stored anywhere?</p><p>No. All calculations happen right in your browser. We don't store your date of birth or any personal information on our servers. Your privacy is completely protected.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Does this age calculator account for leap years?</p>
+                <p className="text-muted-foreground">Yes. The calculator handles leap years and varying month lengths, including February 29 birthdays, so results stay accurate.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Can I calculate the age of someone else?</p>
+                <p className="text-muted-foreground">Absolutely. Enter any valid date of birth to calculate age for family members, friends, students, or records.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Why is age in total days useful?</p>
+                <p className="text-muted-foreground">Total days are useful for milestones, medical forms, and detailed eligibility checks that need precision beyond years.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I check days left for my next birthday?</p>
+                <p className="text-muted-foreground">Yes. After calculation, the result card shows exactly how many days remain until your next birthday.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Is my date of birth stored?</p>
+                <p className="text-muted-foreground">No. The calculation runs in your browser, and your date of birth is not saved on WishSpark servers.</p>
+              </div>
             </div>
           </div>
         </section>

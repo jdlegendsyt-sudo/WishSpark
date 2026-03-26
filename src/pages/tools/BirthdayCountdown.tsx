@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Clock, Share2, Copy } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -119,23 +119,6 @@ const BirthdayCountdown = () => {
               birthdays, the reset workflow also enables quick comparisons without leaving the page.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🧮</span><span>Age Calculator</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎨</span><span>Birthday Card Maker</span>
-              </Link>
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         {!started ? (
@@ -211,10 +194,27 @@ const BirthdayCountdown = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Countdown FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">What happens when my birthday arrives?</p><p>When the countdown reaches zero, you'll see all values at 00 — it's your birthday! Time to celebrate! You can then reset and start counting down to your next birthday.</p></div>
-              <div><p className="font-medium text-foreground">Does the countdown work across time zones?</p><p>Yes. The countdown uses your device's local time, so it automatically adjusts to your time zone. The countdown is always accurate for where you are.</p></div>
-              <div><p className="font-medium text-foreground">Can I use this for someone else's birthday?</p><p>Absolutely! Enter anyone's date of birth and their name to create a personalized birthday countdown for friends, family, or even celebrities.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. What happens when the countdown reaches zero?</p>
+                <p className="text-muted-foreground">The timer shows 00 and your birthday has arrived. You can reset and start counting down for next year.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Does this work correctly for my time zone?</p>
+                <p className="text-muted-foreground">Yes. The countdown uses your local device time, so it stays accurate for your location.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Can I use this for someone else's birthday?</p>
+                <p className="text-muted-foreground">Yes. Enter any date of birth and optional name to track a friend, family member, or partner.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Does the countdown update in real time?</p>
+                <p className="text-muted-foreground">It updates every second and displays days, hours, minutes, and seconds continuously.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. Can I share my countdown with others?</p>
+                <p className="text-muted-foreground">Yes. Use copy link or WhatsApp share to send your countdown result instantly.</p>
+              </div>
             </div>
           </div>
         </section>

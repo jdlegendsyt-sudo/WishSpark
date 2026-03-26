@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, Share2, Copy } from "lucide-react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -119,23 +119,6 @@ const FriendshipCalculator = () => {
               on participation and conversation.
             </p>
           </div>
-          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💕</span><span>Love Calculator</span>
-              </Link>
-              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🔥</span><span>Crush Calculator</span>
-              </Link>
-              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>💑</span><span>Couple Names</span>
-              </Link>
-              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
-                <span>🎂</span><span>Birthday Wishes</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
@@ -207,11 +190,27 @@ const FriendshipCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Friendship Calculator FAQ</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Why does the friendship calculator start at 60%?</p><p>Because every friendship is worth celebrating! If you care enough about someone to test your friendship score, there's already a meaningful connection there. Our calculator reflects that by starting at a positive baseline.</p></div>
-              <div><p className="font-medium text-foreground">Can I test friendship with multiple people?</p><p>Yes! Calculate your friendship percentage with as many friends as you want. Many people test their whole friend group and compare scores — it makes for great group chat content.</p></div>
-              <div><p className="font-medium text-foreground">Is this based on real compatibility science?</p><p>The friendship calculator is designed for entertainment and social fun. Real friendships are built on trust, shared experiences, and mutual support — not algorithms. But that doesn't make the results any less fun to share!</p></div>
-              <div><p className="font-medium text-foreground">What's the best way to use the friendship calculator with a group?</p><p>Have everyone in the group calculate their percentage with every other person. Create a leaderboard of the highest scores. It's a great icebreaker activity for parties, school events, or virtual hangouts on Friendship Day.</p></div>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">1. Why does friendship score start from 60%?</p>
+                <p className="text-muted-foreground">This tool is designed for positive social fun, so scores begin from a friendly baseline.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">2. Can I test friendship with many people?</p>
+                <p className="text-muted-foreground">Yes. You can calculate unlimited name pairs and compare results with your friend group.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">3. Is this based on real compatibility science?</p>
+                <p className="text-muted-foreground">No. It is an entertainment feature for fun interaction and sharing.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">4. Can I share friendship result on WhatsApp?</p>
+                <p className="text-muted-foreground">Yes. Use the built-in share button to send your percentage and title instantly.</p>
+              </div>
+              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
+                <p className="font-medium text-foreground mb-1">5. What is the best way to use this in groups?</p>
+                <p className="text-muted-foreground">Run pair-wise checks for everyone and create a playful leaderboard in your group chat.</p>
+              </div>
             </div>
           </div>
         </section>
