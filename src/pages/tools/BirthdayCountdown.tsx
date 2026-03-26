@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 import { toast } from "@/hooks/use-toast";
 
 const BirthdayCountdown = () => {
@@ -178,7 +179,7 @@ const BirthdayCountdown = () => {
               <p>There's something magical about counting down to your birthday. It builds anticipation, gets you excited, and gives you something to look forward to. Our free birthday countdown timer makes it easy to see exactly how long you have to wait — right down to the second.</p>
               <p>Unlike simple "days until" calculators, our countdown is a live, real-time experience. Once you enter your date of birth, the timer starts ticking immediately. You can watch the seconds count down, see the minutes change, and track the days as they slowly (or quickly!) decrease. It turns waiting for your birthday into an engaging visual experience.</p>
               <p>The countdown timer is also a wonderful way to share excitement with friends and family. Imagine sending your countdown to a group chat — "Only 47 days until my birthday!" — and watching everyone get excited. It's a subtle (or not-so-subtle) way to remind people that your special day is approaching. The optional name field makes it personal, displaying "Your Name's next birthday is in..." for that extra touch.</p>
-              <p>Whether you're a kid counting down to their first double-digit birthday, a teenager eagerly awaiting their 18th, or an adult who never lost that birthday excitement — this countdown timer is for you. It's free, it's instant, and it works on any device. Start your countdown now and let the anticipation build!</p>
+              <p>Whether you're a kid counting down to a milestone birthday, a teenager waiting for 18, or an adult who still enjoys the excitement, this timer keeps the anticipation visible and easy to share. Start the countdown and use it as a small daily reminder that your celebration is getting closer.</p>
             </div>
           </div>
 
@@ -192,15 +193,15 @@ const BirthdayCountdown = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Countdown FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">What happens when the countdown reaches zero?</p><p>The timer reaches 00 and your birthday has arrived. You can then reset it for next year.</p></div>
-              <div><p className="font-medium text-foreground">Does this work with my local time zone?</p><p>Yes. The countdown uses your device time, so it remains accurate for your location.</p></div>
-              <div><p className="font-medium text-foreground">Can I use this for someone else?</p><p>Yes. Enter any date and optional name to track friends, family, or partner birthdays.</p></div>
-              <div><p className="font-medium text-foreground">Does the timer update live?</p><p>Yes. It refreshes every second and shows days, hours, minutes, and seconds.</p></div>
-              <div><p className="font-medium text-foreground">Can I share my countdown result?</p><p>Yes. Use copy link or WhatsApp share to send the countdown instantly.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "What happens when the countdown reaches zero?", answer: "The timer reaches 00 and your birthday has arrived. You can then reset it for next year." },
+              { question: "Does this work with my local time zone?", answer: "Yes. The countdown uses your device time, so it remains accurate for your location." },
+              { question: "Can I use this for someone else?", answer: "Yes. Enter any date and optional name to track friends, family, or partner birthdays." },
+              { question: "Does the timer update live?", answer: "Yes. It refreshes every second and shows days, hours, minutes, and seconds." },
+              { question: "Can I share my countdown result?", answer: "Yes. Use copy link or WhatsApp share to send the countdown instantly." },
+            ]} />
           </div>
         </section>
       </main>

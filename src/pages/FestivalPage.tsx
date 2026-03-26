@@ -13,6 +13,7 @@ import CreateGreeting from "@/components/CreateGreeting";
 import { getFestivalBySlug } from "@/data/festivals";
 import { getFestivalArticle } from "@/data/festivalArticles";
 import { getFestivalFaqs } from "@/data/festivalFaqs";
+import FaqAccordion from "@/components/FaqAccordion";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 
@@ -215,18 +216,16 @@ const FestivalPage = () => {
             );
           })()}
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">
               Frequently Asked Questions About {festival.name}
             </h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              {festivalFaqs.map((faq) => (
-                <div key={faq.question}>
-                  <p className="font-medium text-foreground">{faq.question}</p>
-                  <p>{faq.answer}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion
+              items={festivalFaqs.map((faq) => ({
+                question: faq.question,
+                answer: faq.answer,
+              }))}
+            />
           </div>
         </section>
       </main>

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const themes = [
   { name: "Classic Gold", bg: "from-amber-600 via-yellow-500 to-orange-500", emoji: "🎂", text: "text-white" },
@@ -163,7 +164,7 @@ const BirthdayCardMaker = () => {
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Building Personalized Birthday Cards That Feel Thoughtful</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Birthdays are one of the most personal celebrations we have. They mark another year of growth, memories, and milestones. And yet, most birthday greetings people receive are generic text messages or forwarded images that someone found online. Our free birthday card maker changes that by letting you design a beautiful, personalized birthday card in under a minute — completely free.</p>
-              <p>Unlike other birthday card tools that require you to sign up, download an app, or pay for premium designs, WishSpark's birthday card maker is 100% free with no strings attached. You can create as many cards as you want, for as many people as you want, without ever creating an account. Just open the tool, customize your card, and share it.</p>
+              <p>Many card tools interrupt the flow with account steps or feature limits. This page keeps the process straightforward: open it, personalize the card, preview the result, and share when you're satisfied. That makes it practical for both quick one-off wishes and repeated use.</p>
               <p>The card maker offers six carefully designed color themes, each chosen to evoke different moods and emotions. The Classic Gold theme brings warmth and elegance. Royal Purple feels regal and sophisticated. Ocean Blue is calm and refreshing. Rose Garden is romantic and tender. Forest Green is fresh and vibrant. And Sunset Glow is energetic and joyful. Each theme transforms the entire card design, so you can match the personality of the birthday person.</p>
               <p>Your finished card includes the recipient's name prominently displayed, your custom message in beautiful typography, and a subtle animation that makes the card feel alive. It's the kind of birthday greeting that people actually remember receiving — not just another message lost in a flood of WhatsApp forwards.</p>
             </div>
@@ -180,15 +181,15 @@ const BirthdayCardMaker = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Card FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Can I download this birthday card as an image?</p><p>At the moment, this tool is focused on instant sharing. Image download can be added in a future update.</p></div>
-              <div><p className="font-medium text-foreground">Is there a limit on the number of cards?</p><p>No. You can create unlimited cards for free.</p></div>
-              <div><p className="font-medium text-foreground">Do I need to create an account?</p><p>No signup is required. Open the tool, customize, and share.</p></div>
-              <div><p className="font-medium text-foreground">Can I edit text and theme before sharing?</p><p>Yes. You can adjust name, message, and theme as many times as needed.</p></div>
-              <div><p className="font-medium text-foreground">Why use this over a plain text wish?</p><p>A personalized card format feels more thoughtful and memorable than a generic one-line message.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Can I download this birthday card as an image?", answer: "At the moment, this tool is focused on instant sharing. Image download can be added in a future update." },
+              { question: "Is there a limit on the number of cards?", answer: "No. You can create unlimited cards for free." },
+              { question: "Do I need to create an account?", answer: "No signup is required. Open the tool, customize, and share." },
+              { question: "Can I edit text and theme before sharing?", answer: "Yes. You can adjust name, message, and theme as many times as needed." },
+              { question: "Why use this over a plain text wish?", answer: "A personalized card format feels more thoughtful and memorable than a generic one-line message." },
+            ]} />
           </div>
         </section>
       </main>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 import { toast } from "@/hooks/use-toast";
 
 const calcLove = (a: string, b: string) => {
@@ -185,15 +186,15 @@ const LoveCalculator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Love Calculator FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Is this love calculator scientifically accurate?</p><p>No. It is a fun name-based entertainment tool.</p></div>
-              <div><p className="font-medium text-foreground">Will I get the same result every time?</p><p>Usually yes for the same pair of names.</p></div>
-              <div><p className="font-medium text-foreground">Does name order affect score?</p><p>Yes. Reversing names can produce a different percentage.</p></div>
-              <div><p className="font-medium text-foreground">Can I share my result?</p><p>Yes. You can share directly on WhatsApp or copy the result link.</p></div>
-              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. It is free and can be used without account creation.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Is this love calculator scientifically accurate?", answer: "No. It is a fun name-based entertainment tool." },
+              { question: "Will I get the same result every time?", answer: "Usually yes for the same pair of names." },
+              { question: "Does name order affect score?", answer: "Yes. Reversing names can produce a different percentage." },
+              { question: "Can I share my result?", answer: "Yes. You can share directly on WhatsApp or copy the result link." },
+              { question: "What names work best for better readability?", answer: "Short first names usually produce cleaner and easier-to-read result cards." },
+            ]} />
           </div>
         </section>
       </main>

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const wishes = [
   (n: string) => `💕 Happy Birthday, my dearest ${n}! You are the most precious gift in my life. Every moment with you feels like a beautiful dream. May your day be filled with all the love you deserve! 🎂✨`,
@@ -203,15 +204,15 @@ const BirthdayWishesGenerator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Wishes FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Are wishes different every time I click Generate?</p><p>Yes. The generator refreshes and gives a new set of five wishes each time.</p></div>
-              <div><p className="font-medium text-foreground">Can I use these wishes outside WhatsApp?</p><p>Yes. You can copy any message and use it in SMS, Instagram, email, or other apps.</p></div>
-              <div><p className="font-medium text-foreground">Are wishes suitable for different age groups?</p><p>Yes. The tone is positive and works for friends, family, and colleagues.</p></div>
-              <div><p className="font-medium text-foreground">Can I personalize wishes with a name?</p><p>Yes. Enter one name and all generated wishes are personalized accordingly.</p></div>
-              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. The birthday wishes generator is free to use without signup.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Are wishes different every time I click Generate?", answer: "Yes. The generator refreshes and gives a new set of five wishes each time." },
+              { question: "Can I use these wishes outside WhatsApp?", answer: "Yes. You can copy any message and use it in SMS, Instagram, email, or other apps." },
+              { question: "Are wishes suitable for different age groups?", answer: "Yes. The tone is positive and works for friends, family, and colleagues." },
+              { question: "Can I personalize wishes with a name?", answer: "Yes. Enter one name and all generated wishes are personalized accordingly." },
+              { question: "How can I avoid generic-sounding birthday wishes?", answer: "Choose one generated wish and add a short personal memory or inside joke before sharing." },
+            ]} />
           </div>
         </section>
       </main>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 import { toast } from "@/hooks/use-toast";
 
 const calcFriendship = (a: string, b: string) => {
@@ -188,15 +189,15 @@ const FriendshipCalculator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Friendship Calculator FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Why does friendship score start from 60%?</p><p>The tool uses a positive baseline for a friendly and fun experience.</p></div>
-              <div><p className="font-medium text-foreground">Can I test with multiple friends?</p><p>Yes. You can run unlimited name pairs and compare scores easily.</p></div>
-              <div><p className="font-medium text-foreground">Is this scientific compatibility testing?</p><p>No. It is designed for entertainment and social interaction.</p></div>
-              <div><p className="font-medium text-foreground">Can I share the friendship score?</p><p>Yes. Share directly on WhatsApp with the built-in button.</p></div>
-              <div><p className="font-medium text-foreground">How can groups use this tool best?</p><p>Run pairwise checks among friends and create a fun group leaderboard.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Why does friendship score start from 60%?", answer: "The tool uses a positive baseline for a friendly and fun experience." },
+              { question: "Can I test with multiple friends?", answer: "Yes. You can run unlimited name pairs and compare scores easily." },
+              { question: "Is this scientific compatibility testing?", answer: "No. It is designed for entertainment and social interaction." },
+              { question: "Can I share the friendship score?", answer: "Yes. Share directly on WhatsApp with the built-in button." },
+              { question: "How can groups use this tool best?", answer: "Run pairwise checks among friends and create a fun group leaderboard." },
+            ]} />
           </div>
         </section>
       </main>

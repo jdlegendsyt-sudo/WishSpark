@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 import { toast } from "@/hooks/use-toast";
 
 interface AgeResult {
@@ -233,7 +234,7 @@ const AgeCalculator = () => {
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Age Calculation Works and Why It Matters</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Have you ever wondered exactly how old you are — not just in years, but down to the very day? Our free online age calculator makes it incredibly easy to find out. Whether you need your precise age for an official document, a visa application, or you're just curious, this tool gives you the most accurate result in seconds.</p>
+              <p>Have you ever wondered exactly how old you are — not just in years, but down to the very day? This calculator gives you a clear breakdown quickly. Whether you need age details for a document, a visa application, or simple personal reference, the result is presented in a practical format.</p>
               <p>Calculating your age manually can get tricky. You have to account for leap years, months with different numbers of days, and whether your birthday has already passed this year. Our age calculator handles all of this automatically. Just enter your date of birth, click "Calculate," and you'll instantly see your exact age broken down into years, months, and days.</p>
               <p>But that's not all — our calculator goes beyond the basics. It also shows you interesting facts about your age that you might never have thought about:</p>
               <ul className="list-disc pl-6 space-y-2">
@@ -255,15 +256,15 @@ const AgeCalculator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions About Age Calculation</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Does this age calculator account for leap years?</p><p>Yes. It handles leap years and month-length differences, including February 29 birth dates.</p></div>
-              <div><p className="font-medium text-foreground">Can I calculate the age of someone else?</p><p>Absolutely. Enter any valid birth date to calculate age for family members, friends, or records.</p></div>
-              <div><p className="font-medium text-foreground">Why is total days useful?</p><p>Total days help for milestone tracking and situations where age precision is needed beyond years.</p></div>
-              <div><p className="font-medium text-foreground">Can I see days left for next birthday?</p><p>Yes. The result shows a birthday countdown along with years, months, days, and other stats.</p></div>
-              <div><p className="font-medium text-foreground">Is my date of birth stored?</p><p>No. Calculations run in your browser and personal date inputs are not stored on the server.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Does this age calculator account for leap years?", answer: "Yes. It handles leap years and month-length differences, including February 29 birth dates." },
+              { question: "Can I calculate the age of someone else?", answer: "Absolutely. Enter any valid birth date to calculate age for family members, friends, or records." },
+              { question: "Why is total days useful?", answer: "Total days help for milestone tracking and situations where age precision is needed beyond years." },
+              { question: "Can I see days left for next birthday?", answer: "Yes. The result shows a birthday countdown along with years, months, days, and other stats." },
+              { question: "Is my date of birth stored?", answer: "No. Calculations run in your browser and personal date inputs are not stored on the server." },
+            ]} />
           </div>
         </section>
       </main>

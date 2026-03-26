@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const generateNames = (a: string, b: string): string[] => {
   const results = new Set<string>();
@@ -200,15 +201,15 @@ const CoupleNameGenerator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Couple Name Generator FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">What is a couple name or ship name?</p><p>Both terms refer to the same idea: a blended name representing two people.</p></div>
-              <div><p className="font-medium text-foreground">Can I use generated names as wedding hashtags?</p><p>Yes. Many outputs are hashtag-friendly and suitable for wedding posts and invites.</p></div>
-              <div><p className="font-medium text-foreground">Does name order change results?</p><p>Yes. Swapping name order can produce different combinations.</p></div>
-              <div><p className="font-medium text-foreground">How many names are generated in one run?</p><p>Up to eight options are generated so you can choose the best fit.</p></div>
-              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. The couple name generator is free and unlimited.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "What is a couple name or ship name?", answer: "Both terms refer to the same idea: a blended name representing two people." },
+              { question: "Can I use generated names as wedding hashtags?", answer: "Yes. Many outputs are hashtag-friendly and suitable for wedding posts and invites." },
+              { question: "Does name order change results?", answer: "Yes. Swapping name order can produce different combinations." },
+              { question: "How many names are generated in one run?", answer: "Up to eight options are generated so you can choose the best fit." },
+              { question: "How do I pick the best couple name from the list?", answer: "Pick the option that is easy to pronounce, memorable, and natural as a hashtag." },
+            ]} />
           </div>
         </section>
       </main>

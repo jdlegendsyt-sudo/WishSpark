@@ -3,6 +3,7 @@ import { Gift, ArrowDown, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import FestivalCard from "@/components/FestivalCard";
+import FaqAccordion from "@/components/FaqAccordion";
 import { festivals } from "@/data/festivals";
 
 const Footer = lazy(() => import("@/components/Footer"));
@@ -59,9 +60,9 @@ const Index = () => {
               <a href="#choose-festival" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gold-gradient text-primary-foreground text-sm font-semibold shadow-gold hover:opacity-90 transition-opacity">
                 <Sparkles className="w-4 h-4" /> Festival Wishes
               </a>
-              <Link to="/tools/birthday-wishes-generator" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
-                🎂 Birthday Tools
-              </Link>
+              <a href="#fun-tools" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
+                🧩 Fun Tools
+              </a>
               <Link to="/tools/love-calculator" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
                 💕 Love Calculator
               </Link>
@@ -126,7 +127,7 @@ const Index = () => {
       </section>
 
       {/* Fun Tools Section */}
-      <section className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}>
+      <section id="fun-tools" className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}>
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">
             Fun <span className="text-gold-gradient">Tools</span> ✨
@@ -229,41 +230,28 @@ const Index = () => {
 
             <div className="space-y-3">
               <h3 className="text-lg font-display font-semibold text-foreground">Frequently Asked Questions</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-medium text-foreground">Is WishSpark free to use?</p>
-                  <p>
-                    Yes. Core features across greeting and utility pages are free. Some experiences may include advertising to support
-                    hosting and development costs.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground">Do I need to create an account before using tools?</p>
-                  <p>
-                    Most tools can be used without account registration. The platform is designed for quick access and fast completion.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground">Can I share generated content on WhatsApp and social platforms?</p>
-                  <p>
-                    Yes. Many pages include direct sharing actions and copy options so users can post or send content across channels.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground">Is user input stored permanently?</p>
-                  <p>
-                    Personalization data is generally processed for immediate output. For privacy details and data handling, refer to the
-                    Privacy Policy page.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground">Who should use WishSpark?</p>
-                  <p>
-                    Anyone who wants to create personalized greetings quickly, manage celebration-related mini tasks, or use lightweight
-                    social tools in a clean web experience.
-                  </p>
-                </div>
-              </div>
+              <FaqAccordion items={[
+                {
+                  question: "Is WishSpark free to use?",
+                  answer: "Yes. Core features across greeting and utility pages are free. Some experiences may include advertising to support hosting and development costs.",
+                },
+                {
+                  question: "Do I need to create an account before using tools?",
+                  answer: "Most tools can be used without account registration. The platform is designed for quick access and fast completion.",
+                },
+                {
+                  question: "Can I share generated content on WhatsApp and social platforms?",
+                  answer: "Yes. Many pages include direct sharing actions and copy options so users can post or send content across channels.",
+                },
+                {
+                  question: "Is user input stored permanently?",
+                  answer: "Personalization data is generally processed for immediate output. For privacy details and data handling, refer to the Privacy Policy page.",
+                },
+                {
+                  question: "Who should use WishSpark?",
+                  answer: "Anyone who wants to create personalized greetings quickly, manage celebration-related mini tasks, or use lightweight social tools in a clean web experience.",
+                },
+              ]} />
             </div>
           </div>
         </div>

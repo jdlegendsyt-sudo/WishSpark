@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
 import { toast } from "@/hooks/use-toast";
 
 const calcCrush = (a: string, b: string) => {
@@ -195,15 +196,15 @@ const CrushCalculator = () => {
             </ol>
           </div>
 
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+          <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Crush Calculator FAQ</h2>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div><p className="font-medium text-foreground">Will my crush know I used this calculator?</p><p>No, unless you share the result yourself.</p></div>
-              <div><p className="font-medium text-foreground">Why do scores start from 50%?</p><p>The calculator is designed as a fun experience with a positive range from 50% to 100%.</p></div>
-              <div><p className="font-medium text-foreground">Should I send this result to my crush?</p><p>Your choice. Many users share it as a playful conversation starter.</p></div>
-              <div><p className="font-medium text-foreground">Can I test multiple name combinations?</p><p>Yes. You can try unlimited combinations any time.</p></div>
-              <div><p className="font-medium text-foreground">Is this scientifically accurate?</p><p>No. It is for entertainment and social fun.</p></div>
-            </div>
+            <FaqAccordion items={[
+              { question: "Will my crush know I used this calculator?", answer: "No, unless you share the result yourself." },
+              { question: "Why do scores start from 50%?", answer: "The calculator is designed as a fun experience with a positive range from 50% to 100%." },
+              { question: "Should I send this result to my crush?", answer: "Your choice. Many users share it as a playful conversation starter." },
+              { question: "Can I test multiple name combinations?", answer: "Yes. You can try unlimited combinations any time." },
+              { question: "Is this scientifically accurate?", answer: "No. It is for entertainment and social fun." },
+            ]} />
           </div>
         </section>
       </main>
