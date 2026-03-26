@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Clock, Share2, Copy } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,6 @@ const BirthdayCountdown = () => {
   const [countdown, setCountdown] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
   const [started, setStarted] = useState(false);
   const [isSharedView, setIsSharedView] = useState(false);
-
-  useEffect(() => {
-    document.title = "Birthday Countdown Timer Online Free | How Many Days Until My Birthday | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free birthday countdown timer online. Find out how many days until your next birthday with our live countdown clock. Birthday countdown in days, hours, minutes & seconds!");
-  }, []);
 
   const start = () => {
     if (!dob) return;
@@ -104,6 +99,45 @@ const BirthdayCountdown = () => {
           <p className="text-muted-foreground">Free birthday countdown online — find out how many days, hours, minutes until your next birthday!</p>
         </div>
 
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Countdown tools are effective because they turn an abstract future date into something visible and measurable. For birthdays,
+              this is especially valuable because people often coordinate reminders, event planning, travel, and social messages in the
+              days leading up to the celebration. This page provides a real-time view of how much time remains, making planning easier and
+              more engaging.
+            </p>
+            <p>
+              The timer is designed for clarity. Users enter a date of birth once, then receive live values in days, hours, minutes, and
+              seconds. Optional name input adds context when sharing the result with friends or family. The result is a simple but useful
+              reference point for personal planning, surprise preparation, and group coordination before the birthday arrives.
+            </p>
+            <p>
+              Unlike static date calculators, a live countdown keeps users engaged over time and supports recurring visits. It can be used
+              to track personal milestones, schedule reminders, and maintain momentum for event preparation. For users managing multiple
+              birthdays, the reset workflow also enables quick comparisons without leaving the page.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🧮</span><span>Age Calculator</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎨</span><span>Birthday Card Maker</span>
+              </Link>
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {!started ? (
           <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold space-y-4">
             <div>
@@ -156,7 +190,7 @@ const BirthdayCountdown = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Birthday Countdown Timer — How Many Days Until My Birthday?</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Why a Live Birthday Countdown Is Useful</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>There's something magical about counting down to your birthday. It builds anticipation, gets you excited, and gives you something to look forward to. Our free birthday countdown timer makes it easy to see exactly how long you have to wait — right down to the second.</p>
               <p>Unlike simple "days until" calculators, our countdown is a live, real-time experience. Once you enter your date of birth, the timer starts ticking immediately. You can watch the seconds count down, see the minutes change, and track the days as they slowly (or quickly!) decrease. It turns waiting for your birthday into an engaging visual experience.</p>

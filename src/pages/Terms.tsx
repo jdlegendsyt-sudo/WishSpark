@@ -9,80 +9,109 @@ const Terms = () => {
         <h1 className="text-4xl font-display font-bold text-gold-gradient mb-8">Terms of Use</h1>
 
         <div className="space-y-6 text-muted-foreground leading-relaxed text-sm">
-          <p>Last updated: March 1, 2026</p>
+          <p>Last updated: March 26, 2026</p>
 
           <h2 className="text-xl font-display font-semibold text-foreground">1. Acceptance of Terms</h2>
           <p>
-            By accessing and using WishSpark, you agree to be bound by these Terms of Use.
-            If you do not agree with any part of these terms, please do not use our service.
+            By accessing or using WishSpark, you acknowledge that you have read, understood, and agree to be bound by these Terms and
+            Conditions and all applicable laws. If you do not agree with these terms, you should discontinue use of the website.
+            These terms apply to all users, including visitors, contributors, and users of interactive tools.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">2. Use of Service</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">2. Service Description</h2>
           <p>
-            WishSpark provides a free greeting card creation and sharing service. You may use our
-            service to create personalized greetings for festivals and special occasions. You agree
-            not to use the service for any unlawful or harmful purpose.
+            WishSpark provides web-based tools and content for festival greetings, birthday utilities, name-based generators,
+            and related informational pages. Features may include personalization fields, shareable links, and utility calculations.
+            Services are provided on an "as available" basis and may change over time as we improve functionality and content quality.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">3. User Content</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">3. Eligibility and User Responsibility</h2>
           <p>
-            You are responsible for the names and content you provide when creating greetings.
-            You agree not to submit any content that is offensive, defamatory, or violates
-            the rights of others.
+            You are responsible for ensuring your use of the Service is lawful in your jurisdiction and suitable for your circumstances.
+            If you use the Service on behalf of an organization, you represent that you have authority to accept these terms on that
+            organization's behalf. You are responsible for any content or data you enter into forms and generators.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">4. Intellectual Property</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">4. Acceptable Use</h2>
           <p>
-            All content, designs, graphics, and animations on WishSpark are the property of
-            WishSpark and are protected by intellectual property laws. You may not reproduce,
-            modify, or distribute our content without permission.
+            You agree not to misuse the Service. Prohibited behavior includes but is not limited to: submitting unlawful or abusive
+            content, attempting to interfere with site security, using automation to scrape content at scale, introducing malicious code,
+            or using outputs in ways that violate intellectual property or privacy rights of others.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">5. Disclaimer</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">5. User Input and Generated Outputs</h2>
           <p>
-            WishSpark is provided "as is" without warranties of any kind. We do not guarantee
-            that the service will be uninterrupted, error-free, or secure.
+            Interactive pages on WishSpark may generate outputs based on user-provided names, dates, or messages. You retain
+            responsibility for all input you submit and for how generated output is used or shared. You agree not to submit content that
+            is defamatory, discriminatory, deceptive, or otherwise prohibited by law or platform standards.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">6. Limitation of Liability</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">6. Intellectual Property</h2>
           <p>
-            WishSpark shall not be liable for any indirect, incidental, special, or consequential
-            damages arising from the use of our service.
+            Unless otherwise stated, the website design, code, branding, text, graphics, and visual assets are owned by WishSpark or used
+            under valid rights. You may use the Service for personal and lawful purposes. You may not copy, republish, distribute,
+            reverse engineer, or commercially exploit substantial parts of the Service without prior written permission.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">7. Third-Party Advertising</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">7. Third-Party Services and Advertising</h2>
           <p>
-            WishSpark displays advertisements provided by third-party ad networks, including Google AdSense.
-            These ads may use cookies and similar technologies to serve relevant content based on your
-            browsing activity. By using our Service, you acknowledge the presence of third-party ads
-            and agree that WishSpark is not responsible for the content or accuracy of these advertisements.
+            The website may display third-party advertisements, including Google AdSense. Third-party advertisers may use cookies or
+            similar technologies according to their own policies. WishSpark does not control third-party ad content and does not guarantee
+            the claims, quality, or safety of any advertised products or services. Your interactions with advertisers are between you and
+            the relevant third party.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">8. Third-Party Links</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">8. External Links</h2>
           <p>
-            Our Service may contain links to external websites or services that are not owned or controlled
-            by WishSpark. We have no control over and assume no responsibility for the content, privacy
-            policies, or practices of any third-party websites. You acknowledge and agree that WishSpark
-            shall not be liable for any damage or loss caused by the use of such external sites.
+            WishSpark may contain links to external websites or resources for convenience. We are not responsible for the content,
+            availability, security, or privacy practices of third-party sites. Accessing any third-party site is at your own discretion
+            and risk.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">9. Governing Law</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">9. Availability and Modifications</h2>
           <p>
-            These Terms shall be governed by and construed in accordance with applicable laws, without
-            regard to conflict of law principles. Any disputes arising under these Terms shall be
-            resolved through appropriate legal channels.
+            We may update, suspend, or discontinue any part of the Service at any time, with or without prior notice. We also reserve the
+            right to modify page content, feature sets, and technical implementation to maintain quality, compliance, and performance.
+            We are not liable for interruptions, delays, or temporary unavailability.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">10. Changes to Terms</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">10. No Warranty</h2>
           <p>
-            We reserve the right to modify these Terms of Use at any time. Changes will be
-            effective immediately upon posting on this page. Your continued use of the Service
-            after changes are posted constitutes acceptance of the revised terms.
+            The Service is provided "as is" and "as available" without warranties of any kind, express or implied, including
+            merchantability, fitness for a particular purpose, and non-infringement. We do not warrant uninterrupted operation,
+            complete accuracy, or that the Service will always be error-free.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">11. Contact Us</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">11. Limitation of Liability</h2>
           <p>
-            If you have any questions about these Terms of Use, please contact us:
+            To the maximum extent permitted by law, WishSpark and its operators will not be liable for indirect, incidental, special,
+            consequential, or punitive damages, including loss of data, loss of profits, or business interruption arising from or related
+            to use of the Service. Your sole remedy for dissatisfaction is to stop using the website.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">12. Indemnification</h2>
+          <p>
+            You agree to indemnify and hold harmless WishSpark, its operators, and affiliates from claims, liabilities, damages, and
+            expenses resulting from your misuse of the Service, your violation of these terms, or your infringement of third-party rights.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">13. Governing Law and Disputes</h2>
+          <p>
+            These terms are governed by applicable laws in the relevant jurisdiction of operation. Any disputes arising from these terms
+            shall be resolved through appropriate legal channels. Where legally permitted, parties should first attempt good-faith informal
+            resolution before initiating formal proceedings.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">14. Changes to These Terms</h2>
+          <p>
+            We may revise these Terms and Conditions periodically to reflect legal, operational, or product updates. Any revision will be
+            posted on this page with an updated "Last updated" date. Continued use of the Service after updates indicates acceptance of
+            the revised terms.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">15. Contact</h2>
+          <p>
+            For questions related to these terms, contact us using the details below:
           </p>
           <ul className="list-disc pl-6 space-y-1">
             <li>By email: <a href="mailto:support@wishspark.xyz" className="text-primary underline">support@wishspark.xyz</a></li>

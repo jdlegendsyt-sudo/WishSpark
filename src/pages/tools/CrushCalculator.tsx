@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flame, Share2, RefreshCw, Copy } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -90,11 +90,6 @@ const CrushCalculator = () => {
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
   }, [searchParams]);
 
-  useEffect(() => {
-    document.title = "Crush Calculator — Does My Crush Like Me? Free Test Online | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free crush calculator online. Does your crush like you back? Find out with our crush compatibility test by name. Check crush percentage and crush meter score instantly!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -106,6 +101,44 @@ const CrushCalculator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Crush Calculator — Does My Crush Like Me?</h1>
           <p className="text-muted-foreground">Free crush compatibility test by name — find out if your crush likes you back with our crush meter!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Crush-related tools are popular because they provide a low-pressure way to express curiosity and start conversations. While no
+              algorithm can determine real emotions, interactive calculators can still play a useful social role: they create shareable
+              moments, reduce awkwardness, and add humor to early relationship conversations.
+            </p>
+            <p>
+              This page is designed as entertainment with a clear user flow. You enter two names, generate a compatibility-style score, and
+              receive a verdict card that can be shared privately or in groups. The experience is intentionally fast and optimistic, making
+              it suitable for casual use, friend groups, and social content creation without overpromising real-world accuracy.
+            </p>
+            <p>
+              A structured result format also helps users compare multiple entries quickly while keeping the activity light and respectful.
+              Whether used for private curiosity or playful conversation among friends, the tool provides a predictable experience with
+              clear output language and straightforward sharing controls.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💑</span><span>Couple Names</span>
+              </Link>
+              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>👯</span><span>Friendship Test</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
           <div>
@@ -159,7 +192,7 @@ const CrushCalculator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Crush Calculator Online — Does My Crush Like Me Back?</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Using a Crush Calculator for Social Engagement</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Having a crush is one of life's most thrilling experiences. That flutter in your stomach when they walk by, the way you overanalyze every text message, the constant wondering — "Do they like me back?" Our crush calculator doesn't have the real answer (nobody does, except maybe your crush), but it gives you a fun, exciting way to explore the possibility.</p>
               <p>The crush calculator works differently from a love calculator. While a love calculator measures general compatibility between two people, our crush calculator is specifically designed for that early-stage, butterflies-in-your-stomach phase. The percentage range starts at 50% because let's be honest — if you're already thinking about someone enough to use a crush calculator, there's already SOMETHING there.</p>

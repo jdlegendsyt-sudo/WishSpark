@@ -20,6 +20,23 @@ const Blog = () => {
           </p>
         </div>
 
+        {/* Blog intro content block */}
+        <div className="bg-glass rounded-2xl p-6 border border-gold/10 mb-10 space-y-4 text-sm text-muted-foreground leading-relaxed">
+          <h2 className="text-lg font-display font-semibold text-foreground">About the WishSpark Blog</h2>
+          <p>
+            The WishSpark Blog is a space where we explore the meaning behind the celebrations, festivals, and milestones that bring people together. Every culture has its own way of marking important moments — from the lights of Diwali and the colors of Holi to the quiet warmth of a birthday message sent across a screen at midnight. Our articles aim to capture those moments with depth and sincerity.
+          </p>
+          <p>
+            We cover a wide range of topics including festival traditions and their origins, how to write heartfelt wishes for different occasions, ideas for birthday surprises and gifts, and tips for celebrating relationship milestones in meaningful ways. Whether you are looking for inspiration for a wedding anniversary message, trying to understand the significance of Eid greetings, or simply want to know how to make someone's birthday feel special, you will find practical and thoughtful content here.
+          </p>
+          <p>
+            Our writers draw from real experiences, cultural research, and conversations with people who take celebrations seriously. Each article is written to be genuinely useful — not just a list of generic lines you could find anywhere, but actual context that helps you connect with the person you are trying to reach. We believe a well-chosen word at the right moment carries more weight than any gift ever could.
+          </p>
+          <p>
+            We publish articles regularly on topics like love and relationships, friendship appreciation, seasonal festivals, birthday culture, and digital tools that help you express yourself better. Browse the posts below, save the ones that resonate, and share them with the people in your life who deserve a little extra appreciation today.
+          </p>
+        </div>
+
         {/* Featured post */}
         <Link
           to={`/blog/${blogPosts[0].slug}`}
@@ -84,6 +101,38 @@ const Blog = () => {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Tools cross-link section */}
+        <div className="mt-12 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-2">Try Our Free Birthday &amp; Fun Tools</h2>
+          <p className="text-sm text-muted-foreground mb-5">Beyond articles, WishSpark offers free interactive tools for birthdays, love, and friendship.</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>🎂</span><span>Birthday Wishes</span>
+            </Link>
+            <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>🎨</span><span>Card Maker</span>
+            </Link>
+            <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>💕</span><span>Love Calculator</span>
+            </Link>
+            <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>🧮</span><span>Age Calculator</span>
+            </Link>
+            <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>⏳</span><span>Birthday Countdown</span>
+            </Link>
+            <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>🔥</span><span>Crush Calculator</span>
+            </Link>
+            <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>💑</span><span>Couple Names</span>
+            </Link>
+            <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+              <span>👯</span><span>Friendship Test</span>
+            </Link>
+          </div>
         </div>
 
         <AdBanner adSlot="BLOG_BOTTOM_SLOT" adFormat="horizontal" className="max-w-4xl mx-auto mt-8" />

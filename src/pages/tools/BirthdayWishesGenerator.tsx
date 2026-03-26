@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cake, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -74,11 +74,6 @@ const BirthdayWishesGenerator = () => {
   };
 
   useEffect(() => {
-    document.title = "Birthday Wishes with Name Generator Free Online | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Generate personalized happy birthday wishes with name free online. Create unique heartfelt birthday messages, birthday greetings with name to share on WhatsApp, Facebook & Instagram.");
-  }, []);
-
-  useEffect(() => {
     const shared = searchParams.get("shared") === "1";
     if (!shared) {
       return;
@@ -109,6 +104,45 @@ const BirthdayWishesGenerator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Wishes with Name Generator</h1>
           <p className="text-muted-foreground">Create personalized happy birthday wishes with name — unique, heartfelt birthday messages ready to share on WhatsApp & social media!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Writing birthday messages sounds easy until you need one that feels personal, appropriate, and distinct from generic forwards.
+              Many users face this pressure when they need multiple greetings in a short time for friends, relatives, colleagues, or client
+              contacts. This generator is designed to solve that practical problem by creating readable, name-personalized wishes that are
+              ready for immediate use.
+            </p>
+            <p>
+              Instead of producing a single repeated line, the tool offers multiple options with different tones so users can choose a
+              message that fits the relationship. The output is structured for quick copy and one-click sharing, making it useful when
+              timing matters. The overall goal is to help users communicate warmth and effort without requiring long writing sessions.
+            </p>
+            <p>
+              This approach is valuable for both personal and semi-formal contexts. Users can generate refined text for close friends,
+              family members, classmates, or colleagues while maintaining an appropriate tone. By combining speed, variation, and simple
+              sharing controls, the tool supports high-quality communication at scale.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎨</span><span>Birthday Card Maker</span>
+              </Link>
+              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>⏳</span><span>Birthday Countdown</span>
+              </Link>
+              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🧮</span><span>Age Calculator</span>
+              </Link>
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
           <label className="text-sm font-medium text-foreground block mb-2">Enter Birthday Person's Name</label>
@@ -166,7 +200,7 @@ const BirthdayWishesGenerator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Birthday Wishes Generator — Personalized Happy Birthday Messages with Name</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Creating Better Birthday Wishes in Less Time</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>We've all been there — it's someone's birthday, you want to send something meaningful, but you're staring at a blank screen wondering what to write beyond "Happy Birthday!" Sound familiar? That's exactly why we built this birthday wishes generator. It takes the stress out of finding the right words and creates beautiful, heartfelt messages personalized with the birthday person's name.</p>
               <p>What makes our birthday wishes different from generic messages? Every wish includes the recipient's name woven naturally into the message. This isn't just "Happy Birthday, [Name]" — the person's name is integrated throughout the wish in a way that feels genuine and thoughtful. When someone reads a message that mentions them by name multiple times, it creates a deeper emotional connection.</p>

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calculator, Share2, Copy } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -126,11 +126,6 @@ const AgeCalculator = () => {
   };
 
   useEffect(() => {
-    document.title = "Age Calculator Online Free | Calculate Exact Age from Date of Birth | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free age calculator online. Calculate your exact age from date of birth in years, months, days, hours. Find zodiac sign, birthday countdown & age in days calculator.");
-  }, []);
-
-  useEffect(() => {
     const shared = searchParams.get("shared") === "1";
     const sharedDob = searchParams.get("dob") || "";
     if (!shared || !sharedDob) {
@@ -154,6 +149,46 @@ const AgeCalculator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Age Calculator Online — Calculate Exact Age</h1>
           <p className="text-muted-foreground">Free age calculator from date of birth — find your exact age in years, months, days, hours & more!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              An age calculator is useful far beyond simple curiosity. People often need exact age values for applications, school records,
+              medical forms, insurance documents, and event eligibility checks. In many of these cases, writing only the birth year is not
+              enough because institutions require age in years, months, and days as of the current date. This tool provides that precision
+              instantly from a single date input.
+            </p>
+            <p>
+              WishSpark's age calculator is built to be practical and easy to verify. It accounts for month lengths and leap-year effects,
+              then presents additional context like total days lived, total weeks, and days remaining until the next birthday. Instead of
+              manual counting or spreadsheet formulas, users get a clean summary they can quickly reference and share when needed.
+            </p>
+            <p>
+              The interface is intentionally minimal so users can focus on correctness rather than navigation. This is particularly useful
+              for teachers, students, HR teams, and families who need fast results across multiple profiles. Because the output includes
+              both standard age and extended time metrics, users can rely on one result card for practical documentation and informative
+              personal use.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>⏳</span><span>Birthday Countdown</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+              <Link to="/tools/birthday-card-maker" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎨</span><span>Birthday Card Maker</span>
+              </Link>
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
           <label className="text-sm font-medium text-foreground block mb-2">Date of Birth</label>
@@ -213,7 +248,7 @@ const AgeCalculator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Age Calculator Online — How to Calculate Your Exact Age from Date of Birth</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Age Calculation Works and Why It Matters</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Have you ever wondered exactly how old you are — not just in years, but down to the very day? Our free online age calculator makes it incredibly easy to find out. Whether you need your precise age for an official document, a visa application, or you're just curious, this tool gives you the most accurate result in seconds.</p>
               <p>Calculating your age manually can get tricky. You have to account for leap years, months with different numbers of days, and whether your birthday has already passed this year. Our age calculator handles all of this automatically. Just enter your date of birth, click "Calculate," and you'll instantly see your exact age broken down into years, months, and days.</p>

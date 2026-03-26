@@ -20,7 +20,16 @@ const Sitemap = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-3xl">
-        <h1 className="text-4xl font-display font-bold text-gold-gradient mb-8">Sitemap</h1>
+        <h1 className="text-4xl font-display font-bold text-gold-gradient mb-4">Sitemap</h1>
+
+        <div className="bg-glass rounded-2xl p-6 border border-gold/10 mb-8 space-y-3 text-sm text-muted-foreground leading-relaxed">
+          <p>
+            This page provides a complete overview of all publicly available content on WishSpark. Use this sitemap to quickly navigate to any section of the website — whether you are looking for a specific festival greeting page, one of our fun relationship or birthday tools, a blog article, or a legal policy document.
+          </p>
+          <p>
+            WishSpark covers festival greetings for over {festivals.length} occasions, provides {toolLinks.length} interactive tools for birthdays, love, friendship, and more, and publishes a growing library of articles on celebrations, relationships, and traditions. Everything on this site is free to use and designed to help you express yourself better on the occasions that matter most.
+          </p>
+        </div>
 
         <div className="space-y-8">
           <section>

@@ -1,29 +1,3 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Pinterestbot
-Allow: /
-
-User-agent: Pinterest
-Allow: /
-
-User-agent: Mediapartners-Google
-Allow: /
-
-User-agent: AdsBot-Google
-Allow: /
-
 User-agent: *
 Allow: /
-
 Sitemap: https://www.wishspark.xyz/sitemap.xml
-Sitemap: https://www.wishspark.xyz/sitemap-pages.xml

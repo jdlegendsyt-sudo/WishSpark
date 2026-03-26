@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, Copy, Share2, RefreshCw } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -84,11 +84,6 @@ const CoupleNameGenerator = () => {
   };
 
   useEffect(() => {
-    document.title = "Couple Name Generator — Ship Name Creator Free Online | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free couple name generator online. Create the perfect ship name, couple name, or relationship name by combining two names. Best couple name combiner for Instagram bios & hashtags!");
-  }, []);
-
-  useEffect(() => {
     const shared = searchParams.get("shared") === "1";
     const n1 = searchParams.get("n1") || "";
     const n2 = searchParams.get("n2") || "";
@@ -114,6 +109,44 @@ const CoupleNameGenerator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Couple Name Generator — Ship Name Creator</h1>
           <p className="text-muted-foreground">Free couple name combiner online — create the perfect ship name for you and your partner!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Couple names, often called ship names, are widely used in social bios, wedding hashtags, private jokes, and shared profile
+              identities. The challenge is that manual name blending often produces awkward combinations. This tool helps by generating
+              several viable options automatically so users can compare style, readability, and tone before choosing one.
+            </p>
+            <p>
+              The generator works best as a creative shortlist system. Instead of forcing a single output, it provides multiple combinations
+              based on different blending patterns. This gives users practical flexibility when they want something playful, elegant, or
+              social-media friendly. It is useful for couples, friends, event planning, and anyone creating a shared identity label online.
+            </p>
+            <p>
+              Because each result appears in a hashtag-ready format, users can move directly from idea selection to profile use. This is
+              particularly useful for wedding planning, anniversary posts, and co-managed social accounts where naming consistency matters.
+              The tool reduces trial-and-error and helps users select options that are memorable and easy to type.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🔥</span><span>Crush Calculator</span>
+              </Link>
+              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>👯</span><span>Friendship Test</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
           <div>
@@ -164,7 +197,7 @@ const CoupleNameGenerator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Couple Name Generator — Create Your Perfect Ship Name</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Name Blending Produces Better Couple Tags</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Remember "Brangelina"? That iconic blend of Brad and Angelina's names started a global trend that's still going strong today. Couple names — also known as ship names — have become a cultural phenomenon. From celebrity couples to your best friends' relationship, everyone wants a creative combination of two names that represents their bond. Our couple name generator makes creating the perfect ship name effortless and fun.</p>
               <p>The concept behind a couple name is beautifully simple: take parts of two names and blend them into something new. But doing it well? That's where it gets tricky. Some combinations sound great, while others are... let's say, less flattering. Our algorithm takes the guesswork out by generating up to 8 creative combinations using different blending techniques — syllable mixing, initial combinations, and even hashtag-style mashups.</p>

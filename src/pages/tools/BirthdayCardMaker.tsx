@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Share2 } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -52,11 +52,6 @@ const BirthdayCardMaker = () => {
   };
 
   useEffect(() => {
-    document.title = "Birthday Card Maker Online Free | Create Birthday Greeting Cards | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free birthday card maker online. Create beautiful birthday greeting cards with name and custom message. Design birthday wishes card online free — no signup required!");
-  }, []);
-
-  useEffect(() => {
     const shared = searchParams.get("shared") === "1";
     if (!shared) {
       return;
@@ -83,6 +78,45 @@ const BirthdayCardMaker = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Card Maker Online Free</h1>
           <p className="text-muted-foreground">Design beautiful birthday greeting cards online free — create birthday wishes card with name, no signup required!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              A good birthday card does more than deliver a greeting. It shows intention, memory, and care in a format that people can
+              keep, revisit, and share. The problem is that many online card tools are either too limited, too complex, or locked behind
+              sign-up walls. This page is designed for users who want a professional result quickly without downloading design software or
+              spending time on advanced editing.
+            </p>
+            <p>
+              With this tool, you can personalize name, message, and visual theme in a single workflow. The live preview helps you validate
+              tone and readability before sharing, which reduces mistakes and improves message quality. Whether you are sending a personal
+              card to a close friend or preparing multiple greetings for a team, the workflow stays fast and consistent.
+            </p>
+            <p>
+              The page is also optimized for repeat use. You can quickly switch themes, revise text, and regenerate your final card without
+              losing context. This supports both spontaneous personal use and planned communication during busy birthday seasons when many
+              messages must be sent in a short time window.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+              <Link to="/tools/birthday-countdown" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>⏳</span><span>Birthday Countdown</span>
+              </Link>
+              <Link to="/tools/age-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🧮</span><span>Age Calculator</span>
+              </Link>
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Controls */}
@@ -143,7 +177,7 @@ const BirthdayCardMaker = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Birthday Card Maker Online — Create Stunning Birthday Greeting Cards</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Building Personalized Birthday Cards That Feel Thoughtful</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Birthdays are one of the most personal celebrations we have. They mark another year of growth, memories, and milestones. And yet, most birthday greetings people receive are generic text messages or forwarded images that someone found online. Our free birthday card maker changes that by letting you design a beautiful, personalized birthday card in under a minute — completely free.</p>
               <p>Unlike other birthday card tools that require you to sign up, download an app, or pay for premium designs, WishSpark's birthday card maker is 100% free with no strings attached. You can create as many cards as you want, for as many people as you want, without ever creating an account. Just open the tool, customize your card, and share it.</p>

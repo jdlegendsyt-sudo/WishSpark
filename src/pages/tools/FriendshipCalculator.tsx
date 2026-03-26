@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, Share2, Copy } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -88,11 +88,6 @@ const FriendshipCalculator = () => {
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
   }, [searchParams]);
 
-  useEffect(() => {
-    document.title = "Friendship Calculator — Friendship Percentage Test Free Online | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free friendship calculator online. Test your friendship percentage and friendship compatibility by name. Best friendship meter to check how strong your friendship is!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -104,6 +99,44 @@ const FriendshipCalculator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Friendship Calculator — Friendship Percentage Test</h1>
           <p className="text-muted-foreground">Free friendship compatibility test by name — find your friendship percentage online!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Friendship tools are most useful when they create positive interaction rather than one-time novelty. This calculator is built
+              to encourage light group participation by giving people an easy way to test, compare, and share friendship scores with clear
+              labels and simple result language. It works well as an icebreaker in chats, events, and online communities.
+            </p>
+            <p>
+              The result is intentionally framed around encouragement and social play. Users receive a percentage, a friendship level, and
+              a short interpretation that is easy to understand. Because the output is consistent for the same name pair, friends can revisit
+              and compare results in a repeatable way. This makes the tool more engaging over time, not just on first use.
+            </p>
+            <p>
+              In practical terms, this tool is useful during Friendship Day campaigns, classroom activities, and social media challenges
+              where users want a fast, shareable interaction that feels positive. The interface keeps the process simple so the focus stays
+              on participation and conversation.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/love-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💕</span><span>Love Calculator</span>
+              </Link>
+              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🔥</span><span>Crush Calculator</span>
+              </Link>
+              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💑</span><span>Couple Names</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
           <div>
@@ -153,7 +186,7 @@ const FriendshipCalculator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Friendship Calculator — How Strong Is Your Friendship?</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Measuring and Sharing Friendship Scores</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Friendships are some of the most important relationships in our lives, yet we rarely celebrate them the same way we celebrate romantic relationships. Our friendship calculator is here to change that. It's a fun, lighthearted tool that lets you and your friends test your friendship compatibility and share the results in group chats for laughs and bonding.</p>
               <p>The calculator generates friendship percentages between 60% and 100% — because every friendship has value, and our tool reflects that. Scores are categorized into friendship levels: "Growing Friendship" for newer bonds, "Good Buddies" for solid connections, "Great Friends" for the ones you can count on, "Ride or Die" for the truly loyal ones, and "BEST FRIENDS FOREVER" for that one person who knows ALL your secrets.</p>

@@ -9,7 +9,7 @@ const Privacy = () => {
         <h1 className="text-4xl font-display font-bold text-gold-gradient mb-8">Privacy Policy</h1>
 
         <div className="space-y-6 text-muted-foreground leading-relaxed text-sm">
-          <p>Last updated: March 1, 2026</p>
+          <p>Last updated: March 26, 2026</p>
 
           <p>
             WishSpark ("we", "our", or "us") operates the website{" "}
@@ -114,14 +114,29 @@ const Privacy = () => {
             or practices of any third-party sites or services.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">9. Changes to This Policy</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">9. Data Retention</h2>
+          <p>
+            We retain information only for as long as necessary to operate, secure, and improve the Service,
+            or to satisfy legal obligations. Where user-provided personalization values are processed for immediate
+            output, such values are generally not retained as persistent account records. Technical logs may be
+            retained for limited periods for security and diagnostics.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">10. International Data Processing</h2>
+          <p>
+            Depending on your location and the service providers involved, data related to website usage may be
+            processed in countries other than your own. Where transfers occur, we take reasonable steps to ensure
+            appropriate safeguards are in place, including contractual and technical controls where applicable.
+          </p>
+
+          <h2 className="text-xl font-display font-semibold text-foreground">11. Changes to This Policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify you of any changes
             by posting the new Privacy Policy on this page and updating the "Last updated" date.
             Your continued use of the Service after any changes constitutes acceptance of the new policy.
           </p>
 
-          <h2 className="text-xl font-display font-semibold text-foreground">10. Contact Us</h2>
+          <h2 className="text-xl font-display font-semibold text-foreground">12. Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact us:
           </p>

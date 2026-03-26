@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, Share2, Copy } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -90,11 +90,6 @@ const LoveCalculator = () => {
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
   }, [searchParams]);
 
-  useEffect(() => {
-    document.title = "Love Calculator by Name — True Love Percentage Test Free Online | WishSpark";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Free love calculator by name online. Find your true love percentage and love compatibility score. Best love calculator test with name — check love match percentage instantly!");
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -106,6 +101,44 @@ const LoveCalculator = () => {
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Love Calculator — True Love Percentage Test</h1>
           <p className="text-muted-foreground">Free love calculator by name — find your true love compatibility percentage online!</p>
         </div>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Love calculators remain popular because they combine curiosity, entertainment, and social sharing in one quick interaction.
+              Users often want a simple way to test name combinations and spark conversation with friends or partners. This page is designed
+              for that exact behavior, with a straightforward input flow and a result format that is easy to share.
+            </p>
+            <p>
+              The tool focuses on usability and consistency. After entering two names, users receive a percentage and a contextual message.
+              The experience is intentionally lightweight so anyone can use it without instructions. For social use cases, sharing and copy
+              actions are built in to reduce friction and make the result portable across messaging apps.
+            </p>
+            <p>
+              This makes the page suitable for casual daily use, themed events, and campaign-style social content where people compare
+              multiple results. While results are for entertainment, the clean structure and reliable flow make the experience engaging,
+              repeatable, and easy to understand for first-time visitors.
+            </p>
+          </div>
+          <div className="bg-glass rounded-2xl p-6 border border-gold/10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Related Tools You Might Like</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Link to="/tools/crush-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🔥</span><span>Crush Calculator</span>
+              </Link>
+              <Link to="/tools/couple-name-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>💑</span><span>Couple Names</span>
+              </Link>
+              <Link to="/tools/friendship-calculator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>👯</span><span>Friendship Test</span>
+              </Link>
+              <Link to="/tools/birthday-wishes-generator" className="flex items-center gap-2 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 border border-gold/10 hover:border-gold/30 transition-all text-sm font-medium text-foreground hover:text-primary">
+                <span>🎂</span><span>Birthday Wishes</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
           <div>
@@ -150,7 +183,7 @@ const LoveCalculator = () => {
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Free Love Calculator Online — Discover Your True Love Compatibility</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Interpreting Love Scores as Entertainment</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
               <p>Love calculators have been a beloved internet tradition for over two decades, and for good reason — there's something irresistibly fun about typing in two names and seeing what "destiny" has in store. Our love calculator takes this classic concept and wraps it in a beautiful, modern experience that's perfect for sharing with your partner, crush, or friends.</p>
               <p>Here's how it works: you enter your name and your partner's (or crush's) name, and our algorithm generates a love compatibility percentage between 40% and 100%. But we didn't stop at just a number. Each score comes with a personalized message that describes your compatibility. Scores above 90% get the "match made in heaven" treatment, while lower scores get encouraging messages about building connection over time. Every result feels positive and fun — because that's what love should be!</p>

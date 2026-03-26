@@ -11,68 +11,105 @@ const About = () => {
 
         <div className="space-y-6 text-muted-foreground leading-relaxed">
           <p>
-            WishSpark is a free online platform that lets you create and share beautiful, personalized
-            festival greetings with your loved ones. We believe that every celebration deserves a special touch,
-            and our animated greeting cards bring joy and surprise to every occasion.
-          </p>
-
-          <h2 className="text-2xl font-display font-semibold text-foreground">Our Mission</h2>
-          <p>
-            Our mission is to help people connect and celebrate together, no matter where they are.
-            In a world where digital communication is the norm, we wanted to bring back the excitement
-            of receiving a thoughtful, personalized greeting — with a modern twist. By making it easy
-            to create and share stunning festival greetings, we aim to spread happiness and strengthen
-            bonds between friends and family across the globe.
-          </p>
-
-          <h2 className="text-2xl font-display font-semibold text-foreground">Our Story</h2>
-          <p>
-            WishSpark was born out of a simple idea: what if sending festival wishes could be more than
-            just a text message? We noticed that during festivals, people share generic images and
-            forwards that lack a personal touch. We wanted to create something different — a platform
-            where anyone can send a unique, animated greeting that feels special and personal.
+            WishSpark is a web platform designed to help people create and share personalized greetings and celebration-focused
+            utility content with minimal effort. The product began with a simple principle: meaningful digital wishes should not
+            require design skills, paid software, or complicated workflows. Over time, the platform expanded from greeting card
+            experiences into a broader set of practical tools that support birthdays, social sharing, and light entertainment.
           </p>
           <p>
-            Starting with a handful of festivals, we've grown to support over 35 festivals and
-            occasions from diverse cultures and traditions. From Diwali and Christmas to Eid and Onam,
-            from birthdays to anniversaries — WishSpark covers celebrations that matter to people worldwide.
+            Today, WishSpark serves users who want speed, clarity, and personalization in one place. Whether someone is preparing a
+            festival greeting, generating birthday wishes, or using a quick calculator, the goal is the same: reduce friction and make
+            digital communication feel thoughtful instead of generic.
           </p>
 
-          <h2 className="text-2xl font-display font-semibold text-foreground">What We Offer</h2>
+          <h2 className="text-2xl font-display font-semibold text-foreground">What the Website Is</h2>
+          <p>
+            At its core, WishSpark is a browser-based creation and sharing platform. It combines interactive greeting pages,
+            message generation tools, date and age utilities, and social engagement calculators in a single ecosystem. The product is
+            intentionally accessible across devices and internet conditions so users can complete tasks quickly, even on mobile.
+          </p>
+          <p>
+            WishSpark is not positioned as a social network or messaging app. Instead, it works as a preparation and publishing layer
+            that helps users craft better shareable content before they distribute it on their preferred communication channels.
+          </p>
+
+          <h2 className="text-2xl font-display font-semibold text-foreground">Why WishSpark Was Created</h2>
+          <p>
+            The initial idea came from a common behavior observed during festive seasons: people want to send wishes at scale, but most
+            messages become repetitive and impersonal. Generic forwards are easy, but they do not reflect genuine intent. On the other
+            hand, truly customized design work takes time and effort many users cannot spare.
+          </p>
+          <p>
+            WishSpark was created to close that gap. The platform allows users to add personal identity, choose a suitable format,
+            and share a presentable outcome quickly. The objective is to preserve the emotional value of greetings while still matching
+            the pace of modern digital communication.
+          </p>
+
+          <h2 className="text-2xl font-display font-semibold text-foreground">Who the Platform Is For</h2>
+          <p>
+            WishSpark is built for a broad audience: students sharing birthday wishes with friends, professionals sending festive
+            messages to colleagues, families celebrating across cities, and creators looking for quick, polished assets they can share.
+            It is equally useful for users who prefer utility-first tools, such as age or countdown calculators, and those who want
+            engagement-focused content for chat groups.
+          </p>
+          <p>
+            The platform is especially helpful for users who prioritize convenience without compromising presentation quality. If someone
+            needs a professional-looking output quickly, WishSpark provides a reliable path from input to shareable result.
+          </p>
+
+          <h2 className="text-2xl font-display font-semibold text-foreground">What Makes WishSpark Useful</h2>
+          <p>
+            Usefulness on WishSpark comes from three design choices: focused task flows, strong personalization defaults, and clear
+            navigation. Each tool is built around one primary outcome, which reduces confusion and improves completion rates. Users are
+            not required to learn complex interfaces before getting value.
+          </p>
+          <p>
+            Personalization is integrated into nearly every experience, which increases perceived relevance and shareability. Internal
+            structure is also designed so users can move naturally between related pages, improving discoverability and time on site.
+          </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>35+ festival and occasion greetings covering major celebrations worldwide</li>
-            <li>Unique animated gift box surprise that delights recipients</li>
-            <li>Special themed animations — Diwali lamp lighting, Easter egg cracking, and more</li>
-            <li>Easy sharing via WhatsApp and other social platforms</li>
-            <li>Completely free to use with no registration required</li>
-            <li>Viral sharing — recipients can create and share their own greetings</li>
-            <li>Mobile-friendly design that works beautifully on all devices</li>
+            <li>Festival greeting experiences for major celebrations and seasonal moments</li>
+            <li>Birthday-focused tools for cards, countdowns, and personalized wishes</li>
+            <li>Lightweight social calculators and generators for group engagement</li>
+            <li>Mobile-friendly interfaces with low-friction sharing paths</li>
+            <li>No complicated setup for basic usage</li>
+            <li>Consistent visual language and predictable interaction patterns</li>
+            <li>Regular content and feature refinement based on user behavior</li>
           </ul>
 
-          <h2 className="text-2xl font-display font-semibold text-foreground">Supported Festivals</h2>
+          <h2 className="text-2xl font-display font-semibold text-foreground">Coverage and Content Scope</h2>
           <p>
-            We support greetings for all major festivals including Onam, Vishu, Christmas, New Year,
-            Diwali, Eid, Holi, Raksha Bandhan, Independence Day, Republic Day, Valentine's Day,
-            Mother's Day, Father's Day, Birthday, Anniversary, Thanksgiving, Easter, Pongal,
-            Makar Sankranti, Navratri, Durga Puja, Ganesh Chaturthi, Janmashtami, Baisakhi,
-            Lohri, Ugadi, Bihu, Ramadan, Friendship Day, Teachers' Day, Children's Day, and many more.
+            WishSpark supports a broad set of occasions across cultural and personal contexts, including major festivals, national days,
+            birthdays, and recurring celebration moments. This broad coverage allows users to rely on one destination throughout the year
+            instead of searching for a new tool every time an event arrives.
           </p>
 
-          <h2 className="text-2xl font-display font-semibold text-foreground">How It Works</h2>
+          <h2 className="text-2xl font-display font-semibold text-foreground">How It Works in Practice</h2>
           <p>
-            Simply choose a festival, enter your name, and share the generated link with your
-            friends. When they open the link, they'll see a beautiful animated gift box with your name.
-            Upon opening the gift, a stunning greeting is revealed with celebratory confetti and sparkles.
-            They can then create their own greeting and continue the chain of joy!
+            In a typical flow, users pick a page based on intent, provide a few inputs, preview the output, and share the result.
+            The process is intentionally short and repeatable. For users who return regularly, this consistency improves confidence and
+            reduces the effort needed to create high-quality wishes for multiple contacts.
           </p>
           <p>
             Learn more about the process on our{" "}
             <Link to="/how-it-works" className="text-primary underline">How It Works</Link> page.
           </p>
 
+          <h2 className="text-2xl font-display font-semibold text-foreground">Future Plans</h2>
+          <p>
+            The roadmap focuses on depth, trust, and usability. Future iterations include richer content guidance for each tool,
+            stronger internal recommendations between related pages, and better educational context so users understand when and how to
+            use each feature effectively. Additional work is planned for improved accessibility, faster mobile performance, and clearer
+            policy documentation for users and advertisers.
+          </p>
+          <p>
+            WishSpark also plans to improve transparency around product updates, content quality standards, and support workflows.
+            The long-term objective is to maintain a platform that is reliable for users and credible for publishing partners.
+          </p>
+
           <h2 className="text-2xl font-display font-semibold text-foreground">Contact Us</h2>
           <p>
-            Have questions, feedback, or suggestions? We'd love to hear from you! Reach out to us
+            Questions, feedback, and partnership inquiries are welcome. Reach out to us
             at{" "}
             <a href="mailto:support@wishspark.xyz" className="text-primary underline">support@wishspark.xyz</a>{" "}
             or visit our{" "}

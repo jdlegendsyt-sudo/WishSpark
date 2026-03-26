@@ -5,10 +5,6 @@
       "destination": "/sitemap.xml"
     },
     {
-      "source": "/sitemap-pages.xml",
-      "destination": "/sitemap-pages.xml"
-    },
-    {
       "source": "/robots.txt",
       "destination": "/robots.txt"
     },

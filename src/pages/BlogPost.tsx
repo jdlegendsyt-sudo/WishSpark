@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getBlogPostBySlug, blogPosts } from "@/data/blogPosts";
+import { getBlogPostBySlug, blogPosts, getAuthorProfile } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 import { toast } from "@/hooks/use-toast";
@@ -41,6 +41,8 @@ const BlogPost = () => {
     .filter(p => p.slug !== post.slug)
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
+
+  const authorProfile = getAuthorProfile(post.author);
 
   return (
     <div className="min-h-screen bg-background">
@@ -113,9 +115,6 @@ const BlogPost = () => {
             })}
           </div>
 
-          {post.content.length > 4 && (
-            <AdBanner adSlot="BLOG_POST_MID" adFormat="horizontal" className="my-8" />
-          )}
         </article>
 
         {/* Author box */}
@@ -125,10 +124,16 @@ const BlogPost = () => {
               ✍️
             </div>
             <div>
-              <p className="font-display font-semibold text-foreground">{post.author}</p>
-              <p className="text-xs text-muted-foreground">WishSpark Contributor</p>
+              <p className="font-display font-semibold text-foreground">{authorProfile.name}</p>
+              <p className="text-xs text-muted-foreground">{authorProfile.role}</p>
             </div>
           </div>
+          <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
+            {authorProfile.bio}
+          </p>
+          <p className="text-xs text-muted-foreground mt-2">
+            Focus: {authorProfile.focus}
+          </p>
         </div>
 
         {/* CTA */}
@@ -181,7 +186,10 @@ const BlogPost = () => {
               description: post.excerpt,
               author: {
                 "@type": "Person",
-                name: post.author,
+                name: authorProfile.name,
+                jobTitle: authorProfile.role,
+                description: authorProfile.bio,
+                url: authorProfile.profileUrl,
               },
               datePublished: post.date,
               publisher: {

@@ -10,6 +10,38 @@ export interface BlogPost {
   content: string[];
 }
 
+export interface AuthorProfile {
+  name: string;
+  role: string;
+  focus: string;
+  bio: string;
+  profileUrl: string;
+}
+
+export const authorProfiles: Record<string, AuthorProfile> = {
+  "Ananya Krishnan": {
+    name: "Ananya Krishnan",
+    role: "Culture & Storytelling Editor",
+    focus: "Festival culture, greeting etiquette, and digital communication",
+    bio: "Ananya writes practical guides on celebrations, relationships, and thoughtful communication based on real user behavior and community feedback.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  },
+  "Rahul Menon": {
+    name: "Rahul Menon",
+    role: "Festival Research Writer",
+    focus: "Festival traditions, historical context, and regional celebration practices",
+    bio: "Rahul researches festival traditions and converts cultural context into readable, actionable content for modern digital audiences.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  },
+  "Sneha Patel": {
+    name: "Sneha Patel",
+    role: "Lifestyle & User Experience Contributor",
+    focus: "Messaging habits, relationship communication, and social sharing behavior",
+    bio: "Sneha focuses on practical communication advice and audience-friendly content formats that improve message quality and shareability.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  },
+};
+
 export const blogPosts: BlogPost[] = [
   {
     slug: "why-digital-greetings-matter",
@@ -327,4 +359,14 @@ export const blogPosts: BlogPost[] = [
 
 export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
   return blogPosts.find(post => post.slug === slug);
+};
+
+export const getAuthorProfile = (authorName: string): AuthorProfile => {
+  return authorProfiles[authorName] ?? {
+    name: authorName,
+    role: "WishSpark Contributor",
+    focus: "Celebrations, greetings, and communication",
+    bio: "Contributes practical and reader-first articles on greetings, festivals, and sharing culture.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  };
 };
