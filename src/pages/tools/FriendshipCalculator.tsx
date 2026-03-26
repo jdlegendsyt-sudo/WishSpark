@@ -100,6 +100,21 @@ const FriendshipCalculator = () => {
           <p className="text-muted-foreground">Free friendship compatibility test by name — find your friendship percentage online!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">👤 Your Name</label>
+            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <div className="text-center text-2xl">🤝</div>
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">👤 Friend's Name</label>
+            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Friend's name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <Button onClick={calculate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
+            <Users className="w-4 h-4 mr-2" /> Calculate Friendship
+          </Button>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -120,21 +135,6 @@ const FriendshipCalculator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">👤 Your Name</label>
-            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <div className="text-center text-2xl">🤝</div>
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">👤 Friend's Name</label>
-            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Friend's name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <Button onClick={calculate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
-            <Users className="w-4 h-4 mr-2" /> Calculate Friendship
-          </Button>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -190,27 +190,12 @@ const FriendshipCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Friendship Calculator FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Why does friendship score start from 60%?</p>
-                <p className="text-muted-foreground">This tool is designed for positive social fun, so scores begin from a friendly baseline.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Can I test friendship with many people?</p>
-                <p className="text-muted-foreground">Yes. You can calculate unlimited name pairs and compare results with your friend group.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Is this based on real compatibility science?</p>
-                <p className="text-muted-foreground">No. It is an entertainment feature for fun interaction and sharing.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I share friendship result on WhatsApp?</p>
-                <p className="text-muted-foreground">Yes. Use the built-in share button to send your percentage and title instantly.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. What is the best way to use this in groups?</p>
-                <p className="text-muted-foreground">Run pair-wise checks for everyone and create a playful leaderboard in your group chat.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Why does friendship score start from 60%?</p><p>The tool uses a positive baseline for a friendly and fun experience.</p></div>
+              <div><p className="font-medium text-foreground">Can I test with multiple friends?</p><p>Yes. You can run unlimited name pairs and compare scores easily.</p></div>
+              <div><p className="font-medium text-foreground">Is this scientific compatibility testing?</p><p>No. It is designed for entertainment and social interaction.</p></div>
+              <div><p className="font-medium text-foreground">Can I share the friendship score?</p><p>Yes. Share directly on WhatsApp with the built-in button.</p></div>
+              <div><p className="font-medium text-foreground">How can groups use this tool best?</p><p>Run pairwise checks among friends and create a fun group leaderboard.</p></div>
             </div>
           </div>
         </section>

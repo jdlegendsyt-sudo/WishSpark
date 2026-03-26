@@ -110,6 +110,21 @@ const CoupleNameGenerator = () => {
           <p className="text-muted-foreground">Free couple name combiner online — create the perfect ship name for you and your partner!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">First Person's Name</label>
+            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="e.g. Arun" maxLength={20} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <div className="text-center text-2xl">💕</div>
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">Second Person's Name</label>
+            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="e.g. Priya" maxLength={20} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <Button onClick={generate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
+            <Heart className="w-4 h-4 mr-2" /> Generate Couple Names
+          </Button>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -130,21 +145,6 @@ const CoupleNameGenerator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">First Person's Name</label>
-            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="e.g. Arun" maxLength={20} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <div className="text-center text-2xl">💕</div>
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">Second Person's Name</label>
-            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="e.g. Priya" maxLength={20} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <Button onClick={generate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
-            <Heart className="w-4 h-4 mr-2" /> Generate Couple Names
-          </Button>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -202,27 +202,12 @@ const CoupleNameGenerator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Couple Name Generator FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. What is the difference between a couple name and ship name?</p>
-                <p className="text-muted-foreground">They mean the same thing: a creative blend of two names to represent a relationship or pair.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Can I use generated names as wedding hashtags?</p>
-                <p className="text-muted-foreground">Yes. Most generated names are hashtag-ready and useful for wedding invites and social posts.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Does name order matter when generating results?</p>
-                <p className="text-muted-foreground">Yes. Swapping the order can produce different and sometimes better sounding combinations.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. How many couple names are generated at once?</p>
-                <p className="text-muted-foreground">The tool generates up to eight options so you can compare and choose your favorite quickly.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Is this couple name generator free?</p>
-                <p className="text-muted-foreground">Yes, it is fully free and can be used unlimited times without signup.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">What is a couple name or ship name?</p><p>Both terms refer to the same idea: a blended name representing two people.</p></div>
+              <div><p className="font-medium text-foreground">Can I use generated names as wedding hashtags?</p><p>Yes. Many outputs are hashtag-friendly and suitable for wedding posts and invites.</p></div>
+              <div><p className="font-medium text-foreground">Does name order change results?</p><p>Yes. Swapping name order can produce different combinations.</p></div>
+              <div><p className="font-medium text-foreground">How many names are generated in one run?</p><p>Up to eight options are generated so you can choose the best fit.</p></div>
+              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. The couple name generator is free and unlimited.</p></div>
             </div>
           </div>
         </section>

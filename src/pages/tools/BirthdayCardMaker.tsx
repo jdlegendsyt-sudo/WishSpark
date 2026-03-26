@@ -79,28 +79,6 @@ const BirthdayCardMaker = () => {
           <p className="text-muted-foreground">Design beautiful birthday greeting cards online free — create birthday wishes card with name, no signup required!</p>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              A good birthday card does more than deliver a greeting. It shows intention, memory, and care in a format that people can
-              keep, revisit, and share. The problem is that many online card tools are either too limited, too complex, or locked behind
-              sign-up walls. This page is designed for users who want a professional result quickly without downloading design software or
-              spending time on advanced editing.
-            </p>
-            <p>
-              With this tool, you can personalize name, message, and visual theme in a single workflow. The live preview helps you validate
-              tone and readability before sharing, which reduces mistakes and improves message quality. Whether you are sending a personal
-              card to a close friend or preparing multiple greetings for a team, the workflow stays fast and consistent.
-            </p>
-            <p>
-              The page is also optimized for repeat use. You can quickly switch themes, revise text, and regenerate your final card without
-              losing context. This supports both spontaneous personal use and planned communication during busy birthday seasons when many
-              messages must be sent in a short time window.
-            </p>
-          </div>
-        </section>
-
         <div className="grid md:grid-cols-2 gap-8">
           {/* Controls */}
           <div className="space-y-4">
@@ -156,6 +134,28 @@ const BirthdayCardMaker = () => {
           </div>
         </div>
 
+        <section className="mb-8 mt-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              A good birthday card does more than deliver a greeting. It shows intention, memory, and care in a format that people can
+              keep, revisit, and share. The problem is that many online card tools are either too limited, too complex, or locked behind
+              sign-up walls. This page is designed for users who want a professional result quickly without downloading design software or
+              spending time on advanced editing.
+            </p>
+            <p>
+              With this tool, you can personalize name, message, and visual theme in a single workflow. The live preview helps you validate
+              tone and readability before sharing, which reduces mistakes and improves message quality. Whether you are sending a personal
+              card to a close friend or preparing multiple greetings for a team, the workflow stays fast and consistent.
+            </p>
+            <p>
+              The page is also optimized for repeat use. You can quickly switch themes, revise text, and regenerate your final card without
+              losing context. This supports both spontaneous personal use and planned communication during busy birthday seasons when many
+              messages must be sent in a short time window.
+            </p>
+          </div>
+        </section>
+
         <AdBanner adSlot="TOOL_BOTTOM" adFormat="horizontal" className="mt-8" />
 
         <section className="mt-16 space-y-6">
@@ -182,27 +182,12 @@ const BirthdayCardMaker = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Card FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Can I download this birthday card as an image?</p>
-                <p className="text-muted-foreground">Right now, the tool is focused on instant sharing. Download support can be added in a later update.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Is there a limit on how many cards I can create?</p>
-                <p className="text-muted-foreground">No limit. You can generate as many birthday cards as you want, completely free.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Do I need to sign up or create an account?</p>
-                <p className="text-muted-foreground">No signup is required. Open the page, customize your card, and share it instantly.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I edit message and theme before sharing?</p>
-                <p className="text-muted-foreground">Yes. You can change name, message, and theme any number of times before sharing.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Why use this instead of plain birthday text?</p>
-                <p className="text-muted-foreground">A personalized visual card feels more thoughtful and stands out compared to a generic one-line wish.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Can I download this birthday card as an image?</p><p>At the moment, this tool is focused on instant sharing. Image download can be added in a future update.</p></div>
+              <div><p className="font-medium text-foreground">Is there a limit on the number of cards?</p><p>No. You can create unlimited cards for free.</p></div>
+              <div><p className="font-medium text-foreground">Do I need to create an account?</p><p>No signup is required. Open the tool, customize, and share.</p></div>
+              <div><p className="font-medium text-foreground">Can I edit text and theme before sharing?</p><p>Yes. You can adjust name, message, and theme as many times as needed.</p></div>
+              <div><p className="font-medium text-foreground">Why use this over a plain text wish?</p><p>A personalized card format feels more thoughtful and memorable than a generic one-line message.</p></div>
             </div>
           </div>
         </section>

@@ -102,6 +102,21 @@ const CrushCalculator = () => {
           <p className="text-muted-foreground">Free crush compatibility test by name — find out if your crush likes you back with our crush meter!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">👤 Your Name</label>
+            <Input value={myName} onChange={(e) => setMyName(e.target.value)} placeholder="Your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <div className="text-center text-2xl">🔥</div>
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">💘 Your Crush's Name</label>
+            <Input value={crushName} onChange={(e) => setCrushName(e.target.value)} placeholder="Crush's name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <Button onClick={calculate} disabled={animating} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
+            <Flame className="w-4 h-4 mr-2" /> {animating ? "Calculating..." : "Find Out!"}
+          </Button>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -122,21 +137,6 @@ const CrushCalculator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">👤 Your Name</label>
-            <Input value={myName} onChange={(e) => setMyName(e.target.value)} placeholder="Your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <div className="text-center text-2xl">🔥</div>
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">💘 Your Crush's Name</label>
-            <Input value={crushName} onChange={(e) => setCrushName(e.target.value)} placeholder="Crush's name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <Button onClick={calculate} disabled={animating} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
-            <Flame className="w-4 h-4 mr-2" /> {animating ? "Calculating..." : "Find Out!"}
-          </Button>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -197,27 +197,12 @@ const CrushCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Crush Calculator FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Will my crush know I used this calculator?</p>
-                <p className="text-muted-foreground">No, unless you choose to share it. The tool runs in your browser and does not notify anyone.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Why do scores start from 50%?</p>
-                <p className="text-muted-foreground">The calculator is designed as playful entertainment with a positive baseline range from 50% to 100%.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Should I send the result to my crush?</p>
-                <p className="text-muted-foreground">That is your choice. Many users share results as a fun ice-breaker in chats.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I try with different names repeatedly?</p>
-                <p className="text-muted-foreground">Yes, you can test unlimited name combinations anytime.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Is the crush calculator scientifically accurate?</p>
-                <p className="text-muted-foreground">No. It is made for fun and social engagement, not as a real relationship prediction tool.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Will my crush know I used this calculator?</p><p>No, unless you share the result yourself.</p></div>
+              <div><p className="font-medium text-foreground">Why do scores start from 50%?</p><p>The calculator is designed as a fun experience with a positive range from 50% to 100%.</p></div>
+              <div><p className="font-medium text-foreground">Should I send this result to my crush?</p><p>Your choice. Many users share it as a playful conversation starter.</p></div>
+              <div><p className="font-medium text-foreground">Can I test multiple name combinations?</p><p>Yes. You can try unlimited combinations any time.</p></div>
+              <div><p className="font-medium text-foreground">Is this scientifically accurate?</p><p>No. It is for entertainment and social fun.</p></div>
             </div>
           </div>
         </section>

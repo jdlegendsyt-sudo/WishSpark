@@ -105,6 +105,16 @@ const BirthdayWishesGenerator = () => {
           <p className="text-muted-foreground">Create personalized happy birthday wishes with name — unique, heartfelt birthday messages ready to share on WhatsApp & social media!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
+          <label className="text-sm font-medium text-foreground block mb-2">Enter Birthday Person's Name</label>
+          <div className="flex gap-3">
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Arun" maxLength={50} className="bg-secondary/50 border-gold/20" />
+            <Button onClick={generate} className="bg-gold-gradient text-primary-foreground hover:opacity-90 shrink-0">
+              <Cake className="w-4 h-4 mr-2" /> Generate
+            </Button>
+          </div>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -126,16 +136,6 @@ const BirthdayWishesGenerator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
-          <label className="text-sm font-medium text-foreground block mb-2">Enter Birthday Person's Name</label>
-          <div className="flex gap-3">
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Arun" maxLength={50} className="bg-secondary/50 border-gold/20" />
-            <Button onClick={generate} className="bg-gold-gradient text-primary-foreground hover:opacity-90 shrink-0">
-              <Cake className="w-4 h-4 mr-2" /> Generate
-            </Button>
-          </div>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -205,27 +205,12 @@ const BirthdayWishesGenerator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Wishes FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Are wishes different every time I click Generate?</p>
-                <p className="text-muted-foreground">Yes. The generator shuffles templates and gives you a fresh set of five wishes each time.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Can I use these wishes outside WhatsApp?</p>
-                <p className="text-muted-foreground">Yes. Copy any wish and paste it into Instagram, SMS, email, Facebook, or any chat app.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Are these wishes suitable for all age groups?</p>
-                <p className="text-muted-foreground">They are written in a positive tone and work for friends, family members, and colleagues.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I personalize wishes with a specific name?</p>
-                <p className="text-muted-foreground">Yes. Enter the person name once and all generated wishes are personalized automatically.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Is this birthday wishes generator free?</p>
-                <p className="text-muted-foreground">Yes, the tool is fully free to use with no signup required.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Are wishes different every time I click Generate?</p><p>Yes. The generator refreshes and gives a new set of five wishes each time.</p></div>
+              <div><p className="font-medium text-foreground">Can I use these wishes outside WhatsApp?</p><p>Yes. You can copy any message and use it in SMS, Instagram, email, or other apps.</p></div>
+              <div><p className="font-medium text-foreground">Are wishes suitable for different age groups?</p><p>Yes. The tone is positive and works for friends, family, and colleagues.</p></div>
+              <div><p className="font-medium text-foreground">Can I personalize wishes with a name?</p><p>Yes. Enter one name and all generated wishes are personalized accordingly.</p></div>
+              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. The birthday wishes generator is free to use without signup.</p></div>
             </div>
           </div>
         </section>

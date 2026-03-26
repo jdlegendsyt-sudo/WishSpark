@@ -99,28 +99,6 @@ const BirthdayCountdown = () => {
           <p className="text-muted-foreground">Free birthday countdown online — find out how many days, hours, minutes until your next birthday!</p>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Countdown tools are effective because they turn an abstract future date into something visible and measurable. For birthdays,
-              this is especially valuable because people often coordinate reminders, event planning, travel, and social messages in the
-              days leading up to the celebration. This page provides a real-time view of how much time remains, making planning easier and
-              more engaging.
-            </p>
-            <p>
-              The timer is designed for clarity. Users enter a date of birth once, then receive live values in days, hours, minutes, and
-              seconds. Optional name input adds context when sharing the result with friends or family. The result is a simple but useful
-              reference point for personal planning, surprise preparation, and group coordination before the birthday arrives.
-            </p>
-            <p>
-              Unlike static date calculators, a live countdown keeps users engaged over time and supports recurring visits. It can be used
-              to track personal milestones, schedule reminders, and maintain momentum for event preparation. For users managing multiple
-              birthdays, the reset workflow also enables quick comparisons without leaving the page.
-            </p>
-          </div>
-        </section>
-
         {!started ? (
           <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold space-y-4">
             <div>
@@ -169,6 +147,28 @@ const BirthdayCountdown = () => {
           </motion.div>
         ) : null}
 
+        <section className="mb-8 mt-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Countdown tools are effective because they turn an abstract future date into something visible and measurable. For birthdays,
+              this is especially valuable because people often coordinate reminders, event planning, travel, and social messages in the
+              days leading up to the celebration. This page provides a real-time view of how much time remains, making planning easier and
+              more engaging.
+            </p>
+            <p>
+              The timer is designed for clarity. Users enter a date of birth once, then receive live values in days, hours, minutes, and
+              seconds. Optional name input adds context when sharing the result with friends or family. The result is a simple but useful
+              reference point for personal planning, surprise preparation, and group coordination before the birthday arrives.
+            </p>
+            <p>
+              Unlike static date calculators, a live countdown keeps users engaged over time and supports recurring visits. It can be used
+              to track personal milestones, schedule reminders, and maintain momentum for event preparation. For users managing multiple
+              birthdays, the reset workflow also enables quick comparisons without leaving the page.
+            </p>
+          </div>
+        </section>
+
         <AdBanner adSlot="TOOL_BOTTOM" adFormat="horizontal" className="mt-8" />
 
         <section className="mt-16 space-y-6">
@@ -194,27 +194,12 @@ const BirthdayCountdown = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Birthday Countdown FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. What happens when the countdown reaches zero?</p>
-                <p className="text-muted-foreground">The timer shows 00 and your birthday has arrived. You can reset and start counting down for next year.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Does this work correctly for my time zone?</p>
-                <p className="text-muted-foreground">Yes. The countdown uses your local device time, so it stays accurate for your location.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Can I use this for someone else's birthday?</p>
-                <p className="text-muted-foreground">Yes. Enter any date of birth and optional name to track a friend, family member, or partner.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Does the countdown update in real time?</p>
-                <p className="text-muted-foreground">It updates every second and displays days, hours, minutes, and seconds continuously.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Can I share my countdown with others?</p>
-                <p className="text-muted-foreground">Yes. Use copy link or WhatsApp share to send your countdown result instantly.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">What happens when the countdown reaches zero?</p><p>The timer reaches 00 and your birthday has arrived. You can then reset it for next year.</p></div>
+              <div><p className="font-medium text-foreground">Does this work with my local time zone?</p><p>Yes. The countdown uses your device time, so it remains accurate for your location.</p></div>
+              <div><p className="font-medium text-foreground">Can I use this for someone else?</p><p>Yes. Enter any date and optional name to track friends, family, or partner birthdays.</p></div>
+              <div><p className="font-medium text-foreground">Does the timer update live?</p><p>Yes. It refreshes every second and shows days, hours, minutes, and seconds.</p></div>
+              <div><p className="font-medium text-foreground">Can I share my countdown result?</p><p>Yes. Use copy link or WhatsApp share to send the countdown instantly.</p></div>
             </div>
           </div>
         </section>

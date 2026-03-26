@@ -102,6 +102,21 @@ const LoveCalculator = () => {
           <p className="text-muted-foreground">Free love calculator by name — find your true love compatibility percentage online!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">Your Name</label>
+            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Enter your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <div className="text-center text-3xl">❤️</div>
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">Partner's Name</label>
+            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Enter their name" maxLength={30} className="bg-secondary/50 border-gold/20" />
+          </div>
+          <Button onClick={calculate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
+            <Heart className="w-4 h-4 mr-2" /> Calculate Love
+          </Button>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -122,21 +137,6 @@ const LoveCalculator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8 space-y-4">
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">Your Name</label>
-            <Input value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Enter your name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <div className="text-center text-3xl">❤️</div>
-          <div>
-            <label className="text-sm font-medium text-foreground block mb-2">Partner's Name</label>
-            <Input value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Enter their name" maxLength={30} className="bg-secondary/50 border-gold/20" />
-          </div>
-          <Button onClick={calculate} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90" size="lg">
-            <Heart className="w-4 h-4 mr-2" /> Calculate Love
-          </Button>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -187,27 +187,12 @@ const LoveCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Love Calculator FAQ</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Is this love calculator scientifically accurate?</p>
-                <p className="text-muted-foreground">No. It is a fun entertainment tool that uses a name-based formula for playful results.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Will I get the same result every time?</p>
-                <p className="text-muted-foreground">Yes. The same name pair usually gives the same percentage for consistency.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Does the order of names matter?</p>
-                <p className="text-muted-foreground">Yes, switching order can produce a different value. You can test both combinations.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I share my love result with friends?</p>
-                <p className="text-muted-foreground">Yes. You can copy the result link or share instantly on WhatsApp.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Is this tool free to use?</p>
-                <p className="text-muted-foreground">Yes, it is fully free with unlimited usage and no account required.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Is this love calculator scientifically accurate?</p><p>No. It is a fun name-based entertainment tool.</p></div>
+              <div><p className="font-medium text-foreground">Will I get the same result every time?</p><p>Usually yes for the same pair of names.</p></div>
+              <div><p className="font-medium text-foreground">Does name order affect score?</p><p>Yes. Reversing names can produce a different percentage.</p></div>
+              <div><p className="font-medium text-foreground">Can I share my result?</p><p>Yes. You can share directly on WhatsApp or copy the result link.</p></div>
+              <div><p className="font-medium text-foreground">Is this tool free?</p><p>Yes. It is free and can be used without account creation.</p></div>
             </div>
           </div>
         </section>

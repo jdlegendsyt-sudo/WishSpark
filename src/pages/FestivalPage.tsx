@@ -12,6 +12,7 @@ import GreetingReveal from "@/components/GreetingReveal";
 import CreateGreeting from "@/components/CreateGreeting";
 import { getFestivalBySlug } from "@/data/festivals";
 import { getFestivalArticle } from "@/data/festivalArticles";
+import { getFestivalFaqs } from "@/data/festivalFaqs";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 
@@ -22,6 +23,7 @@ const FestivalPage = () => {
   const senderName = searchParams.get("from");
   const slug = location.pathname.replace(/^\/+|\/+$/g, "");
   const festival = getFestivalBySlug(slug);
+  const festivalFaqs = festival ? getFestivalFaqs(festival) : [];
 
   const [giftOpened, setGiftOpened] = useState(false);
   const [showGreeting, setShowGreeting] = useState(false);
@@ -212,6 +214,20 @@ const FestivalPage = () => {
               </div>
             );
           })()}
+
+          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">
+              Frequently Asked Questions About {festival.name}
+            </h2>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              {festivalFaqs.map((faq) => (
+                <div key={faq.question}>
+                  <p className="font-medium text-foreground">{faq.question}</p>
+                  <p>{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
       </main>
       <Footer />

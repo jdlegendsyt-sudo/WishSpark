@@ -150,6 +150,16 @@ const AgeCalculator = () => {
           <p className="text-muted-foreground">Free age calculator from date of birth — find your exact age in years, months, days, hours & more!</p>
         </div>
 
+        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
+          <label className="text-sm font-medium text-foreground block mb-2">Date of Birth</label>
+          <div className="flex gap-3">
+            <Input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="bg-secondary/50 border-gold/20" />
+            <Button onClick={calculate} className="bg-gold-gradient text-primary-foreground hover:opacity-90 shrink-0">
+              <Calculator className="w-4 h-4 mr-2" /> Calculate
+            </Button>
+          </div>
+        </div>
+
         <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -172,16 +182,6 @@ const AgeCalculator = () => {
             </p>
           </div>
         </section>
-
-        <div className="bg-glass rounded-2xl p-6 border border-gold/20 shadow-gold mb-8">
-          <label className="text-sm font-medium text-foreground block mb-2">Date of Birth</label>
-          <div className="flex gap-3">
-            <Input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="bg-secondary/50 border-gold/20" />
-            <Button onClick={calculate} className="bg-gold-gradient text-primary-foreground hover:opacity-90 shrink-0">
-              <Calculator className="w-4 h-4 mr-2" /> Calculate
-            </Button>
-          </div>
-        </div>
 
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
@@ -257,27 +257,12 @@ const AgeCalculator = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions About Age Calculation</h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">1. Does this age calculator account for leap years?</p>
-                <p className="text-muted-foreground">Yes. The calculator handles leap years and varying month lengths, including February 29 birthdays, so results stay accurate.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">2. Can I calculate the age of someone else?</p>
-                <p className="text-muted-foreground">Absolutely. Enter any valid date of birth to calculate age for family members, friends, students, or records.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">3. Why is age in total days useful?</p>
-                <p className="text-muted-foreground">Total days are useful for milestones, medical forms, and detailed eligibility checks that need precision beyond years.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">4. Can I check days left for my next birthday?</p>
-                <p className="text-muted-foreground">Yes. After calculation, the result card shows exactly how many days remain until your next birthday.</p>
-              </div>
-              <div className="rounded-xl border border-gold/10 bg-secondary/20 p-4">
-                <p className="font-medium text-foreground mb-1">5. Is my date of birth stored?</p>
-                <p className="text-muted-foreground">No. The calculation runs in your browser, and your date of birth is not saved on WishSpark servers.</p>
-              </div>
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div><p className="font-medium text-foreground">Does this age calculator account for leap years?</p><p>Yes. It handles leap years and month-length differences, including February 29 birth dates.</p></div>
+              <div><p className="font-medium text-foreground">Can I calculate the age of someone else?</p><p>Absolutely. Enter any valid birth date to calculate age for family members, friends, or records.</p></div>
+              <div><p className="font-medium text-foreground">Why is total days useful?</p><p>Total days help for milestone tracking and situations where age precision is needed beyond years.</p></div>
+              <div><p className="font-medium text-foreground">Can I see days left for next birthday?</p><p>Yes. The result shows a birthday countdown along with years, months, days, and other stats.</p></div>
+              <div><p className="font-medium text-foreground">Is my date of birth stored?</p><p>No. Calculations run in your browser and personal date inputs are not stored on the server.</p></div>
             </div>
           </div>
         </section>
