@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
+import RelatedToolsSection from "@/components/RelatedToolsSection";
 
 const wishes = [
   (n: string) => `💕 Happy Birthday, my dearest ${n}! You are the most precious gift in my life. Every moment with you feels like a beautiful dream. May your day be filled with all the love you deserve! 🎂✨`,
@@ -181,6 +182,8 @@ const BirthdayWishesGenerator = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <RelatedToolsSection currentToolPath="/tools/birthday-wishes-generator" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

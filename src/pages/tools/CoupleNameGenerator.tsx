@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
+import RelatedToolsSection from "@/components/RelatedToolsSection";
 
 const generateNames = (a: string, b: string): string[] => {
   const results = new Set<string>();
@@ -178,6 +179,8 @@ const CoupleNameGenerator = () => {
             </div>
           </motion.div>
         )}
+
+        <RelatedToolsSection currentToolPath="/tools/couple-name-generator" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

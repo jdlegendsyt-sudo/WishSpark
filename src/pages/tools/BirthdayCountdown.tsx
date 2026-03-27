@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
+import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
 
 const BirthdayCountdown = () => {
@@ -147,6 +148,8 @@ const BirthdayCountdown = () => {
             </div>
           </motion.div>
         ) : null}
+
+        <RelatedToolsSection currentToolPath="/tools/birthday-countdown" />
 
         <section className="mb-8 mt-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
