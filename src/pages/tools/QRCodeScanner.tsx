@@ -12,14 +12,52 @@ import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
 
+type BarcodeResult = {
+  rawValue?: string;
+  format?: string;
+};
+
+type BarcodeDetectorLike = {
+  detect: (source: CanvasImageSource) => Promise<BarcodeResult[]>;
+};
+
+type BarcodeDetectorConstructor = new (options?: { formats?: string[] }) => BarcodeDetectorLike;
+
 const CAMERA_CONSTRAINTS: MediaStreamConstraints[] = [
   { video: { facingMode: { ideal: "environment" } }, audio: false },
   { video: true, audio: false },
   { video: { facingMode: "user" }, audio: false },
 ];
 
+const BARCODE_FORMATS = [
+  "qr_code",
+  "code_128",
+  "code_39",
+  "code_93",
+  "codabar",
+  "ean_13",
+  "ean_8",
+  "itf",
+  "upc_a",
+  "upc_e",
+  "pdf417",
+  "aztec",
+  "data_matrix",
+];
+
+const getBarcodeDetectorConstructor = () => {
+  return (window as Window & { BarcodeDetector?: BarcodeDetectorConstructor }).BarcodeDetector;
+};
+
+const formatDetectedCodeType = (format?: string) => {
+  if (!format) return "Scanned code";
+  if (format === "qr_code") return "QR code";
+  return format.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+};
+
 const QRCodeScanner = () => {
   const [result, setResult] = useState("");
+  const [detectedType, setDetectedType] = useState("");
   const [error, setError] = useState("");
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -44,7 +82,36 @@ const QRCodeScanner = () => {
     setIsScanning(false);
   };
 
-  const scanFromVideo = () => {
+  const scanCanvasForCode = async (canvas: HTMLCanvasElement, imageData: ImageData) => {
+    const BarcodeDetectorApi = getBarcodeDetectorConstructor();
+
+    if (BarcodeDetectorApi) {
+      try {
+        const detector = new BarcodeDetectorApi({ formats: BARCODE_FORMATS });
+        const [barcode] = await detector.detect(canvas);
+        if (barcode?.rawValue) {
+          return {
+            value: barcode.rawValue,
+            type: formatDetectedCodeType(barcode.format),
+          };
+        }
+      } catch {
+        // Continue with QR fallback if detector support is partial or unavailable.
+      }
+    }
+
+    const decodedQr = jsQR(imageData.data, imageData.width, imageData.height);
+    if (decodedQr?.data) {
+      return {
+        value: decodedQr.data,
+        type: "QR code",
+      };
+    }
+
+    return null;
+  };
+
+  const scanFromVideo = async () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
@@ -56,19 +123,22 @@ const QRCodeScanner = () => {
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const decoded = jsQR(imageData.data, imageData.width, imageData.height);
-        if (decoded?.data) {
-          setResult(decoded.data);
+        const decoded = await scanCanvasForCode(canvas, imageData);
+        if (decoded) {
+          setResult(decoded.value);
+          setDetectedType(decoded.type);
           setError("");
           setIsScanning(false);
           stopCamera();
-          toast({ title: "QR code scanned", description: "The decoded result is ready below." });
+          toast({ title: `${decoded.type} scanned`, description: "The decoded result is ready below." });
           return;
         }
       }
     }
 
-    frameRef.current = requestAnimationFrame(scanFromVideo);
+    frameRef.current = requestAnimationFrame(() => {
+      void scanFromVideo();
+    });
   };
 
   const getCameraStream = async () => {
@@ -93,6 +163,8 @@ const QRCodeScanner = () => {
       const stream = await getCameraStream();
       streamRef.current = stream;
 
+      setResult("");
+      setDetectedType("");
       setIsCameraActive(true);
       setIsScanning(true);
       setError("");
@@ -118,16 +190,18 @@ const QRCodeScanner = () => {
         canvas.height = image.height;
         context.drawImage(image, 0, 0);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const decoded = jsQR(imageData.data, imageData.width, imageData.height);
-
-        if (decoded?.data) {
-          setResult(decoded.data);
-          setError("");
-          toast({ title: "QR code scanned", description: "The uploaded image was decoded successfully." });
-        } else {
-          setResult("");
-          setError("No readable QR code was found in that image.");
-        }
+        void scanCanvasForCode(canvas, imageData).then((decoded) => {
+          if (decoded) {
+            setResult(decoded.value);
+            setDetectedType(decoded.type);
+            setError("");
+            toast({ title: `${decoded.type} scanned`, description: "The uploaded image was decoded successfully." });
+          } else {
+            setResult("");
+            setDetectedType("");
+            setError("No readable QR code or barcode was found in that image.");
+          }
+        });
       };
       image.src = String(reader.result);
     };
@@ -139,6 +213,9 @@ const QRCodeScanner = () => {
     if (!file) return;
     stopCamera();
     setPreviewName(file.name);
+    setResult("");
+    setDetectedType("");
+    setError("");
     scanImageFile(file);
   };
 
@@ -146,6 +223,25 @@ const QRCodeScanner = () => {
     if (!result) return;
     await navigator.clipboard.writeText(result);
     toast({ title: "Copied", description: "The scanned result has been copied." });
+  };
+
+  const getRedirectUrl = (value: string) => {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+
+    if (/^https?:\/\//i.test(trimmed)) {
+      return trimmed;
+    }
+
+    if (/^(mailto:|tel:|sms:)/i.test(trimmed)) {
+      return trimmed;
+    }
+
+    if (/^www\./i.test(trimmed)) {
+      return `https://${trimmed}`;
+    }
+
+    return null;
   };
 
   useEffect(() => {
@@ -163,7 +259,9 @@ const QRCodeScanner = () => {
         videoRef.current.muted = true;
         videoRef.current.playsInline = true;
         await videoRef.current.play();
-        frameRef.current = requestAnimationFrame(scanFromVideo);
+        frameRef.current = requestAnimationFrame(() => {
+          void scanFromVideo();
+        });
       } catch {
         setError("Camera started but the video preview could not play. Try refreshing the page or use image upload instead.");
         stopCamera();
@@ -173,7 +271,7 @@ const QRCodeScanner = () => {
     attachStreamToVideo();
   }, [isCameraActive]);
 
-  const isUrl = /^https?:\/\//i.test(result);
+  const redirectUrl = getRedirectUrl(result);
 
   return (
     <div className="min-h-screen bg-background">
@@ -198,7 +296,7 @@ const QRCodeScanner = () => {
           <section className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/20 shadow-gold">
             <div className="flex items-center gap-2 mb-4 text-foreground">
               <ScanLine className="w-5 h-5 text-primary" />
-              <h2 className="text-xl font-display font-semibold">Scan a QR code</h2>
+              <h2 className="text-xl font-display font-semibold">Scan a QR code or barcode</h2>
             </div>
             <div className="flex flex-wrap gap-3 mb-4">
               <Button onClick={startCamera} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
@@ -217,20 +315,32 @@ const QRCodeScanner = () => {
               )}
             </div>
 
-            <div className="rounded-3xl border border-gold/10 bg-secondary/20 overflow-hidden min-h-[320px] flex items-center justify-center">
+            <div className="relative rounded-3xl border border-gold/10 bg-secondary/20 overflow-hidden min-h-[320px] flex items-center justify-center">
               {isCameraActive ? (
-                <video ref={videoRef} className="block w-full min-h-[320px] bg-black object-cover" autoPlay playsInline muted />
+                <>
+                  <video ref={videoRef} className="block w-full min-h-[320px] bg-black object-cover" autoPlay playsInline muted />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
+                  <div className="pointer-events-none absolute inset-x-6 top-1/2 -translate-y-1/2 rounded-2xl border border-emerald-400/60 h-40 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]" />
+                  <motion.div
+                    className="pointer-events-none absolute left-8 right-8 h-0.5 bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.75)]"
+                    animate={{ top: ["34%", "66%", "34%"] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs text-emerald-200">
+                    Align the QR code or barcode inside the scan area
+                  </div>
+                </>
               ) : (
                 <div className="text-center px-6 py-12 max-w-md">
                   <div className="w-24 h-24 mx-auto rounded-3xl bg-primary/10 flex items-center justify-center text-4xl mb-3">🔍</div>
                   <p className="text-foreground font-medium mb-2">Camera or upload preview</p>
-                  <p className="text-sm text-muted-foreground">Use camera access for quick live scanning, or upload a screenshot, bill, menu, flyer, or product label image that contains a QR code.</p>
+                  <p className="text-sm text-muted-foreground">Use camera access for quick live scanning, or upload a screenshot, bill, menu, flyer, product label, or ticket image that contains a QR code or barcode.</p>
                   {previewName && <p className="mt-3 text-xs text-muted-foreground">Last source: {previewName}</p>}
                 </div>
               )}
             </div>
             <canvas ref={canvasRef} className="hidden" />
-            {isScanning && <p className="text-xs text-muted-foreground mt-3">Scanning in progress. Point the code clearly toward the camera.</p>}
+            {isScanning && <p className="text-xs text-muted-foreground mt-3">Scanning in progress. Point the QR code or barcode clearly inside the guide frame.</p>}
             {error && <p className="text-sm text-destructive mt-3">{error}</p>}
           </section>
 
@@ -238,21 +348,33 @@ const QRCodeScanner = () => {
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Decoded result</h2>
             {result ? (
               <div className="space-y-4">
+                {detectedType && (
+                  <div className="inline-flex rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                    {detectedType}
+                  </div>
+                )}
                 <div className="rounded-2xl border border-gold/10 bg-primary/5 p-4 break-words text-sm text-foreground leading-relaxed">{result}</div>
                 <div className="flex flex-wrap gap-3">
                   <Button onClick={handleCopy} variant="outline" className="border-gold/30 hover:bg-gold/10">
                     <Copy className="w-4 h-4 mr-2" />
                     Copy Result
                   </Button>
-                  {isUrl && (
-                    <a href={result} target="_blank" rel="noopener noreferrer">
+                  {redirectUrl && (
+                    <a href={redirectUrl} target="_blank" rel="noopener noreferrer">
                       <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90">Open Link</Button>
                     </a>
                   )}
                 </div>
+                {redirectUrl && (
+                  <a href={redirectUrl} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                      Redirect to Scanned Source
+                    </Button>
+                  </a>
+                )}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground leading-relaxed">Once a QR code is detected, the decoded text or URL will appear here so you can copy it or open the link immediately.</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Once a QR code or supported barcode is detected, the decoded text or URL will appear here so you can copy it or open the link immediately.</p>
             )}
           </aside>
         </div>
