@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -42,6 +42,18 @@ const renderInlineContent = (text: string) => {
   });
 };
 
+const headingToId = (heading: string) =>
+  heading
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+const parseDate = (value: string) => {
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogPostBySlug(slug) : undefined;
@@ -60,6 +72,30 @@ const BlogPost = () => {
     );
   }
 
+  const headings = useMemo(
+    () =>
+      post.content
+        .filter((block) => block.startsWith("## ") || block.startsWith("### "))
+        .map((heading) => {
+          const isH3 = heading.startsWith("### ");
+          const label = heading.replace(/^###?\s/, "");
+          return { id: headingToId(label), label, depth: isH3 ? 3 : 2 };
+        }),
+    [post.content],
+  );
+
+  const wordCount = useMemo(
+    () =>
+      post.content
+        .join(" ")
+        .replace(/\[[^\]]+\]\([^\)]+\)/g, "")
+        .split(/\s+/)
+        .filter(Boolean).length,
+    [post.content],
+  );
+
+  const isThinContent = wordCount < 700;
+
   const handleShare = async () => {
     const url = window.location.href;
     if (navigator.share) {
@@ -67,16 +103,36 @@ const BlogPost = () => {
         await navigator.share({ title: post.title, text: post.excerpt, url });
       } catch { /* user cancelled */ }
     } else {
-      await navigator.clipboard.writeText(url);
-      toast({ title: "Link copied!", description: "Share it with your friends." });
+      try {
+        await navigator.clipboard.writeText(url);
+        toast({ title: "Link copied!", description: "Share it with your friends." });
+      } catch {
+        toast({ title: "Copy failed", description: "Please copy the URL from your browser address bar." });
+      }
     }
   };
 
-  // Get related posts (same category, excluding current)
-  const related = blogPosts
-    .filter(p => p.slug !== post.slug)
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 3);
+  const related = useMemo(() => {
+    const curated = (post.relatedSlugs ?? [])
+      .map((slugItem) => blogPosts.find((candidate) => candidate.slug === slugItem))
+      .filter((candidate): candidate is (typeof blogPosts)[number] => Boolean(candidate));
+
+    const byCategory = blogPosts
+      .filter((candidate) => candidate.slug !== post.slug && candidate.category === post.category)
+      .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+    const byTool = blogPosts
+      .filter(
+        (candidate) =>
+          candidate.slug !== post.slug &&
+          !!post.toolPath &&
+          !!candidate.toolPath &&
+          candidate.toolPath === post.toolPath,
+      )
+      .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+    return Array.from(new Set([...curated, ...byCategory, ...byTool])).slice(0, 3);
+  }, [post]);
 
   const authorProfile = getAuthorProfile(post.author);
   const callToActionPath = post.toolPath ?? "/";
@@ -120,6 +176,9 @@ const BlogPost = () => {
                 <span className="flex items-center gap-1.5">
                   <span aria-hidden="true">⏱️</span> {post.readTime}
                 </span>
+                <span className="flex items-center gap-1.5">
+                  <span aria-hidden="true">📝</span> {wordCount.toLocaleString()} words
+                </span>
               </div>
               <Button
                 variant="outline"
@@ -134,21 +193,44 @@ const BlogPost = () => {
 
           <AdBanner adSlot="BLOG_POST_TOP" adFormat="horizontal" className="mb-8" />
 
+          {headings.length > 0 ? (
+            <nav className="bg-glass rounded-2xl p-5 border border-gold/10 mb-8" aria-label="Table of contents">
+              <h2 className="text-base font-display font-semibold text-foreground mb-3">In this article</h2>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {headings.map((heading) => (
+                  <li key={heading.id} className={heading.depth === 3 ? "pl-4" : ""}>
+                    <a href={`#${heading.id}`} className="hover:text-primary transition-colors">
+                      {heading.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : null}
+
+          {isThinContent ? (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 mb-8 text-sm text-amber-100">
+              This article is being expanded as part of our editorial quality refresh. For now, use the related articles below for deeper context.
+            </div>
+          ) : null}
+
           {/* Article content */}
           <div className="space-y-5">
             {post.content.map((block, index) => {
               if (block.startsWith("## ")) {
+                const heading = block.slice(3);
                 return (
-                  <h2 key={index} className="text-2xl font-display font-semibold text-foreground pt-3">
-                    {block.slice(3)}
+                  <h2 id={headingToId(heading)} key={index} className="text-2xl font-display font-semibold text-foreground pt-3 scroll-mt-24">
+                    {heading}
                   </h2>
                 );
               }
 
               if (block.startsWith("### ")) {
+                const heading = block.slice(4);
                 return (
-                  <h3 key={index} className="text-xl font-display font-semibold text-foreground pt-2">
-                    {block.slice(4)}
+                  <h3 id={headingToId(heading)} key={index} className="text-xl font-display font-semibold text-foreground pt-2 scroll-mt-24">
+                    {heading}
                   </h3>
                 );
               }
@@ -162,6 +244,21 @@ const BlogPost = () => {
           </div>
 
         </article>
+
+        {post.references?.length ? (
+          <section className="bg-glass rounded-2xl p-6 border border-gold/10 mt-10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-3">References</h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {post.references.map((reference) => (
+                <li key={reference.url}>
+                  <a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    {reference.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         {/* Author box */}
         <div className="bg-glass rounded-2xl p-6 border border-gold/10 mt-12">
@@ -230,6 +327,9 @@ const BlogPost = () => {
               "@type": "BlogPosting",
               headline: post.title,
               description: post.excerpt,
+              mainEntityOfPage: `https://www.wishspark.xyz/blog/${post.slug}`,
+              wordCount,
+              keywords: post.seoKeywords?.join(", "),
               author: {
                 "@type": "Person",
                 name: authorProfile.name,
@@ -238,6 +338,7 @@ const BlogPost = () => {
                 url: authorProfile.profileUrl,
               },
               datePublished: post.date,
+              dateModified: post.updatedDate ?? post.date,
               publisher: {
                 "@type": "Organization",
                 name: "WishSpark",

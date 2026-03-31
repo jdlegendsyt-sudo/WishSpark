@@ -11,6 +11,7 @@ type SeoMeta = {
   type?: "website" | "article";
   robots?: string;
   articlePublishedTime?: string;
+  articleModifiedTime?: string;
   articleAuthor?: string;
 };
 
@@ -197,11 +198,10 @@ const includesPhrase = (text: string, phrase: string) => {
 };
 
 const buildSeoTitle = (rawTitle: string, primaryKeyword: string) => {
-  const keyword = normalizeSpace(primaryKeyword || "festival wishes");
   let title = normalizeSpace(rawTitle);
 
-  if (!includesPhrase(title, keyword)) {
-    title = `${keyword} | WishSpark`;
+  if (!includesPhrase(title, "WishSpark") && title.length < TITLE_MAX_LENGTH - 12) {
+    title = `${title} | WishSpark`;
   }
 
   if (title.length > TITLE_MAX_LENGTH) {
@@ -220,15 +220,15 @@ const buildSeoDescription = (rawDescription: string, primaryKeyword: string) => 
   let description = normalizeSpace(rawDescription);
 
   if (!includesPhrase(description, keyword)) {
-    description = `${description} Explore ${keyword} now.`;
+    description = `${description} Discover practical ${keyword} ideas.`;
   }
 
-  if (!/(create|discover|explore|try|read|share|generate)/i.test(description)) {
-    description = `${description} Explore now.`;
+  if (!/(create|discover|explore|try|read|share|generate|learn)/i.test(description)) {
+    description = `${description} Learn more on WishSpark.`;
   }
 
   if (description.length < DESCRIPTION_MIN_TARGET) {
-    description = `${description} Create and share instantly.`;
+    description = `${description} Get usable examples and step-by-step tips.`;
   }
 
   return trimToWordBoundary(description, DESCRIPTION_MAX_LENGTH);
@@ -296,18 +296,22 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
     const post = getBlogPostBySlug(slug);
     if (post) {
       return {
-        title: `${post.title} | WishSpark Blog`,
-        description: post.excerpt,
-        keywords: [
-          post.title,
-          `${post.category.toLowerCase()} blog`,
-          "festival blog article",
-          "greeting ideas",
-          "celebration tips",
-        ],
+        title: post.seoTitle ?? `${post.title} | WishSpark Blog`,
+        description: post.seoDescription ?? post.excerpt,
+        keywords: post.seoKeywords?.length
+          ? post.seoKeywords
+          : [
+              post.title,
+              `${post.category.toLowerCase()} blog`,
+              "festival blog article",
+              "greeting ideas",
+              "celebration tips",
+            ],
         canonicalPath: normalizedPath,
         type: "article",
+        robots: post.noIndex ? "noindex, follow" : undefined,
         articlePublishedTime: formatDate(post.date),
+        articleModifiedTime: formatDate(post.updatedDate ?? post.date),
         articleAuthor: post.author,
       };
     }
@@ -385,6 +389,7 @@ const SeoManager = () => {
     canonicalLink.setAttribute("href", canonicalUrl);
 
     const articlePublishedMeta = ensureMetaByProperty("article:published_time");
+    const articleModifiedMeta = ensureMetaByProperty("article:modified_time");
     const articleAuthorMeta = ensureMetaByProperty("article:author");
 
     if (meta.articlePublishedTime) {
@@ -397,6 +402,12 @@ const SeoManager = () => {
       articleAuthorMeta.setAttribute("content", meta.articleAuthor);
     } else {
       articleAuthorMeta.remove();
+    }
+
+    if (meta.articleModifiedTime) {
+      articleModifiedMeta.setAttribute("content", meta.articleModifiedTime);
+    } else {
+      articleModifiedMeta.remove();
     }
   }, [meta]);
 

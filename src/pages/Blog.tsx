@@ -1,11 +1,64 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blogPosts";
 import AdBanner from "@/components/AdBanner";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+const POSTS_PER_PAGE = 12;
+
+const parseDate = (value: string) => {
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+};
 
 const Blog = () => {
+  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "readTime">("newest");
+  const [page, setPage] = useState(1);
+
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(blogPosts.map((post) => post.category)))],
+    [],
+  );
+
+  const filteredPosts = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    const posts = blogPosts.filter((post) => {
+      const matchesCategory = activeCategory === "All" || post.category === activeCategory;
+      if (!matchesCategory) return false;
+
+      if (!normalizedQuery) return true;
+      const haystack = [post.title, post.excerpt, post.author, post.category].join(" ").toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+
+    return [...posts].sort((a, b) => {
+      if (sortBy === "newest") return parseDate(b.date) - parseDate(a.date);
+      if (sortBy === "oldest") return parseDate(a.date) - parseDate(b.date);
+
+      const readA = Number.parseInt(a.readTime, 10) || 0;
+      const readB = Number.parseInt(b.readTime, 10) || 0;
+      return readB - readA;
+    });
+  }, [query, activeCategory, sortBy]);
+
+  const featuredPost = filteredPosts[0];
+  const regularPosts = filteredPosts.filter((post) => post.slug !== featuredPost?.slug);
+
+  const totalPages = Math.max(1, Math.ceil(regularPosts.length / POSTS_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const paginatedPosts = regularPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+
+  const handleFiltersChange = (nextPage = 1) => {
+    setPage(nextPage);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -37,46 +90,96 @@ const Blog = () => {
           </p>
         </div>
 
-        {/* Featured post */}
-        <Link
-          to={`/blog/${blogPosts[0].slug}`}
-          className="group block bg-glass rounded-2xl p-6 md:p-8 border border-gold/20 hover:border-gold/40 transition-all duration-300 hover:shadow-gold mb-8"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
-              Featured
-            </span>
-            <span className="text-xs text-muted-foreground">{blogPosts[0].category}</span>
-          </div>
-          <div className="flex items-start gap-4">
-            <span className="text-4xl md:text-5xl shrink-0">{blogPosts[0].emoji}</span>
-            <div className="flex-1 min-w-0">
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors mb-2">
-                {blogPosts[0].title}
-              </h2>
-              <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                {blogPosts[0].excerpt}
-              </p>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <User className="w-3 h-3" /> {blogPosts[0].author}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" /> {blogPosts[0].date}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" /> {blogPosts[0].readTime}
-                </span>
-              </div>
+        <div className="bg-glass rounded-2xl p-4 md:p-5 border border-gold/10 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Input
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                handleFiltersChange();
+              }}
+              placeholder="Search by topic, keyword, author..."
+              className="md:col-span-2"
+              aria-label="Search blog articles"
+            />
+            <div className="grid grid-cols-2 gap-3">
+              <select
+                value={activeCategory}
+                onChange={(event) => {
+                  setActiveCategory(event.target.value);
+                  handleFiltersChange();
+                }}
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                aria-label="Filter posts by category"
+              >
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={sortBy}
+                onChange={(event) => {
+                  setSortBy(event.target.value as "newest" | "oldest" | "readTime");
+                  handleFiltersChange();
+                }}
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                aria-label="Sort posts"
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="readTime">Longest Read</option>
+              </select>
             </div>
           </div>
-        </Link>
+          <p className="text-xs text-muted-foreground mt-3">
+            Showing {filteredPosts.length} article{filteredPosts.length === 1 ? "" : "s"}
+          </p>
+        </div>
+
+        {/* Featured post */}
+        {featuredPost ? (
+          <Link
+            to={`/blog/${featuredPost.slug}`}
+            className="group block bg-glass rounded-2xl p-6 md:p-8 border border-gold/20 hover:border-gold/40 transition-all duration-300 hover:shadow-gold mb-8"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
+                Featured
+              </span>
+              <span className="text-xs text-muted-foreground">{featuredPost.category}</span>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="text-4xl md:text-5xl shrink-0">{featuredPost.emoji}</span>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl md:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+                  {featuredPost.title}
+                </h2>
+                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                  {featuredPost.excerpt}
+                </p>
+                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <User className="w-3 h-3" /> {featuredPost.author}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3" /> {featuredPost.date}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" /> {featuredPost.readTime}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ) : null}
 
         <AdBanner adSlot="BLOG_TOP_SLOT" adFormat="horizontal" className="max-w-4xl mx-auto mb-8" />
 
         {/* Post grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {blogPosts.slice(1).map((post) => (
+          {paginatedPosts.map((post) => (
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}
@@ -102,6 +205,40 @@ const Blog = () => {
             </Link>
           ))}
         </div>
+
+        {filteredPosts.length === 0 ? (
+          <div className="text-center py-12 bg-glass rounded-2xl border border-gold/10 mt-6">
+            <p className="text-2xl mb-2">🔎</p>
+            <h2 className="text-lg font-display font-semibold text-foreground">No posts found</h2>
+            <p className="text-sm text-muted-foreground mt-1">Try a different keyword or category filter.</p>
+          </div>
+        ) : null}
+
+        {totalPages > 1 ? (
+          <div className="mt-8 flex items-center justify-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => handleFiltersChange(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="border-gold/20"
+            >
+              Previous
+            </Button>
+            <span className="text-sm text-muted-foreground px-2">
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => handleFiltersChange(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="border-gold/20"
+            >
+              Next
+            </Button>
+          </div>
+        ) : null}
 
         {/* Tools cross-link section */}
         <div className="mt-12 bg-glass rounded-2xl p-6 border border-gold/10">

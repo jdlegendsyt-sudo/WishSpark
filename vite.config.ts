@@ -17,4 +17,8 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Avoid Windows/OneDrive file-lock failures when Vite tries to wipe dist.
+    emptyOutDir: false,
+  },
 }));
