@@ -1,3 +1,5 @@
+import { toolBlogPosts } from "./toolBlogPosts";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -8,6 +10,8 @@ export interface BlogPost {
   category: string;
   emoji: string;
   content: string[];
+  toolPath?: string;
+  toolLabel?: string;
 }
 
 export interface AuthorProfile {
@@ -38,6 +42,20 @@ export const authorProfiles: Record<string, AuthorProfile> = {
     role: "Lifestyle & User Experience Contributor",
     focus: "Messaging habits, relationship communication, and social sharing behavior",
     bio: "Sneha focuses on practical communication advice and audience-friendly content formats that improve message quality and shareability.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  },
+  "Meera Nair": {
+    name: "Meera Nair",
+    role: "Growth & Utility Content Strategist",
+    focus: "SEO-led tools content, creator workflows, and practical digital utility guides",
+    bio: "Meera writes search-focused tool guides that combine clear explanations, conversion-friendly structure, and practical user advice.",
+    profileUrl: "https://www.wishspark.xyz/about",
+  },
+  "Arjun Varma": {
+    name: "Arjun Varma",
+    role: "Finance & Consumer Tech Writer",
+    focus: "Loan education, calculators, and simplified decision support for everyday users",
+    bio: "Arjun turns complex finance topics into accessible web content with a strong focus on clarity, transparency, and practical decision-making.",
     profileUrl: "https://www.wishspark.xyz/about",
   },
 };
@@ -355,6 +373,7 @@ export const blogPosts: BlogPost[] = [
       "Try the exercise. One week. Three things. No repeats. The worst that can happen is you'll feel slightly better about the world. And honestly, couldn't we all use a bit of that?"
     ]
   },
+  ...toolBlogPosts,
 ];
 
 export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {

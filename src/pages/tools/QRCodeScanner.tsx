@@ -1,0 +1,308 @@
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import jsQR from "jsqr";
+import { Camera, Copy, ScanLine, Upload } from "lucide-react";
+import { Link } from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import AdBanner from "@/components/AdBanner";
+import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/FaqAccordion";
+import RelatedToolsSection from "@/components/RelatedToolsSection";
+import { toast } from "@/hooks/use-toast";
+
+const QRCodeScanner = () => {
+  const [result, setResult] = useState("");
+  const [error, setError] = useState("");
+  const [isCameraActive, setIsCameraActive] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const [previewName, setPreviewName] = useState("");
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const frameRef = useRef<number | null>(null);
+
+  const stopCamera = () => {
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+    setIsCameraActive(false);
+    setIsScanning(false);
+  };
+
+  const scanFromVideo = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+
+    if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+      const context = canvas.getContext("2d");
+      if (context) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const decoded = jsQR(imageData.data, imageData.width, imageData.height);
+        if (decoded?.data) {
+          setResult(decoded.data);
+          setError("");
+          setIsScanning(false);
+          stopCamera();
+          toast({ title: "QR code scanned", description: "The decoded result is ready below." });
+          return;
+        }
+      }
+    }
+
+    frameRef.current = requestAnimationFrame(scanFromVideo);
+  };
+
+  const startCamera = async () => {
+    try {
+      stopCamera();
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
+      }
+      setIsCameraActive(true);
+      setIsScanning(true);
+      setError("");
+      setPreviewName("Live camera");
+      frameRef.current = requestAnimationFrame(scanFromVideo);
+    } catch {
+      setError("Camera access failed. You can still scan by uploading an image.");
+      setIsCameraActive(false);
+      setIsScanning(false);
+    }
+  };
+
+  const scanImageFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const context = canvas.getContext("2d");
+        if (!context) return;
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+        context.drawImage(image, 0, 0);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const decoded = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (decoded?.data) {
+          setResult(decoded.data);
+          setError("");
+          toast({ title: "QR code scanned", description: "The uploaded image was decoded successfully." });
+        } else {
+          setResult("");
+          setError("No readable QR code was found in that image.");
+        }
+      };
+      image.src = String(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    stopCamera();
+    setPreviewName(file.name);
+    scanImageFile(file);
+  };
+
+  const handleCopy = async () => {
+    if (!result) return;
+    await navigator.clipboard.writeText(result);
+    toast({ title: "Copied", description: "The scanned result has been copied." });
+  };
+
+  useEffect(() => {
+    return () => stopCamera();
+  }, []);
+
+  const isUrl = /^https?:\/\//i.test(result);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", name: "QR Code Scanner", url: "https://www.wishspark.xyz/tools/qr-code-scanner", description: "Scan QR codes online from an uploaded image or live camera. Decode links, text, and contact data without installing an app.", applicationCategory: "UtilityApplication", operatingSystem: "All", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, publisher: { "@type": "Organization", name: "WishSpark" } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [
+        { "@type": "Question", name: "Can I scan a QR code from an image file?", acceptedAnswer: { "@type": "Answer", text: "Yes. Upload a PNG, JPG, or similar image file and the tool will try to decode the QR code automatically." } },
+        { "@type": "Question", name: "Can I scan QR codes using my camera here?", acceptedAnswer: { "@type": "Answer", text: "Yes. If your browser supports camera access and you grant permission, the tool can scan a QR code live from your device camera." } },
+        { "@type": "Question", name: "Do I need to install an app to scan a QR code online?", acceptedAnswer: { "@type": "Answer", text: "No. This scanner works directly in your browser for both image uploads and live camera scanning." } },
+        { "@type": "Question", name: "What happens after the QR code is decoded?", acceptedAnswer: { "@type": "Answer", text: "The decoded text or link appears on the page so you can copy it or open it if it is a valid URL." } },
+        { "@type": "Question", name: "Why might a QR scan fail?", acceptedAnswer: { "@type": "Answer", text: "Scanning can fail if the image is blurry, cropped, low contrast, or the QR code is damaged or too small." } }
+      ] }} />
+
+      <main className="container mx-auto px-4 py-16 max-w-5xl">
+        <div className="text-center mb-10 max-w-3xl mx-auto">
+          <motion.div className="text-6xl mb-4" animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 2 }}>📷</motion.div>
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-gold-gradient mb-4">QR Code Scanner Online</h1>
+          <p className="text-muted-foreground text-base md:text-lg">Scan QR codes from a live camera feed or uploaded image file and decode the result instantly without installing a separate app.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.95fr] gap-6 mb-10">
+          <section className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/20 shadow-gold">
+            <div className="flex items-center gap-2 mb-4 text-foreground">
+              <ScanLine className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-display font-semibold">Scan a QR code</h2>
+            </div>
+            <div className="flex flex-wrap gap-3 mb-4">
+              <Button onClick={startCamera} className="bg-gold-gradient text-primary-foreground hover:opacity-90">
+                <Camera className="w-4 h-4 mr-2" />
+                Start Camera
+              </Button>
+              <label className="inline-flex items-center">
+                <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                <span className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-gold/30 px-4 py-2 text-sm text-foreground hover:bg-gold/10">
+                  <Upload className="w-4 h-4" />
+                  Upload QR Image
+                </span>
+              </label>
+              {isCameraActive && (
+                <Button variant="outline" onClick={stopCamera} className="border-gold/30 hover:bg-gold/10">Stop Camera</Button>
+              )}
+            </div>
+
+            <div className="rounded-3xl border border-gold/10 bg-secondary/20 overflow-hidden min-h-[320px] flex items-center justify-center">
+              {isCameraActive ? (
+                <video ref={videoRef} className="w-full h-full object-cover" playsInline muted />
+              ) : (
+                <div className="text-center px-6 py-12 max-w-md">
+                  <div className="w-24 h-24 mx-auto rounded-3xl bg-primary/10 flex items-center justify-center text-4xl mb-3">🔍</div>
+                  <p className="text-foreground font-medium mb-2">Camera or upload preview</p>
+                  <p className="text-sm text-muted-foreground">Use camera access for quick live scanning, or upload a screenshot, bill, menu, flyer, or product label image that contains a QR code.</p>
+                  {previewName && <p className="mt-3 text-xs text-muted-foreground">Last source: {previewName}</p>}
+                </div>
+              )}
+            </div>
+            <canvas ref={canvasRef} className="hidden" />
+            {isScanning && <p className="text-xs text-muted-foreground mt-3">Scanning in progress. Point the code clearly toward the camera.</p>}
+            {error && <p className="text-sm text-destructive mt-3">{error}</p>}
+          </section>
+
+          <aside className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4">Decoded result</h2>
+            {result ? (
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-gold/10 bg-primary/5 p-4 break-words text-sm text-foreground leading-relaxed">{result}</div>
+                <div className="flex flex-wrap gap-3">
+                  <Button onClick={handleCopy} variant="outline" className="border-gold/30 hover:bg-gold/10">
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copy Result
+                  </Button>
+                  {isUrl && (
+                    <a href={result} target="_blank" rel="noopener noreferrer">
+                      <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90">Open Link</Button>
+                    </a>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground leading-relaxed">Once a QR code is detected, the decoded text or URL will appear here so you can copy it or open the link immediately.</p>
+            )}
+          </aside>
+        </div>
+
+        <section className="mb-10 bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+          <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Introduction</h2>
+          <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              A browser-based QR code scanner is useful because it removes the need for extra apps when you only need to decode one code quickly. Many users land on a QR image from a screenshot, an emailed invoice, a menu PDF, a product box photo, or a desktop presentation and simply want the destination without switching devices or downloading another scanner application. This page is designed for that practical workflow. You can upload an image, try live camera scanning, and view the decoded text or URL immediately.
+            </p>
+            <p>
+              Professional scanning tools are not only about recognition speed. They also need to be understandable, dependable, and flexible. Some people scan from the rear camera of a phone or laptop webcam, while others want to upload an existing image file. Both use cases matter. That is why this page supports camera access where available and also includes an image upload path for situations where the QR code already exists in a screenshot, social media post, or saved document.
+            </p>
+            <p>
+              On a quality tools website, a QR scanner should solve a real task without adding friction of its own. The goal here is not novelty. It is convenience. If you need to extract a URL from a printed leaflet, verify a payment QR before sharing it, or decode a customer support label from a photograph, this scanner gives you a fast and production-friendly option directly in the browser.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-10" />
+
+        <section className="grid grid-cols-1 xl:grid-cols-[1fr_320px] gap-6">
+          <div className="space-y-6">
+            <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+              <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Where an Online QR Scanner Fits Best</h2>
+              <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+                <p>
+                  QR scanners are most useful when the encoded information is trapped inside an image or physical object and you need to recover it quickly. This happens often in business and everyday workflows. Someone shares a QR code inside a WhatsApp image instead of the actual link. A team member sends a flyer proof for review. A customer photographs a label or invoice. A restaurant menu appears as a poster image in a presentation. In each case, the user does not need a complicated system. They just need the underlying text or destination decoded accurately.
+                </p>
+                <p>
+                  An online scanner helps because it meets users where they already are: inside the browser. That matters for desktop workflows. If a person is reviewing campaign material on a laptop, a browser scanner avoids the extra loop of emailing the image to a phone or searching for a mobile app. Upload, decode, copy, and continue. That kind of low-friction behavior is what makes utility pages genuinely valuable instead of superficial.
+                </p>
+                <p>
+                  Camera support is helpful for quick real-world scanning. For example, a user may want to scan a code printed on packaging, signage, event passes, or a monitor during a meeting. Live scanning is a natural option in those situations. But upload support is equally important because QR codes often appear in screenshots, PDFs, creatives, and saved photos. A production-ready scanner should therefore support both routes, which is why this page includes live camera scanning and image decoding together.
+                </p>
+                <p>
+                  Reliability depends on a few practical factors. Sharp images scan more easily than blurry ones. High contrast improves detection. Larger QR codes generally decode faster than tiny ones. If a code is partially cut off, heavily compressed, or printed with poor contrast, recognition becomes harder. Understanding that helps users troubleshoot failed scans without blaming the tool immediately. Good utility pages explain these realities instead of pretending every input should work perfectly.
+                </p>
+                <p>
+                  Security also matters. Scanning a QR code is easy, but users should still think about where the code leads before opening it. Businesses can use scanners like this one to verify the destination of a code from an invoice, poster, or vendor asset before sharing it further. Individuals can use it to inspect unfamiliar QR content rather than opening it blindly on a phone. That inspection step is a small but meaningful layer of caution.
+                </p>
+                <p>
+                  In short, an online QR scanner earns its place when it saves time, supports real workflows, and gives users clarity. This page is built around those needs. It provides actual decoding logic, supports both upload and live input, and returns the result in a format that is easy to verify, copy, and use immediately.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+              <h2 className="text-2xl font-display font-semibold text-foreground mb-4">How to Use the QR Scanner</h2>
+              <ol className="space-y-3 text-sm text-muted-foreground">
+                <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">1</span><span>Choose whether you want to scan from a live camera or upload an image that already contains a QR code.</span></li>
+                <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">2</span><span>If you use the camera, allow access and point the code clearly at the lens until the tool detects it.</span></li>
+                <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">3</span><span>If you upload an image, use a clear file with enough lighting and contrast so the QR modules are visible.</span></li>
+                <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">4</span><span>Review the decoded result, copy it if needed, and open it only after confirming that the destination looks safe and expected.</span></li>
+              </ol>
+            </div>
+
+            <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+              <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Benefits of an Online QR Scanner</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+                <div className="rounded-2xl border border-gold/10 p-4 bg-primary/5"><p className="font-medium text-foreground mb-2">No extra app required</p><p>Useful for quick scans on desktop and mobile browsers when installing another app is unnecessary.</p></div>
+                <div className="rounded-2xl border border-gold/10 p-4 bg-primary/5"><p className="font-medium text-foreground mb-2">Works with saved images</p><p>Decode QR codes from screenshots, creative assets, menu files, labels, and PDF exports.</p></div>
+                <div className="rounded-2xl border border-gold/10 p-4 bg-primary/5"><p className="font-medium text-foreground mb-2">Better verification</p><p>Review the decoded text before opening unknown links, which is useful for security and quality control.</p></div>
+                <div className="rounded-2xl border border-gold/10 p-4 bg-primary/5"><p className="font-medium text-foreground mb-2">Flexible workflow</p><p>Switch between live camera scanning and image upload depending on what is more practical in the moment.</p></div>
+              </div>
+            </div>
+
+            <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10 text-sm text-muted-foreground leading-relaxed">
+              <h2 className="text-2xl font-display font-semibold text-foreground mb-3">Read the complete guide</h2>
+              <p className="mb-4">For browser compatibility tips, troubleshooting advice, and safer scanning practices, explore the detailed article linked below.</p>
+              <Link to="/blog/how-to-scan-qr-codes-online-without-apps" className="text-primary hover:underline font-medium">How to Scan QR Codes Online Without Apps</Link>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions</h2>
+              <FaqAccordion items={[
+                { question: "Can this scanner read a QR code from a screenshot?", answer: "Yes. Upload the screenshot as an image file and the scanner will try to decode it directly." },
+                { question: "Does my browser need special support for camera scanning?", answer: "You need a browser that supports camera access through getUserMedia and you must grant permission when prompted." },
+                { question: "Will the scanner work for text and links?", answer: "Yes. It can decode plain text, web links, contact information, and other standard QR content." },
+                { question: "Why did my uploaded image fail to scan?", answer: "The image may be blurry, too dark, cropped, low contrast, or the QR code itself may be damaged or too small." },
+                { question: "Is camera footage stored anywhere?", answer: "No. The scanning process runs in your browser session and this page does not upload your live camera stream to a server." },
+              ]} />
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <RelatedToolsSection currentToolPath="/tools/qr-code-scanner" />
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default QRCodeScanner;

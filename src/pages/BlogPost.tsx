@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -5,6 +6,41 @@ import { getBlogPostBySlug, blogPosts, getAuthorProfile } from "@/data/blogPosts
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 import { toast } from "@/hooks/use-toast";
+
+const renderInlineContent = (text: string) => {
+  const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
+
+  return parts.map((part, index) => {
+    if (!part) return null;
+
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={index} className="text-foreground font-semibold">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      const [, label, href] = linkMatch;
+      if (href.startsWith("/")) {
+        return (
+          <Link key={index} to={href} className="text-primary hover:underline font-medium">
+            {label}
+          </Link>
+        );
+      }
+      return (
+        <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+          {label}
+        </a>
+      );
+    }
+
+    return <Fragment key={index}>{part}</Fragment>;
+  });
+};
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -43,6 +79,11 @@ const BlogPost = () => {
     .slice(0, 3);
 
   const authorProfile = getAuthorProfile(post.author);
+  const callToActionPath = post.toolPath ?? "/";
+  const callToActionLabel = post.toolLabel ?? "Create a Greeting";
+  const callToActionText = post.toolPath
+    ? "Use the matching free tool to put the advice from this article into practice right away."
+    : "Create a free personalized festival greeting and share it with your loved ones.";
 
   return (
     <div className="min-h-screen bg-background">
@@ -95,21 +136,26 @@ const BlogPost = () => {
 
           {/* Article content */}
           <div className="space-y-5">
-            {post.content.map((paragraph, i) => {
-              // Handle paragraphs with bold markdown-style formatting
-              const parts = paragraph.split(/(\*\*.*?\*\*)/g);
+            {post.content.map((block, index) => {
+              if (block.startsWith("## ")) {
+                return (
+                  <h2 key={index} className="text-2xl font-display font-semibold text-foreground pt-3">
+                    {block.slice(3)}
+                  </h2>
+                );
+              }
+
+              if (block.startsWith("### ")) {
+                return (
+                  <h3 key={index} className="text-xl font-display font-semibold text-foreground pt-2">
+                    {block.slice(4)}
+                  </h3>
+                );
+              }
+
               return (
-                <p key={i} className="text-foreground/90 leading-relaxed text-[15px]">
-                  {parts.map((part, j) => {
-                    if (part.startsWith("**") && part.endsWith("**")) {
-                      return (
-                        <strong key={j} className="text-foreground font-semibold">
-                          {part.slice(2, -2)}
-                        </strong>
-                      );
-                    }
-                    return <span key={j}>{part}</span>;
-                  })}
+                <p key={index} className="text-foreground/90 leading-relaxed text-[15px]">
+                  {renderInlineContent(block)}
                 </p>
               );
             })}
@@ -139,14 +185,14 @@ const BlogPost = () => {
         {/* CTA */}
         <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/20 mt-8 text-center">
           <p className="text-lg font-display font-semibold text-foreground mb-2">
-            Ready to spread some joy?
+            Ready to take the next step?
           </p>
           <p className="text-sm text-muted-foreground mb-4">
-            Create a free personalized festival greeting and share it with your loved ones.
+            {callToActionText}
           </p>
-          <Link to="/">
+          <Link to={callToActionPath}>
             <Button className="bg-gold-gradient text-primary-foreground hover:opacity-90 font-semibold shadow-gold">
-              Create a Greeting
+              {callToActionLabel}
             </Button>
           </Link>
         </div>

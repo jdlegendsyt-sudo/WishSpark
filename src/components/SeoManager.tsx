@@ -16,7 +16,7 @@ type SeoMeta = {
 
 const SITE_URL = "https://www.wishspark.xyz";
 const SITE_NAME = "WishSpark";
-const SITE_OG_IMAGE = `${SITE_URL}/og-image.svg`;
+const SITE_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_ROBOTS = "index, follow, max-snippet:160, max-image-preview:large, max-video-preview:-1";
 const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 160;
@@ -81,6 +81,30 @@ const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     title: "Friendship Calculator | Friendship Percentage Test Free Online | WishSpark",
     description: "Check friendship percentage online with our free friendship calculator. Test best friend compatibility by name and share your friendship score.",
     keywords: ["friendship calculator", "friendship percentage test", "best friend compatibility", "friendship compatibility by name", "friendship score calculator"],
+    type: "website",
+  },
+  "/tools/qr-code-generator": {
+    title: "Free QR Code Generator Online | Create QR Code PNG | WishSpark",
+    description: "Create QR codes online for free from text, links, and messages. Generate a clean QR code instantly and download it as a PNG image.",
+    keywords: ["qr code generator", "free qr code generator", "create qr code online", "qr code png download", "generate qr code from url"],
+    type: "website",
+  },
+  "/tools/qr-code-scanner": {
+    title: "QR Code Scanner Online Free | Scan QR From Image or Camera | WishSpark",
+    description: "Scan QR codes online from an image or live camera without installing an app. Decode links, text, and QR content instantly in your browser.",
+    keywords: ["qr code scanner", "scan qr code online", "scan qr from image", "qr scanner without app", "online qr decoder"],
+    type: "website",
+  },
+  "/tools/instagram-hashtag-generator": {
+    title: "Instagram Hashtag Generator Free | Hashtags for Growth | WishSpark",
+    description: "Generate Instagram hashtags for reels, creators, and business posts. Build relevant hashtag sets for reach, discovery, and niche growth.",
+    keywords: ["instagram hashtag generator", "hashtags for instagram growth", "instagram hashtag tool", "reels hashtags", "niche hashtag generator"],
+    type: "website",
+  },
+  "/tools/emi-calculator": {
+    title: "EMI Calculator Online Free | Loan EMI, Interest & Repayment | WishSpark",
+    description: "Calculate monthly EMI online for home, car, education, and personal loans. Check EMI, total interest, and total repayment instantly.",
+    keywords: ["emi calculator", "loan emi calculator", "monthly emi calculator", "home loan emi", "car loan emi calculator"],
     type: "website",
   },
 };
@@ -346,7 +370,7 @@ const SeoManager = () => {
     ensureMetaByProperty("og:site_name").setAttribute("content", SITE_NAME);
     ensureMetaByProperty("og:image").setAttribute("content", SITE_OG_IMAGE);
     ensureMetaByProperty("og:image:secure_url").setAttribute("content", SITE_OG_IMAGE);
-    ensureMetaByProperty("og:image:type").setAttribute("content", "image/svg+xml");
+    ensureMetaByProperty("og:image:type").setAttribute("content", "image/png");
     ensureMetaByProperty("og:image:width").setAttribute("content", "1200");
     ensureMetaByProperty("og:image:height").setAttribute("content", "630");
     ensureMetaByProperty("og:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");

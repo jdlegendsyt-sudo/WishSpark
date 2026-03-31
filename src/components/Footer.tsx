@@ -42,6 +42,10 @@ const Footer = () => {
               <li><Link to="/tools/crush-calculator" className="text-sm text-muted-foreground hover:text-primary transition-colors">Crush Calculator</Link></li>
               <li><Link to="/tools/couple-name-generator" className="text-sm text-muted-foreground hover:text-primary transition-colors">Couple Name Generator</Link></li>
               <li><Link to="/tools/friendship-calculator" className="text-sm text-muted-foreground hover:text-primary transition-colors">Friendship Calculator</Link></li>
+              <li><Link to="/tools/qr-code-generator" className="text-sm text-muted-foreground hover:text-primary transition-colors">QR Code Generator</Link></li>
+              <li><Link to="/tools/qr-code-scanner" className="text-sm text-muted-foreground hover:text-primary transition-colors">QR Code Scanner</Link></li>
+              <li><Link to="/tools/instagram-hashtag-generator" className="text-sm text-muted-foreground hover:text-primary transition-colors">Instagram Hashtag Generator</Link></li>
+              <li><Link to="/tools/emi-calculator" className="text-sm text-muted-foreground hover:text-primary transition-colors">EMI Calculator</Link></li>
             </ul>
           </div>
 

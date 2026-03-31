@@ -30,6 +30,10 @@ const LoveCalculator = lazy(() => import("./pages/tools/LoveCalculator"));
 const CrushCalculator = lazy(() => import("./pages/tools/CrushCalculator"));
 const CoupleNameGenerator = lazy(() => import("./pages/tools/CoupleNameGenerator"));
 const FriendshipCalculator = lazy(() => import("./pages/tools/FriendshipCalculator"));
+const QRCodeGenerator = lazy(() => import("./pages/tools/QRCodeGenerator"));
+const QRCodeScanner = lazy(() => import("./pages/tools/QRCodeScanner"));
+const InstagramHashtagGenerator = lazy(() => import("./pages/tools/InstagramHashtagGenerator"));
+const EmiCalculator = lazy(() => import("./pages/tools/EmiCalculator"));
 
 const App = () => (
   <BrowserRouter>
@@ -56,6 +60,10 @@ const App = () => (
         <Route path="/tools/crush-calculator" element={<CrushCalculator />} />
         <Route path="/tools/couple-name-generator" element={<CoupleNameGenerator />} />
         <Route path="/tools/friendship-calculator" element={<FriendshipCalculator />} />
+        <Route path="/tools/qr-code-generator" element={<QRCodeGenerator />} />
+        <Route path="/tools/qr-code-scanner" element={<QRCodeScanner />} />
+        <Route path="/tools/instagram-hashtag-generator" element={<InstagramHashtagGenerator />} />
+        <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
         <Route path="/:slug" element={<FestivalPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

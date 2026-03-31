@@ -13,6 +13,10 @@ const toolLinks = [
   { to: "/tools/crush-calculator", label: "🔥 Crush Calculator" },
   { to: "/tools/couple-name-generator", label: "💑 Couple Name Generator" },
   { to: "/tools/friendship-calculator", label: "👯 Friendship Calculator" },
+  { to: "/tools/qr-code-generator", label: "🔳 QR Code Generator" },
+  { to: "/tools/qr-code-scanner", label: "📷 QR Code Scanner" },
+  { to: "/tools/instagram-hashtag-generator", label: "#️⃣ Instagram Hashtag Generator" },
+  { to: "/tools/emi-calculator", label: "💳 EMI Calculator" },
 ];
 
 const Sitemap = () => {

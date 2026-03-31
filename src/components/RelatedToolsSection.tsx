@@ -9,6 +9,10 @@ const toolLinks = [
   { to: "/tools/crush-calculator", label: "Crush Calculator", emoji: "🔥" },
   { to: "/tools/couple-name-generator", label: "Couple Name Generator", emoji: "💑" },
   { to: "/tools/friendship-calculator", label: "Friendship Calculator", emoji: "👯" },
+  { to: "/tools/qr-code-generator", label: "QR Code Generator", emoji: "🔳" },
+  { to: "/tools/qr-code-scanner", label: "QR Code Scanner", emoji: "📷" },
+  { to: "/tools/instagram-hashtag-generator", label: "Instagram Hashtag Generator", emoji: "#️⃣" },
+  { to: "/tools/emi-calculator", label: "EMI Calculator", emoji: "💳" },
 ];
 
 type RelatedToolsSectionProps = {
@@ -22,7 +26,7 @@ const RelatedToolsSection = ({ currentToolPath }: RelatedToolsSectionProps) => {
     <section className="mt-10 bg-glass rounded-2xl p-6 border border-gold/10">
       <h2 className="text-lg font-display font-semibold text-foreground mb-2">Related Free Tools</h2>
       <p className="text-sm text-muted-foreground mb-4">
-        Explore more WishSpark tools for birthdays, relationships, and quick celebration planning.
+        Explore more WishSpark tools for QR tasks, social growth, finance planning, birthdays, and quick celebration workflows.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {related.map((tool) => (

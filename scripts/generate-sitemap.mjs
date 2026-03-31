@@ -27,6 +27,10 @@ const STATIC_PATHS = [
   "/tools/crush-calculator",
   "/tools/couple-name-generator",
   "/tools/friendship-calculator",
+  "/tools/qr-code-generator",
+  "/tools/qr-code-scanner",
+  "/tools/instagram-hashtag-generator",
+  "/tools/emi-calculator",
 ];
 
 const escapeXml = (value) => value

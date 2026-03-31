@@ -1,8 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GiftBox from "@/components/GiftBox";
@@ -19,7 +18,6 @@ import AdBanner from "@/components/AdBanner";
 
 const FestivalPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const senderName = searchParams.get("from");
   const slug = location.pathname.replace(/^\/+|\/+$/g, "");

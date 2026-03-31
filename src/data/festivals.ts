@@ -53,7 +53,7 @@ export const festivals: Festival[] = [
     longDescription: "New Year is a time to reflect on the past and look forward to new possibilities. It's celebrated worldwide with fireworks, parties, and resolutions. Send your warmest New Year wishes to start the year with love!",
     gradient: "from-blue-500 via-purple-500 to-pink-500",
     accentColor: "hsl(260 70% 60%)",
-    keywords: ["new year", "2025", "celebration", "fireworks", "party"],
+    keywords: ["new year", "2026", "celebration", "fireworks", "party"],
   },
   {
     name: "Diwali",

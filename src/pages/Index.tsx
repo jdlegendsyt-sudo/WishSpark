@@ -18,6 +18,10 @@ const tools = [
   { name: "Crush Calculator", desc: "Does your crush like you back? Find out!", emoji: "🔥", path: "/tools/crush-calculator" },
   { name: "Couple Name Generator", desc: "Create the perfect ship name for couples", emoji: "💑", path: "/tools/couple-name-generator" },
   { name: "Friendship Calculator", desc: "Test your friendship percentage by name", emoji: "👯", path: "/tools/friendship-calculator" },
+  { name: "QR Code Generator", desc: "Create scannable QR codes for links and text", emoji: "🔳", path: "/tools/qr-code-generator" },
+  { name: "QR Code Scanner", desc: "Scan QR codes from camera or uploaded images", emoji: "📷", path: "/tools/qr-code-scanner" },
+  { name: "Instagram Hashtag Generator", desc: "Generate relevant hashtag ideas for posts and reels", emoji: "#️⃣", path: "/tools/instagram-hashtag-generator" },
+  { name: "EMI Calculator", desc: "Estimate monthly loan EMI and total interest", emoji: "💳", path: "/tools/emi-calculator" },
 ];
 
 const Index = () => {
@@ -133,7 +137,7 @@ const Index = () => {
             Fun <span className="text-gold-gradient">Tools</span> ✨
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-lg mx-auto">
-            Free online calculators & generators — love calculator, age calculator, birthday wishes & more!
+            Free online calculators and generators for birthdays, QR codes, Instagram growth, EMI planning, and more.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {tools.map((tool) => (

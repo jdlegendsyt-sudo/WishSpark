@@ -11,6 +11,10 @@ const tools = [
   { to: "/tools/crush-calculator", label: "🔥 Crush Calculator" },
   { to: "/tools/couple-name-generator", label: "💑 Couple Names" },
   { to: "/tools/friendship-calculator", label: "👯 Friendship Calculator" },
+  { to: "/tools/qr-code-generator", label: "🔳 QR Code Generator" },
+  { to: "/tools/qr-code-scanner", label: "📷 QR Code Scanner" },
+  { to: "/tools/instagram-hashtag-generator", label: "#️⃣ Instagram Hashtag Generator" },
+  { to: "/tools/emi-calculator", label: "💳 EMI Calculator" },
 ];
 
 const Header = () => {
@@ -50,7 +54,7 @@ const Header = () => {
               Tools <span aria-hidden="true">▾</span>
             </button>
             <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[220px]">
+              <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[220px] max-h-[420px] overflow-y-auto">
                 {tools.map((t) => (
                   <Link key={t.to} to={t.to} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
                     {t.label}
