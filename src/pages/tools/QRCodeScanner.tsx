@@ -1,5 +1,13 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import {
+  BarcodeFormat,
+  BinaryBitmap,
+  DecodeHintType,
+  HybridBinarizer,
+  MultiFormatReader,
+  RGBLuminanceSource,
+} from "@zxing/library";
 import jsQR from "jsqr";
 import { Camera, Copy, ScanLine, Upload } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -45,6 +53,27 @@ const BARCODE_FORMATS = [
   "data_matrix",
 ];
 
+const ZXING_FORMATS = [
+  BarcodeFormat.QR_CODE,
+  BarcodeFormat.CODE_128,
+  BarcodeFormat.CODE_39,
+  BarcodeFormat.CODE_93,
+  BarcodeFormat.CODABAR,
+  BarcodeFormat.EAN_13,
+  BarcodeFormat.EAN_8,
+  BarcodeFormat.ITF,
+  BarcodeFormat.UPC_A,
+  BarcodeFormat.UPC_E,
+  BarcodeFormat.PDF_417,
+  BarcodeFormat.AZTEC,
+  BarcodeFormat.DATA_MATRIX,
+];
+
+const ZXING_HINTS = new Map<DecodeHintType, unknown>([
+  [DecodeHintType.POSSIBLE_FORMATS, ZXING_FORMATS],
+  [DecodeHintType.TRY_HARDER, true],
+]);
+
 const getBarcodeDetectorConstructor = () => {
   return (window as Window & { BarcodeDetector?: BarcodeDetectorConstructor }).BarcodeDetector;
 };
@@ -53,6 +82,26 @@ const formatDetectedCodeType = (format?: string) => {
   if (!format) return "Scanned code";
   if (format === "qr_code") return "QR code";
   return format.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+};
+
+const decodeWithZxing = (imageData: ImageData) => {
+  const reader = new MultiFormatReader();
+  reader.setHints(ZXING_HINTS);
+
+  try {
+    const luminanceSource = new RGBLuminanceSource(imageData.data, imageData.width, imageData.height);
+    const binaryBitmap = new BinaryBitmap(new HybridBinarizer(luminanceSource));
+    const decoded = reader.decode(binaryBitmap);
+
+    return {
+      value: decoded.getText(),
+      type: formatDetectedCodeType(BarcodeFormat[decoded.getBarcodeFormat()]?.toLowerCase()),
+    };
+  } catch {
+    return null;
+  } finally {
+    reader.reset();
+  }
 };
 
 const QRCodeScanner = () => {
@@ -66,12 +115,14 @@ const QRCodeScanner = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const frameRef = useRef<number | null>(null);
+  const scanBusyRef = useRef(false);
 
   const stopCamera = () => {
     if (frameRef.current) {
       cancelAnimationFrame(frameRef.current);
       frameRef.current = null;
     }
+    scanBusyRef.current = false;
     streamRef.current?.getTracks().forEach((track) => track.stop());
     streamRef.current = null;
     if (videoRef.current) {
@@ -83,6 +134,14 @@ const QRCodeScanner = () => {
   };
 
   const scanCanvasForCode = async (canvas: HTMLCanvasElement, imageData: ImageData) => {
+    const decodedQr = jsQR(imageData.data, imageData.width, imageData.height);
+    if (decodedQr?.data) {
+      return {
+        value: decodedQr.data,
+        type: "QR code",
+      };
+    }
+
     const BarcodeDetectorApi = getBarcodeDetectorConstructor();
 
     if (BarcodeDetectorApi) {
@@ -96,19 +155,11 @@ const QRCodeScanner = () => {
           };
         }
       } catch {
-        // Continue with QR fallback if detector support is partial or unavailable.
+        // Continue with library fallback if detector support is partial or unavailable.
       }
     }
 
-    const decodedQr = jsQR(imageData.data, imageData.width, imageData.height);
-    if (decodedQr?.data) {
-      return {
-        value: decodedQr.data,
-        type: "QR code",
-      };
-    }
-
-    return null;
+    return decodeWithZxing(imageData);
   };
 
   const scanFromVideo = async () => {
@@ -116,9 +167,17 @@ const QRCodeScanner = () => {
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
 
+    if (scanBusyRef.current) {
+      frameRef.current = requestAnimationFrame(() => {
+        void scanFromVideo();
+      });
+      return;
+    }
+
     if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
       const context = canvas.getContext("2d");
       if (context) {
+        scanBusyRef.current = true;
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -133,6 +192,8 @@ const QRCodeScanner = () => {
           toast({ title: `${decoded.type} scanned`, description: "The decoded result is ready below." });
           return;
         }
+
+        scanBusyRef.current = false;
       }
     }
 
