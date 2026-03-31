@@ -5,6 +5,7 @@ import {
   BinaryBitmap,
   DecodeHintType,
   HybridBinarizer,
+  InvertedLuminanceSource,
   MultiFormatReader,
   RGBLuminanceSource,
 } from "@zxing/library";
@@ -32,7 +33,14 @@ type BarcodeDetectorLike = {
 type BarcodeDetectorConstructor = new (options?: { formats?: string[] }) => BarcodeDetectorLike;
 
 const CAMERA_CONSTRAINTS: MediaStreamConstraints[] = [
-  { video: { facingMode: { ideal: "environment" } }, audio: false },
+  {
+    video: {
+      facingMode: { ideal: "environment" },
+      width: { ideal: 1920 },
+      height: { ideal: 1080 },
+    },
+    audio: false,
+  },
   { video: true, audio: false },
   { video: { facingMode: "user" }, audio: false },
 ];
@@ -84,19 +92,58 @@ const formatDetectedCodeType = (format?: string) => {
   return format.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
+const parseWifiPassword = (value: string) => {
+  if (!/^WIFI:/i.test(value.trim())) {
+    return null;
+  }
+
+  const match = value.match(/(?:^|;)P:((?:\\.|[^;])*)/i);
+  if (!match) {
+    return "";
+  }
+
+  return match[1].replace(/\\([\\;,:])/g, "$1");
+};
+
 const decodeWithZxing = (imageData: ImageData) => {
   const reader = new MultiFormatReader();
   reader.setHints(ZXING_HINTS);
 
-  try {
-    const luminanceSource = new RGBLuminanceSource(imageData.data, imageData.width, imageData.height);
-    const binaryBitmap = new BinaryBitmap(new HybridBinarizer(luminanceSource));
-    const decoded = reader.decode(binaryBitmap);
-
+  const decodeBitmap = (bitmap: BinaryBitmap) => {
+    const decoded = reader.decode(bitmap);
     return {
       value: decoded.getText(),
       type: formatDetectedCodeType(BarcodeFormat[decoded.getBarcodeFormat()]?.toLowerCase()),
     };
+  };
+
+  try {
+    const luminanceSource = new RGBLuminanceSource(imageData.data, imageData.width, imageData.height);
+    const normalBitmap = new BinaryBitmap(new HybridBinarizer(luminanceSource));
+
+    try {
+      return decodeBitmap(normalBitmap);
+    } catch {
+      if (normalBitmap.isRotateSupported()) {
+        try {
+          return decodeBitmap(normalBitmap.rotateCounterClockwise());
+        } catch {
+          // Try additional fallbacks below.
+        }
+      }
+
+      const invertedBitmap = new BinaryBitmap(
+        new HybridBinarizer(new InvertedLuminanceSource(luminanceSource)),
+      );
+
+      try {
+        return decodeBitmap(invertedBitmap);
+      } catch {
+        if (invertedBitmap.isRotateSupported()) {
+          return decodeBitmap(invertedBitmap.rotateCounterClockwise());
+        }
+      }
+    }
   } catch {
     return null;
   } finally {
@@ -282,7 +329,9 @@ const QRCodeScanner = () => {
 
   const handleCopy = async () => {
     if (!result) return;
-    await navigator.clipboard.writeText(result);
+    const wifiPassword = parseWifiPassword(result);
+    const copyValue = wifiPassword !== null ? wifiPassword : result;
+    await navigator.clipboard.writeText(copyValue);
     toast({ title: "Copied", description: "The scanned result has been copied." });
   };
 
@@ -333,6 +382,8 @@ const QRCodeScanner = () => {
   }, [isCameraActive]);
 
   const redirectUrl = getRedirectUrl(result);
+  const wifiPassword = parseWifiPassword(result);
+  const displayResult = wifiPassword !== null ? (wifiPassword ? `Wi-Fi password: ${wifiPassword}` : "Wi-Fi password: (empty)") : result;
 
   return (
     <div className="min-h-screen bg-background">
@@ -414,7 +465,7 @@ const QRCodeScanner = () => {
                     {detectedType}
                   </div>
                 )}
-                <div className="rounded-2xl border border-gold/10 bg-primary/5 p-4 break-words text-sm text-foreground leading-relaxed">{result}</div>
+                <div className="rounded-2xl border border-gold/10 bg-primary/5 p-4 break-words text-sm text-foreground leading-relaxed">{displayResult}</div>
                 <div className="flex flex-wrap gap-3">
                   <Button onClick={handleCopy} variant="outline" className="border-gold/30 hover:bg-gold/10">
                     <Copy className="w-4 h-4 mr-2" />
