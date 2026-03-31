@@ -36,6 +36,10 @@ const QRCodeScanner = () => {
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
     streamRef.current = null;
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.srcObject = null;
+    }
     setIsCameraActive(false);
     setIsScanning(false);
   };
@@ -89,18 +93,10 @@ const QRCodeScanner = () => {
       const stream = await getCameraStream();
       streamRef.current = stream;
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.muted = true;
-        videoRef.current.playsInline = true;
-        await videoRef.current.play();
-      }
-
       setIsCameraActive(true);
       setIsScanning(true);
       setError("");
       setPreviewName("Live camera");
-      frameRef.current = requestAnimationFrame(scanFromVideo);
     } catch {
       setError("Camera access failed or no compatible device camera was available. You can still scan by uploading an image.");
       setIsCameraActive(false);
@@ -155,6 +151,27 @@ const QRCodeScanner = () => {
   useEffect(() => {
     return () => stopCamera();
   }, []);
+
+  useEffect(() => {
+    const attachStreamToVideo = async () => {
+      if (!isCameraActive || !videoRef.current || !streamRef.current) {
+        return;
+      }
+
+      try {
+        videoRef.current.srcObject = streamRef.current;
+        videoRef.current.muted = true;
+        videoRef.current.playsInline = true;
+        await videoRef.current.play();
+        frameRef.current = requestAnimationFrame(scanFromVideo);
+      } catch {
+        setError("Camera started but the video preview could not play. Try refreshing the page or use image upload instead.");
+        stopCamera();
+      }
+    };
+
+    attachStreamToVideo();
+  }, [isCameraActive]);
 
   const isUrl = /^https?:\/\//i.test(result);
 
