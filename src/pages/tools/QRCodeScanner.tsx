@@ -12,6 +12,12 @@ import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
 
+const CAMERA_CONSTRAINTS: MediaStreamConstraints[] = [
+  { video: { facingMode: { ideal: "environment" } }, audio: false },
+  { video: true, audio: false },
+  { video: { facingMode: "user" }, audio: false },
+];
+
 const QRCodeScanner = () => {
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
@@ -61,22 +67,42 @@ const QRCodeScanner = () => {
     frameRef.current = requestAnimationFrame(scanFromVideo);
   };
 
+  const getCameraStream = async () => {
+    for (const constraints of CAMERA_CONSTRAINTS) {
+      try {
+        return await navigator.mediaDevices.getUserMedia(constraints);
+      } catch {
+        // Try the next available camera mode before failing.
+      }
+    }
+
+    throw new Error("Unable to access any available camera.");
+  };
+
   const startCamera = async () => {
     try {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error("Camera access is not supported in this browser.");
+      }
+
       stopCamera();
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      const stream = await getCameraStream();
       streamRef.current = stream;
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.muted = true;
+        videoRef.current.playsInline = true;
         await videoRef.current.play();
       }
+
       setIsCameraActive(true);
       setIsScanning(true);
       setError("");
       setPreviewName("Live camera");
       frameRef.current = requestAnimationFrame(scanFromVideo);
     } catch {
-      setError("Camera access failed. You can still scan by uploading an image.");
+      setError("Camera access failed or no compatible device camera was available. You can still scan by uploading an image.");
       setIsCameraActive(false);
       setIsScanning(false);
     }
@@ -176,7 +202,7 @@ const QRCodeScanner = () => {
 
             <div className="rounded-3xl border border-gold/10 bg-secondary/20 overflow-hidden min-h-[320px] flex items-center justify-center">
               {isCameraActive ? (
-                <video ref={videoRef} className="w-full h-full object-cover" playsInline muted />
+                <video ref={videoRef} className="block w-full min-h-[320px] bg-black object-cover" autoPlay playsInline muted />
               ) : (
                 <div className="text-center px-6 py-12 max-w-md">
                   <div className="w-24 h-24 mx-auto rounded-3xl bg-primary/10 flex items-center justify-center text-4xl mb-3">🔍</div>

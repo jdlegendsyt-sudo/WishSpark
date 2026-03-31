@@ -154,6 +154,32 @@ const EmiCalculator = () => {
           </aside>
         </div>
 
+        {result && (
+          <section className="mb-10 bg-glass rounded-3xl p-6 md:p-8 border border-gold/10 overflow-x-auto">
+            <h2 className="text-2xl font-display font-semibold text-foreground mb-4">First-year repayment preview</h2>
+            <table className="w-full text-sm text-left text-muted-foreground">
+              <thead>
+                <tr className="border-b border-gold/10 text-foreground">
+                  <th className="py-2 pr-4">Month</th>
+                  <th className="py-2 pr-4">Principal</th>
+                  <th className="py-2 pr-4">Interest</th>
+                  <th className="py-2">Remaining Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {result.schedulePreview.map((row) => (
+                  <tr key={row.month} className="border-b border-gold/5 last:border-0">
+                    <td className="py-2 pr-4">{row.month}</td>
+                    <td className="py-2 pr-4">₹ {formatCurrency(row.principal)}</td>
+                    <td className="py-2 pr-4">₹ {formatCurrency(row.interest)}</td>
+                    <td className="py-2">₹ {formatCurrency(row.balance)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        )}
+
         <section className="mb-10 bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
           <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Introduction</h2>
           <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
@@ -206,32 +232,6 @@ const EmiCalculator = () => {
                 <li className="flex gap-3"><span className="shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">4</span><span>Click <strong className="text-foreground">Calculate EMI</strong> to view the monthly EMI, total interest payable, total repayment, and a preview of early repayment breakdown.</span></li>
               </ol>
             </div>
-
-            {result && (
-              <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10 overflow-x-auto">
-                <h2 className="text-2xl font-display font-semibold text-foreground mb-4">First-year repayment preview</h2>
-                <table className="w-full text-sm text-left text-muted-foreground">
-                  <thead>
-                    <tr className="border-b border-gold/10 text-foreground">
-                      <th className="py-2 pr-4">Month</th>
-                      <th className="py-2 pr-4">Principal</th>
-                      <th className="py-2 pr-4">Interest</th>
-                      <th className="py-2">Remaining Balance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.schedulePreview.map((row) => (
-                      <tr key={row.month} className="border-b border-gold/5 last:border-0">
-                        <td className="py-2 pr-4">{row.month}</td>
-                        <td className="py-2 pr-4">₹ {formatCurrency(row.principal)}</td>
-                        <td className="py-2 pr-4">₹ {formatCurrency(row.interest)}</td>
-                        <td className="py-2">₹ {formatCurrency(row.balance)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
 
             <div className="bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
               <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Benefits of Using an EMI Tool Before Loan Approval</h2>
