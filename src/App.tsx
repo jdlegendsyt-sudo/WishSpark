@@ -35,11 +35,17 @@ const QRCodeScanner = lazy(() => import("./pages/tools/QRCodeScanner"));
 const InstagramHashtagGenerator = lazy(() => import("./pages/tools/InstagramHashtagGenerator"));
 const EmiCalculator = lazy(() => import("./pages/tools/EmiCalculator"));
 
+const routeLoadingFallback = (
+  <div className="min-h-screen bg-background flex items-center justify-center">
+    <p className="text-sm text-muted-foreground">Loading page...</p>
+  </div>
+);
+
 const App = () => (
   <BrowserRouter>
     <ScrollToTop />
     <SeoManager />
-    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+    <Suspense fallback={routeLoadingFallback}>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/blog" element={<Blog />} />
