@@ -30,9 +30,16 @@ const Index = () => {
   useEffect(() => {
     if (!location.hash) return;
     const id = location.hash.replace("#", "");
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth" });
+    const scrollToHashTarget = () => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const y = el.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    };
+
+    const rafId = window.requestAnimationFrame(scrollToHashTarget);
+    return () => window.cancelAnimationFrame(rafId);
   }, [location.hash]);
 
   return (
@@ -61,12 +68,12 @@ const Index = () => {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-              <a href="#choose-festival" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gold-gradient text-primary-foreground text-sm font-semibold shadow-gold hover:opacity-90 transition-opacity">
+              <Link to="/#choose-festival" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gold-gradient text-primary-foreground text-sm font-semibold shadow-gold hover:opacity-90 transition-opacity">
                 <Sparkles className="w-4 h-4" /> Festival Wishes
-              </a>
-              <a href="#fun-tools" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
+              </Link>
+              <Link to="/#fun-tools" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
                 🧩 Fun Tools
-              </a>
+              </Link>
               <Link to="/tools/love-calculator" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary text-foreground text-sm font-semibold border border-gold/20 hover:border-gold/40 hover:bg-secondary/80 transition-all">
                 💕 Love Calculator
               </Link>
@@ -113,7 +120,7 @@ const Index = () => {
       </div>
 
       {/* Festival Grid */}
-      <section id="choose-festival" className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 800px" }}>
+      <section id="choose-festival" className="scroll-mt-28 py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 800px" }}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">
             Choose Your <span className="text-gold-gradient">Festival</span>
@@ -131,7 +138,7 @@ const Index = () => {
       </section>
 
       {/* Fun Tools Section */}
-      <section id="fun-tools" className="py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}>
+      <section id="fun-tools" className="scroll-mt-28 py-16 border-t border-gold/10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}>
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">
             Fun <span className="text-gold-gradient">Tools</span> ✨
