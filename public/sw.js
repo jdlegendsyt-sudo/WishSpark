@@ -1,5 +1,5 @@
-const STATIC_CACHE = "wishspark-static-v1";
-const RUNTIME_CACHE = "wishspark-runtime-v1";
+const STATIC_CACHE = "wishspark-static-v2";
+const RUNTIME_CACHE = "wishspark-runtime-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -47,17 +47,9 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const responseClone = response.clone();
-          void caches.open(RUNTIME_CACHE).then((cache) => {
-            cache.put(request, responseClone);
-          });
-          return response;
-        })
+      fetch(request, { cache: "no-store" })
         .catch(async () => {
-          const cachedResponse = await caches.match(request);
-          return cachedResponse || caches.match("/");
+          return caches.match("/");
         })
     );
     return;
@@ -70,10 +62,12 @@ self.addEventListener("fetch", (event) => {
       }
 
       return fetch(request).then((response) => {
-        const responseClone = response.clone();
-        void caches.open(RUNTIME_CACHE).then((cache) => {
-          cache.put(request, responseClone);
-        });
+        if (response.ok && request.destination !== "document") {
+          const responseClone = response.clone();
+          void caches.open(RUNTIME_CACHE).then((cache) => {
+            cache.put(request, responseClone);
+          });
+        }
         return response;
       });
     })
