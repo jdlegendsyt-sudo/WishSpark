@@ -198,6 +198,7 @@ const includesPhrase = (text: string, phrase: string) => {
 };
 
 const buildSeoTitle = (rawTitle: string, primaryKeyword: string) => {
+  const keyword = normalizeSpace(primaryKeyword || "festival wishes");
   let title = normalizeSpace(rawTitle);
 
   if (!includesPhrase(title, "WishSpark") && title.length < TITLE_MAX_LENGTH - 12) {

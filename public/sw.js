@@ -1,5 +1,5 @@
-const STATIC_CACHE = "wishspark-static-v2";
-const RUNTIME_CACHE = "wishspark-runtime-v2";
+const STATIC_CACHE = "wishspark-static-v3";
+const RUNTIME_CACHE = "wishspark-runtime-v3";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -47,8 +47,12 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request, { cache: "no-store" })
-        .catch(async () => {
+      fetch(request, { cache: "no-store" }).catch(async () => {
+          const cachedIndex = await caches.match("/index.html");
+          if (cachedIndex) {
+            return cachedIndex;
+          }
+
           return caches.match("/");
         })
     );

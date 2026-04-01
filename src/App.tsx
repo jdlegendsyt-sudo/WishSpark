@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "@/components/ScrollToTop";
 import SeoManager from "@/components/SeoManager";
@@ -48,7 +48,9 @@ const App = () => (
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/privacy-policy" element={<Privacy />} />
+        <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sitemap" element={<Sitemap />} />

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
@@ -115,7 +116,7 @@ const Terms = () => {
           </p>
           <ul className="list-disc pl-6 space-y-1">
             <li>By email: <a href="mailto:support@wishspark.xyz" className="text-primary underline">support@wishspark.xyz</a></li>
-            <li>By visiting our <a href="/contact" className="text-primary underline">Contact page</a></li>
+            <li>By visiting our <Link to="/contact" className="text-primary underline">Contact page</Link></li>
           </ul>
         </div>
       </main>
