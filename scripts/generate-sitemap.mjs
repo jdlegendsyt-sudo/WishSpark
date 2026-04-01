@@ -7,6 +7,7 @@ const SITE_URL = "https://www.wishspark.xyz";
 const FESTIVALS_FILE = path.join(ROOT, "src", "data", "festivals.ts");
 const BLOG_FILE = path.join(ROOT, "src", "data", "blogPosts.ts");
 const OUTPUT_FILE = path.join(ROOT, "public", "sitemap.xml");
+const NOW_ISO_DATE = new Date().toISOString().split("T")[0];
 
 const STATIC_PATHS = [
   "/",
@@ -54,9 +55,38 @@ const readBlogPaths = () => {
 
 const buildUrlNode = (pathname) => {
   const loc = pathname === "/" ? `${SITE_URL}/` : `${SITE_URL}${pathname}`;
+  const isHome = pathname === "/";
+  const isTool = pathname.startsWith("/tools/");
+  const isBlogPost = pathname.startsWith("/blog/");
+  const isBlogIndex = pathname === "/blog";
+  const isLegal = ["/privacy-policy", "/terms", "/disclaimer"].includes(pathname);
+
+  const changefreq = isHome
+    ? "daily"
+    : isBlogIndex || isBlogPost
+      ? "weekly"
+      : isTool
+        ? "weekly"
+        : isLegal
+          ? "yearly"
+          : "monthly";
+
+  const priority = isHome
+    ? "1.0"
+    : isBlogIndex
+      ? "0.9"
+      : isTool || isBlogPost
+        ? "0.8"
+        : isLegal
+          ? "0.4"
+          : "0.7";
+
   return [
     "  <url>",
     `    <loc>${escapeXml(loc)}</loc>`,
+    `    <lastmod>${NOW_ISO_DATE}</lastmod>`,
+    `    <changefreq>${changefreq}</changefreq>`,
+    `    <priority>${priority}</priority>`,
     "  </url>",
   ].join("\n");
 };

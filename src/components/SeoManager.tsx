@@ -18,10 +18,12 @@ type SeoMeta = {
 const SITE_URL = "https://www.wishspark.xyz";
 const SITE_NAME = "WishSpark";
 const SITE_OG_IMAGE = `${SITE_URL}/og-image.png`;
+const SITE_TWITTER = "@WishSpark";
 const DEFAULT_ROBOTS = "index, follow, max-snippet:160, max-image-preview:large, max-video-preview:-1";
 const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 160;
 const DESCRIPTION_MIN_TARGET = 145;
+const BLOG_MIN_WORDS_FOR_INDEX = 1000;
 const BASE_KEYWORDS = [
   "WishSpark",
   "festival greeting card maker",
@@ -275,6 +277,13 @@ const formatDate = (date: string) => {
   return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
 };
 
+const estimateWordCount = (blocks: string[]) =>
+  blocks
+    .join(" ")
+    .replace(/\[[^\]]+\]\([^\)]+\)/g, "")
+    .split(/\s+/)
+    .filter(Boolean).length;
+
 const buildSeoMeta = (pathname: string): SeoMeta => {
   const normalizedPath = normalizePath(pathname);
 
@@ -296,6 +305,8 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
     const slug = normalizedPath.replace("/blog/", "");
     const post = getBlogPostBySlug(slug);
     if (post) {
+      const estimatedWordCount = estimateWordCount(post.content);
+      const isThinArticle = estimatedWordCount < BLOG_MIN_WORDS_FOR_INDEX;
       return {
         title: post.seoTitle ?? `${post.title} | WishSpark Blog`,
         description: post.seoDescription ?? post.excerpt,
@@ -310,7 +321,7 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
             ],
         canonicalPath: normalizedPath,
         type: "article",
-        robots: post.noIndex ? "noindex, follow" : undefined,
+            robots: post.noIndex || isThinArticle ? "noindex, follow" : undefined,
         articlePublishedTime: formatDate(post.date),
         articleModifiedTime: formatDate(post.updatedDate ?? post.date),
         articleAuthor: post.author,
@@ -373,6 +384,7 @@ const SeoManager = () => {
     ensureMetaByProperty("og:url").setAttribute("content", canonicalUrl);
     ensureMetaByProperty("og:type").setAttribute("content", meta.type ?? "website");
     ensureMetaByProperty("og:site_name").setAttribute("content", SITE_NAME);
+    ensureMetaByProperty("og:locale").setAttribute("content", "en_US");
     ensureMetaByProperty("og:image").setAttribute("content", SITE_OG_IMAGE);
     ensureMetaByProperty("og:image:secure_url").setAttribute("content", SITE_OG_IMAGE);
     ensureMetaByProperty("og:image:type").setAttribute("content", "image/png");
@@ -383,6 +395,8 @@ const SeoManager = () => {
     ensureMetaByName("twitter:card").setAttribute("content", "summary_large_image");
     ensureMetaByName("twitter:title").setAttribute("content", optimizedTitle);
     ensureMetaByName("twitter:description").setAttribute("content", optimizedDescription);
+    ensureMetaByName("twitter:site").setAttribute("content", SITE_TWITTER);
+    ensureMetaByName("twitter:url").setAttribute("content", canonicalUrl);
     ensureMetaByName("twitter:image").setAttribute("content", SITE_OG_IMAGE);
     ensureMetaByName("twitter:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
 

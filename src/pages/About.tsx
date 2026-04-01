@@ -107,6 +107,35 @@ const About = () => {
             The long-term objective is to maintain a platform that is reliable for users and credible for publishing partners.
           </p>
 
+          <h2 className="text-2xl font-display font-semibold text-foreground">Editorial and Platform Standards</h2>
+          <p>
+            WishSpark aligns content and technical quality practices with trusted web publishing guidance. For transparency,
+            users and partners can review the public policy references we follow for search quality, ad policy hygiene,
+            and practical content standards.
+          </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <a
+                href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline"
+              >
+                Google Search Central: Creating Helpful, Reliable, People-First Content
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://support.google.com/adsense/answer/48182"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline"
+              >
+                Google AdSense Program Policies
+              </a>
+            </li>
+          </ul>
+
           <h2 className="text-2xl font-display font-semibold text-foreground">Contact Us</h2>
           <p>
             Questions, feedback, and partnership inquiries are welcome. Reach out to us

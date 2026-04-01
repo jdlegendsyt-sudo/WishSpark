@@ -94,7 +94,7 @@ const BlogPost = () => {
     [post.content],
   );
 
-  const isThinContent = wordCount < 700;
+  const isThinContent = wordCount < 1000;
 
   const handleShare = async () => {
     const url = window.location.href;

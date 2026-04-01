@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { festivals } from "@/data/festivals";
 
 const tools = [
@@ -18,9 +18,53 @@ const tools = [
 ];
 
 const Header = () => {
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [festivalOpen, setFestivalOpen] = useState(false);
+  const [desktopToolsOpen, setDesktopToolsOpen] = useState(false);
+  const [desktopFestivalOpen, setDesktopFestivalOpen] = useState(false);
+
+  const festivalMenuRef = useRef<HTMLDivElement | null>(null);
+  const toolsMenuRef = useRef<HTMLDivElement | null>(null);
+
+  const closeAllMenus = () => {
+    setMobileOpen(false);
+    setFestivalOpen(false);
+    setToolsOpen(false);
+    setDesktopFestivalOpen(false);
+    setDesktopToolsOpen(false);
+  };
+
+  useEffect(() => {
+    closeAllMenus();
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const clickedFestival = festivalMenuRef.current?.contains(target);
+      const clickedTools = toolsMenuRef.current?.contains(target);
+
+      if (!clickedFestival) setDesktopFestivalOpen(false);
+      if (!clickedTools) setDesktopToolsOpen(false);
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDesktopFestivalOpen(false);
+        setDesktopToolsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-card border-b border-gold/20">
@@ -35,28 +79,72 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
-          <div className="relative group">
-            <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+          <div
+            ref={festivalMenuRef}
+            className="relative"
+            onMouseEnter={() => setDesktopFestivalOpen(true)}
+            onMouseLeave={() => setDesktopFestivalOpen(false)}
+          >
+            <button
+              type="button"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+              aria-expanded={desktopFestivalOpen}
+              aria-controls="desktop-festival-menu"
+              onClick={() => {
+                setDesktopFestivalOpen((prev) => !prev);
+                setDesktopToolsOpen(false);
+              }}
+            >
               Festival Wishes <span aria-hidden="true">▾</span>
             </button>
-            <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div
+              id="desktop-festival-menu"
+              className={`absolute top-full left-0 pt-2 transition-all duration-200 ${desktopFestivalOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
+            >
               <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[250px] max-h-[380px] overflow-y-auto">
                 {festivals.map((festival) => (
-                  <Link key={festival.slug} to={`/${festival.slug}`} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+                  <Link
+                    key={festival.slug}
+                    to={`/${festival.slug}`}
+                    onClick={closeAllMenus}
+                    className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                  >
                     {festival.emoji} {festival.name} Wishes
                   </Link>
                 ))}
               </div>
             </div>
           </div>
-          <div className="relative group">
-            <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+          <div
+            ref={toolsMenuRef}
+            className="relative"
+            onMouseEnter={() => setDesktopToolsOpen(true)}
+            onMouseLeave={() => setDesktopToolsOpen(false)}
+          >
+            <button
+              type="button"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+              aria-expanded={desktopToolsOpen}
+              aria-controls="desktop-tools-menu"
+              onClick={() => {
+                setDesktopToolsOpen((prev) => !prev);
+                setDesktopFestivalOpen(false);
+              }}
+            >
               Tools <span aria-hidden="true">▾</span>
             </button>
-            <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div
+              id="desktop-tools-menu"
+              className={`absolute top-full left-0 pt-2 transition-all duration-200 ${desktopToolsOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
+            >
               <div className="bg-card border border-gold/20 rounded-xl shadow-xl p-2 min-w-[220px] max-h-[420px] overflow-y-auto">
                 {tools.map((t) => (
-                  <Link key={t.to} to={t.to} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+                  <Link
+                    key={t.to}
+                    to={t.to}
+                    onClick={closeAllMenus}
+                    className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                  >
                     {t.label}
                   </Link>
                 ))}
@@ -71,7 +159,13 @@ const Header = () => {
         </nav>
 
         {/* Mobile toggle */}
-        <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button
+          type="button"
+          className="md:hidden text-foreground"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-main-nav"
+          onClick={() => setMobileOpen((prev) => !prev)}
+        >
           <span aria-hidden="true" className="text-2xl leading-none">{mobileOpen ? "✕" : "☰"}</span>
         </button>
       </div>
@@ -79,29 +173,39 @@ const Header = () => {
       {/* Mobile Nav */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gold/10 bg-card">
-          <nav className="container mx-auto px-4 py-4 space-y-1">
-            <Link to="/" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">Home</Link>
-            <button onClick={() => setFestivalOpen(!festivalOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
+          <nav id="mobile-main-nav" className="container mx-auto px-4 py-4 space-y-1">
+            <Link to="/" onClick={closeAllMenus} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">Home</Link>
+            <button
+              type="button"
+              onClick={() => setFestivalOpen((prev) => !prev)}
+              aria-expanded={festivalOpen}
+              className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between"
+            >
               <span>Festival Wishes</span>
               <span aria-hidden="true" className={`transition-transform ${festivalOpen ? "rotate-180" : ""}`}>▾</span>
             </button>
             {festivalOpen && (
               <div className="pl-4 space-y-1 max-h-[260px] overflow-y-auto">
                 {festivals.map((festival) => (
-                  <Link key={festival.slug} to={`/${festival.slug}`} onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
+                  <Link key={festival.slug} to={`/${festival.slug}`} onClick={closeAllMenus} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
                     {festival.emoji} {festival.name} Wishes
                   </Link>
                 ))}
               </div>
             )}
-            <button onClick={() => setToolsOpen(!toolsOpen)} className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setToolsOpen((prev) => !prev)}
+              aria-expanded={toolsOpen}
+              className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg flex items-center justify-between"
+            >
               <span>Tools</span>
               <span aria-hidden="true" className={`transition-transform ${toolsOpen ? "rotate-180" : ""}`}>▾</span>
             </button>
             {toolsOpen && (
               <div className="pl-4 space-y-1">
                 {tools.map((t) => (
-                  <Link key={t.to} to={t.to} onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
+                  <Link key={t.to} to={t.to} onClick={closeAllMenus} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
                     {t.label}
                   </Link>
                 ))}
@@ -114,7 +218,7 @@ const Header = () => {
               { to: "/about", label: "About" },
               { to: "/contact", label: "Contact" },
             ].map((link) => (
-              <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
+              <Link key={link.to} to={link.to} onClick={closeAllMenus} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg">
                 {link.label}
               </Link>
             ))}

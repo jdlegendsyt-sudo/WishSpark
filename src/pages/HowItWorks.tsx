@@ -33,8 +33,8 @@ const steps = [
   },
   {
     icon: Users,
-    title: "6. Chain of Joy Continues",
-    desc: "The recipient can create their own greeting and share it with their loved ones. This creates a beautiful viral chain of festive wishes spreading happiness!",
+    title: "6. Keep the Celebration Going",
+    desc: "The recipient can create their own greeting and share it with their loved ones, making celebrations feel more personal across families, friends, and communities.",
   },
 ];
 
