@@ -24,6 +24,7 @@ const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 160;
 const DESCRIPTION_MIN_TARGET = 145;
 const BLOG_MIN_WORDS_FOR_INDEX = 1000;
+const ENABLE_AUTO_THIN_CONTENT_NOINDEX = false;
 const BASE_KEYWORDS = [
   "WishSpark",
   "festival greeting card maker",
@@ -307,6 +308,7 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
     if (post) {
       const estimatedWordCount = estimateWordCount(post.content);
       const isThinArticle = estimatedWordCount < BLOG_MIN_WORDS_FOR_INDEX;
+      const shouldNoIndex = post.noIndex || (ENABLE_AUTO_THIN_CONTENT_NOINDEX && isThinArticle);
       return {
         title: post.seoTitle ?? `${post.title} | WishSpark Blog`,
         description: post.seoDescription ?? post.excerpt,
@@ -321,7 +323,7 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
             ],
         canonicalPath: normalizedPath,
         type: "article",
-            robots: post.noIndex || isThinArticle ? "noindex, follow" : undefined,
+          robots: shouldNoIndex ? "noindex, follow" : undefined,
         articlePublishedTime: formatDate(post.date),
         articleModifiedTime: formatDate(post.updatedDate ?? post.date),
         articleAuthor: post.author,
