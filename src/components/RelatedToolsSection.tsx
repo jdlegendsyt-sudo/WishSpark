@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getToolBlogPost } from "@/data/blogCoverage";
 
 const toolLinks = [
   { to: "/tools/birthday-wishes-generator", label: "Birthday Wishes Generator", emoji: "🎂" },
@@ -21,9 +22,21 @@ type RelatedToolsSectionProps = {
 
 const RelatedToolsSection = ({ currentToolPath }: RelatedToolsSectionProps) => {
   const related = toolLinks.filter((tool) => tool.to !== currentToolPath);
+  const dedicatedGuide = getToolBlogPost(currentToolPath);
 
   return (
     <section className="mt-10 bg-glass rounded-2xl p-6 border border-gold/10">
+      {dedicatedGuide ? (
+        <div className="mb-6 rounded-2xl border border-gold/20 bg-primary/5 p-5">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-2">Dedicated Guide</p>
+          <h2 className="text-lg font-display font-semibold text-foreground mb-2">{dedicatedGuide.title}</h2>
+          <p className="text-sm text-muted-foreground mb-4">{dedicatedGuide.excerpt}</p>
+          <Link to={`/blog/${dedicatedGuide.slug}`} className="text-sm font-medium text-primary hover:underline">
+            Read the complete guide for this tool
+          </Link>
+        </div>
+      ) : null}
+
       <h2 className="text-lg font-display font-semibold text-foreground mb-2">Related Free Tools</h2>
       <p className="text-sm text-muted-foreground mb-4">
         Explore more WishSpark tools for QR tasks, social growth, finance planning, birthdays, and quick celebration workflows.

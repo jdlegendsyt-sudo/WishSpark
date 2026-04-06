@@ -24,6 +24,8 @@ const Footer = () => {
               <li><Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
               <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
               <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/authors" className="text-sm text-muted-foreground hover:text-primary transition-colors">Authors</Link></li>
+              <li><Link to="/editorial-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Editorial Policy</Link></li>
               <li><Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-primary transition-colors">How It Works</Link></li>
               <li><Link to="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">FAQ</Link></li>
               <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
@@ -66,6 +68,7 @@ const Footer = () => {
               <li><Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Use</Link></li>
               <li><Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Disclaimer</Link></li>
+              <li><Link to="/editorial-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Editorial Policy</Link></li>
               <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Support</Link></li>
             </ul>
           </div>

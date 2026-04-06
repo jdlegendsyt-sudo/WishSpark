@@ -5,6 +5,7 @@ import { Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GiftBox from "@/components/GiftBox";
+import { getFestivalBlogPost } from "@/data/blogCoverage";
 import DiwaliLamp from "@/components/DiwaliLamp";
 import EasterEgg from "@/components/EasterEgg";
 import GreetingReveal from "@/components/GreetingReveal";
@@ -28,6 +29,7 @@ const FestivalPage = () => {
   const [showGreeting, setShowGreeting] = useState(false);
   const [showCreate, setShowCreate] = useState(!senderName);
   const [timeoutExpired, setTimeoutExpired] = useState(false);
+  const dedicatedBlogPost = festival ? getFestivalBlogPost(festival.slug) : undefined;
 
   const isEaster = festival?.slug === "easter-wishes";
   const isDiwali = festival?.slug === "diwali-wishes";
@@ -210,6 +212,20 @@ const FestivalPage = () => {
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
+
+                {dedicatedBlogPost ? (
+                  <div className="mt-8 rounded-2xl border border-gold/20 bg-primary/5 p-5">
+                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-2">Detailed Reading</p>
+                    <h2 className="text-xl font-display font-semibold text-foreground mb-2">Read the full {festival.name} guide</h2>
+                    <p className="text-sm text-muted-foreground mb-4">{dedicatedBlogPost.excerpt}</p>
+                    <Link
+                      to={`/blog/${dedicatedBlogPost.slug}`}
+                      className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                    >
+                      Open the complete article
+                    </Link>
+                  </div>
+                ) : null}
               </div>
             );
           })()}

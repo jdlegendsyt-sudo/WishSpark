@@ -43,6 +43,8 @@ const Sitemap = () => {
                 { to: "/", label: "Home" },
                 { to: "/blog", label: "Blog" },
                 { to: "/about", label: "About Us" },
+                { to: "/authors", label: "Authors" },
+                { to: "/editorial-policy", label: "Editorial Policy" },
                 { to: "/how-it-works", label: "How It Works" },
                 { to: "/faq", label: "Frequently Asked Questions" },
                 { to: "/contact", label: "Contact Us" },
@@ -98,6 +100,7 @@ const Sitemap = () => {
                 { to: "/privacy-policy", label: "Privacy Policy" },
                 { to: "/terms", label: "Terms of Use" },
                 { to: "/disclaimer", label: "Disclaimer" },
+                { to: "/editorial-policy", label: "Editorial Policy" },
               ].map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-primary hover:underline">{link.label}</Link>

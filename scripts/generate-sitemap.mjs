@@ -13,6 +13,8 @@ const STATIC_PATHS = [
   "/",
   "/blog",
   "/about",
+  "/authors",
+  "/editorial-policy",
   "/how-it-works",
   "/faq",
   "/contact",

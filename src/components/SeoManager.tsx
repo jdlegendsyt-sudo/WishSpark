@@ -138,6 +138,18 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     keywords: ["how festival greeting maker works", "how to create greeting link", "WishSpark tutorial", "share festival wishes online", "animated greeting steps"],
     type: "website",
   },
+  "/authors": {
+    title: "WishSpark Authors | Editorial Contributors and Content Team",
+    description: "Meet the WishSpark authors and contributors behind our festival, relationship, and utility content. Review roles, focus areas, and editorial accountability.",
+    keywords: ["WishSpark authors", "content contributors", "editorial team", "festival writers", "tool content experts"],
+    type: "website",
+  },
+  "/editorial-policy": {
+    title: "Editorial Policy | WishSpark Content Standards and Review Process",
+    description: "Read the WishSpark editorial policy covering content quality standards, fact checks, human review, updates, corrections, and advertising independence.",
+    keywords: ["WishSpark editorial policy", "content quality standards", "fact checking policy", "corrections policy", "ad editorial independence"],
+    type: "website",
+  },
   "/faq": {
     title: "FAQ | WishSpark Frequently Asked Questions",
     description: "Find answers about creating greeting cards, sharing festival wishes on WhatsApp, supported festivals, privacy, and how WishSpark works.",

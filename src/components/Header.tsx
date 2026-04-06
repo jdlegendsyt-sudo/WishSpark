@@ -152,6 +152,8 @@ const Header = () => {
             </div>
           </div>
           <Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</Link>
+          <Link to="/authors" className="text-sm text-muted-foreground hover:text-primary transition-colors">Authors</Link>
+          <Link to="/editorial-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Editorial Policy</Link>
           <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-primary transition-colors">How It Works</Link>
           <Link to="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">FAQ</Link>
           <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link>
@@ -213,6 +215,8 @@ const Header = () => {
             )}
             {[
               { to: "/blog", label: "Blog" },
+              { to: "/authors", label: "Authors" },
+              { to: "/editorial-policy", label: "Editorial Policy" },
               { to: "/how-it-works", label: "How It Works" },
               { to: "/faq", label: "FAQ" },
               { to: "/about", label: "About" },

@@ -262,6 +262,7 @@ const BlogPost = () => {
 
         {/* Author box */}
         <div className="bg-glass rounded-2xl p-6 border border-gold/10 mt-12">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-4">About the Author</p>
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl">
               ✍️
