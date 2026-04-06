@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 const calcCrush = (a: string, b: string) => {
   const s = (a + "crush" + b).toLowerCase().replace(/\s/g, "");
@@ -45,7 +46,7 @@ const CrushCalculator = () => {
       setResult({ pct, ...getVerdict(pct) });
       setIsSharedView(false);
       setAnimating(false);
-      setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+      setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
     }, 1500);
   };
 
@@ -89,7 +90,7 @@ const CrushCalculator = () => {
     setResult({ pct, ...getVerdict(pct) });
     setAnimating(false);
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -129,7 +130,7 @@ const CrushCalculator = () => {
 
           {result && (
             <motion.div ref={resultsRef} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4">
+              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4 max-w-2xl mx-auto">
               <p className="text-muted-foreground">{myName} 🔥 {crushName}</p>
               <motion.p className={`text-6xl font-bold ${result.color}`}
                 initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring" }}>

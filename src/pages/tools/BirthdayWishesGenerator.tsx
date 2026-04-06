@@ -11,6 +11,7 @@ import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 const wishes = [
   (n: string) => `💕 Happy Birthday, my dearest ${n}! You are the most precious gift in my life. Every moment with you feels like a beautiful dream. May your day be filled with all the love you deserve! 🎂✨`,
@@ -39,7 +40,7 @@ const BirthdayWishesGenerator = () => {
     const shuffled = [...wishes].sort(() => Math.random() - 0.5);
     setGenerated(shuffled.slice(0, 5).map((fn) => fn(name.trim())));
     setIsSharedView(false);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   };
 
   const getShareLink = (wish?: string) => {
@@ -92,7 +93,7 @@ const BirthdayWishesGenerator = () => {
       setGenerated(shuffled.slice(0, 5).map((fn) => fn(sharedName.trim())));
     }
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -119,7 +120,7 @@ const BirthdayWishesGenerator = () => {
 
         <AnimatePresence>
           {generated.length > 0 && (
-            <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-display font-semibold text-foreground">Your Wishes for {name}</h2>
                 <div className="flex items-center gap-2">

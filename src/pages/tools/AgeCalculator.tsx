@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 interface AgeResult {
   years: number;
@@ -71,7 +72,7 @@ const AgeCalculator = () => {
       zodiac: getZodiac(birth.getMonth() + 1, birth.getDate()),
     });
     setIsSharedView(false);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   };
 
   const calculateFromDob = (value: string) => {
@@ -137,7 +138,7 @@ const AgeCalculator = () => {
     setDob(sharedDob);
     calculateFromDob(sharedDob);
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -163,7 +164,7 @@ const AgeCalculator = () => {
         </div>
 
         {result && (
-          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto">
             <div className="bg-glass rounded-2xl p-6 border border-gold/20 text-center">
               <h2 className="text-lg font-display font-semibold text-foreground mb-4">Your Age</h2>
               <div className="flex justify-center gap-4 mb-6">

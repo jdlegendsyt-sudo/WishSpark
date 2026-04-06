@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 const calcFriendship = (a: string, b: string) => {
   const s = (a + "bff" + b).toLowerCase().replace(/\s/g, "");
@@ -40,7 +41,7 @@ const FriendshipCalculator = () => {
     const pct = calcFriendship(name1, name2);
     setResult({ pct, ...getLevel(pct) });
     setIsSharedView(false);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   };
 
   const getShareLink = () => {
@@ -87,7 +88,7 @@ const FriendshipCalculator = () => {
     setName2(n2);
     setResult({ pct, ...getLevel(pct) });
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -120,7 +121,7 @@ const FriendshipCalculator = () => {
         <AnimatePresence>
           {result && (
             <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
-              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4">
+              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4 max-w-2xl mx-auto">
               <p className="text-muted-foreground">{name1} 🤝 {name2}</p>
               <motion.p className="text-7xl font-bold text-primary"
                 initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}>

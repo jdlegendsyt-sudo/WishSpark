@@ -11,6 +11,7 @@ import AdBanner from "@/components/AdBanner";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 const generateNames = (a: string, b: string): string[] => {
   const results = new Set<string>();
@@ -52,7 +53,7 @@ const CoupleNameGenerator = () => {
     const result = generateNames(name1, name2);
     setNames(result);
     setIsSharedView(false);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   };
 
   const getShareLink = () => {
@@ -97,7 +98,7 @@ const CoupleNameGenerator = () => {
     setName2(n2);
     setNames(generateNames(n1, n2));
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -128,7 +129,7 @@ const CoupleNameGenerator = () => {
         </div>
 
         {names.length > 0 && (
-          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-display font-semibold text-foreground">Your Couple Names 💕</h2>
               <div className="flex items-center gap-2">

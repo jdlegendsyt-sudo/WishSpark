@@ -3,6 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getBlogPostBySlug, blogPosts, getAuthorProfile } from "@/data/blogPosts";
+import { festivals } from "@/data/festivals";
+import {
+  getAutoReferencesForBlogSlug,
+  getFestivalSlugByBlogSlug,
+  getToolPathByBlogSlug,
+} from "@/data/blogCoverage";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 import { toast } from "@/hooks/use-toast";
@@ -135,11 +141,24 @@ const BlogPost = () => {
   }, [post]);
 
   const authorProfile = getAuthorProfile(post.author);
-  const callToActionPath = post.toolPath ?? "/";
-  const callToActionLabel = post.toolLabel ?? "Create a Greeting";
-  const callToActionText = post.toolPath
+  const mappedFestivalSlug = getFestivalSlugByBlogSlug(post.slug);
+  const mappedFestival = mappedFestivalSlug
+    ? festivals.find((festivalItem) => festivalItem.slug === mappedFestivalSlug)
+    : undefined;
+  const mappedToolPath = post.toolPath ?? getToolPathByBlogSlug(post.slug);
+  const autoReferences = getAutoReferencesForBlogSlug(post.slug);
+  const effectiveReferences = post.references?.length ? post.references : autoReferences;
+  const callToActionPath = mappedToolPath ?? (mappedFestival ? `/${mappedFestival.slug}` : "/");
+  const callToActionLabel = mappedToolPath
+    ? (post.toolLabel ?? "Open Matching Tool")
+    : mappedFestival
+      ? `Open ${mappedFestival.name} Wishes Page`
+      : "Create a Greeting";
+  const callToActionText = mappedToolPath
     ? "Use the matching free tool to put the advice from this article into practice right away."
-    : "Create a free personalized festival greeting and share it with your loved ones.";
+    : mappedFestival
+      ? `Generate and share a personalized ${mappedFestival.name} greeting from the linked festival page.`
+      : "Create a free personalized festival greeting and share it with your loved ones.";
 
   return (
     <div className="min-h-screen bg-background">
@@ -245,11 +264,34 @@ const BlogPost = () => {
 
         </article>
 
-        {post.references?.length ? (
+        {mappedFestival || mappedToolPath ? (
+          <section className="bg-glass rounded-2xl p-6 border border-gold/10 mt-10">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-3">Quick Links for This Topic</h2>
+            <div className="flex flex-wrap gap-3">
+              {mappedFestival ? (
+                <Link to={`/${mappedFestival.slug}`}>
+                  <Button variant="outline" className="border-gold/20 hover:border-gold/40">
+                    {mappedFestival.emoji} Open {mappedFestival.name} Wishes Page
+                  </Button>
+                </Link>
+              ) : null}
+
+              {mappedToolPath ? (
+                <Link to={mappedToolPath}>
+                  <Button variant="outline" className="border-gold/20 hover:border-gold/40">
+                    Open Matching Tool
+                  </Button>
+                </Link>
+              ) : null}
+            </div>
+          </section>
+        ) : null}
+
+        {effectiveReferences.length ? (
           <section className="bg-glass rounded-2xl p-6 border border-gold/10 mt-10">
             <h2 className="text-lg font-display font-semibold text-foreground mb-3">References</h2>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              {post.references.map((reference) => (
+              {effectiveReferences.map((reference) => (
                 <li key={reference.url}>
                   <a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     {reference.label}

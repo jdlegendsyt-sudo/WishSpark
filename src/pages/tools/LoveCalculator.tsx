@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import RelatedToolsSection from "@/components/RelatedToolsSection";
 import { toast } from "@/hooks/use-toast";
+import { smoothScrollToElement } from "@/lib/scrollToElement";
 
 const calcLove = (a: string, b: string) => {
   const combined = (a + "loves" + b).toLowerCase().replace(/\s/g, "");
@@ -42,7 +43,7 @@ const LoveCalculator = () => {
     const info = getMessage(pct);
     setResult({ pct, ...info });
     setIsSharedView(false);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   };
 
   const getShareLink = () => {
@@ -89,7 +90,7 @@ const LoveCalculator = () => {
     setName2(n2);
     setResult({ pct, ...getMessage(pct) });
     setIsSharedView(true);
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    setTimeout(() => smoothScrollToElement(resultsRef.current), 120);
   }, [searchParams]);
 
   return (
@@ -120,7 +121,7 @@ const LoveCalculator = () => {
         </div>
 
         {result && (
-          <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4">
+          <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4 max-w-2xl mx-auto">
             <p className="text-muted-foreground">{name1} ❤️ {name2}</p>
             <motion.p className="text-7xl font-bold text-primary" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}>
               {result.pct}%
