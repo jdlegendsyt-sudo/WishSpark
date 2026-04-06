@@ -162,31 +162,6 @@ const AgeCalculator = () => {
           </div>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              An age calculator is useful far beyond simple curiosity. People often need exact age values for applications, school records,
-              medical forms, insurance documents, and event eligibility checks. In many of these cases, writing only the birth year is not
-              enough because institutions require age in years, months, and days as of the current date. This tool provides that precision
-              instantly from a single date input.
-            </p>
-            <p>
-              WishSpark's age calculator is built to be practical and easy to verify. It accounts for month lengths and leap-year effects,
-              then presents additional context like total days lived, total weeks, and days remaining until the next birthday. Instead of
-              manual counting or spreadsheet formulas, users get a clean summary they can quickly reference and share when needed.
-            </p>
-            <p>
-              The interface is intentionally minimal so users can focus on correctness rather than navigation. This is particularly useful
-              for teachers, students, HR teams, and families who need fast results across multiple profiles. Because the output includes
-              both standard age and extended time metrics, users can rely on one result card for practical documentation and informative
-              personal use.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         {result && (
           <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
             <div className="bg-glass rounded-2xl p-6 border border-gold/20 text-center">
@@ -230,6 +205,31 @@ const AgeCalculator = () => {
             </div>
           </motion.div>
         )}
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              An age calculator is useful far beyond simple curiosity. People often need exact age values for applications, school records,
+              medical forms, insurance documents, and event eligibility checks. In many of these cases, writing only the birth year is not
+              enough because institutions require age in years, months, and days as of the current date. This tool provides that precision
+              instantly from a single date input.
+            </p>
+            <p>
+              WishSpark's age calculator is built to be practical and easy to verify. It accounts for month lengths and leap-year effects,
+              then presents additional context like total days lived, total weeks, and days remaining until the next birthday. Instead of
+              manual counting or spreadsheet formulas, users get a clean summary they can quickly reference and share when needed.
+            </p>
+            <p>
+              The interface is intentionally minimal so users can focus on correctness rather than navigation. This is particularly useful
+              for teachers, students, HR teams, and families who need fast results across multiple profiles. Because the output includes
+              both standard age and extended time metrics, users can rely on one result card for practical documentation and informative
+              personal use.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

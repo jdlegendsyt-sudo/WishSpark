@@ -119,29 +119,6 @@ const CrushCalculator = () => {
           </Button>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Crush-related tools are popular because they provide a low-pressure way to express curiosity and start conversations. While no
-              algorithm can determine real emotions, interactive calculators can still play a useful social role: they create shareable
-              moments, reduce awkwardness, and add humor to early relationship conversations.
-            </p>
-            <p>
-              This page is designed as entertainment with a clear user flow. You enter two names, generate a compatibility-style score, and
-              receive a verdict card that can be shared privately or in groups. The experience is intentionally fast and optimistic, making
-              it suitable for casual use, friend groups, and social content creation without overpromising real-world accuracy.
-            </p>
-            <p>
-              A structured result format also helps users compare multiple entries quickly while keeping the activity light and respectful.
-              Whether used for private curiosity or playful conversation among friends, the tool provides a predictable experience with
-              clear output language and straightforward sharing controls.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         <AnimatePresence>
           {animating && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-8">
@@ -174,6 +151,29 @@ const CrushCalculator = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Crush-related tools are popular because they provide a low-pressure way to express curiosity and start conversations. While no
+              algorithm can determine real emotions, interactive calculators can still play a useful social role: they create shareable
+              moments, reduce awkwardness, and add humor to early relationship conversations.
+            </p>
+            <p>
+              This page is designed as entertainment with a clear user flow. You enter two names, generate a compatibility-style score, and
+              receive a verdict card that can be shared privately or in groups. The experience is intentionally fast and optimistic, making
+              it suitable for casual use, friend groups, and social content creation without overpromising real-world accuracy.
+            </p>
+            <p>
+              A structured result format also helps users compare multiple entries quickly while keeping the activity light and respectful.
+              Whether used for private curiosity or playful conversation among friends, the tool provides a predictable experience with
+              clear output language and straightforward sharing controls.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

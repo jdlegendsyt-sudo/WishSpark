@@ -117,30 +117,6 @@ const BirthdayWishesGenerator = () => {
           </div>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Writing birthday messages sounds easy until you need one that feels personal, appropriate, and distinct from generic forwards.
-              Many users face this pressure when they need multiple greetings in a short time for friends, relatives, colleagues, or client
-              contacts. This generator is designed to solve that practical problem by creating readable, name-personalized wishes that are
-              ready for immediate use.
-            </p>
-            <p>
-              Instead of producing a single repeated line, the tool offers multiple options with different tones so users can choose a
-              message that fits the relationship. The output is structured for quick copy and one-click sharing, making it useful when
-              timing matters. The overall goal is to help users communicate warmth and effort without requiring long writing sessions.
-            </p>
-            <p>
-              This approach is valuable for both personal and semi-formal contexts. Users can generate refined text for close friends,
-              family members, classmates, or colleagues while maintaining an appropriate tone. By combining speed, variation, and simple
-              sharing controls, the tool supports high-quality communication at scale.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         <AnimatePresence>
           {generated.length > 0 && (
             <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
@@ -182,6 +158,30 @@ const BirthdayWishesGenerator = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Writing birthday messages sounds easy until you need one that feels personal, appropriate, and distinct from generic forwards.
+              Many users face this pressure when they need multiple greetings in a short time for friends, relatives, colleagues, or client
+              contacts. This generator is designed to solve that practical problem by creating readable, name-personalized wishes that are
+              ready for immediate use.
+            </p>
+            <p>
+              Instead of producing a single repeated line, the tool offers multiple options with different tones so users can choose a
+              message that fits the relationship. The output is structured for quick copy and one-click sharing, making it useful when
+              timing matters. The overall goal is to help users communicate warmth and effort without requiring long writing sessions.
+            </p>
+            <p>
+              This approach is valuable for both personal and semi-formal contexts. Users can generate refined text for close friends,
+              family members, classmates, or colleagues while maintaining an appropriate tone. By combining speed, variation, and simple
+              sharing controls, the tool supports high-quality communication at scale.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

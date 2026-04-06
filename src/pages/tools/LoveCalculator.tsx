@@ -119,29 +119,6 @@ const LoveCalculator = () => {
           </Button>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Love calculators remain popular because they combine curiosity, entertainment, and social sharing in one quick interaction.
-              Users often want a simple way to test name combinations and spark conversation with friends or partners. This page is designed
-              for that exact behavior, with a straightforward input flow and a result format that is easy to share.
-            </p>
-            <p>
-              The tool focuses on usability and consistency. After entering two names, users receive a percentage and a contextual message.
-              The experience is intentionally lightweight so anyone can use it without instructions. For social use cases, sharing and copy
-              actions are built in to reduce friction and make the result portable across messaging apps.
-            </p>
-            <p>
-              This makes the page suitable for casual daily use, themed events, and campaign-style social content where people compare
-              multiple results. While results are for entertainment, the clean structure and reliable flow make the experience engaging,
-              repeatable, and easy to understand for first-time visitors.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         {result && (
           <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4">
             <p className="text-muted-foreground">{name1} ❤️ {name2}</p>
@@ -165,6 +142,29 @@ const LoveCalculator = () => {
             </div>
           </motion.div>
         )}
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Love calculators remain popular because they combine curiosity, entertainment, and social sharing in one quick interaction.
+              Users often want a simple way to test name combinations and spark conversation with friends or partners. This page is designed
+              for that exact behavior, with a straightforward input flow and a result format that is easy to share.
+            </p>
+            <p>
+              The tool focuses on usability and consistency. After entering two names, users receive a percentage and a contextual message.
+              The experience is intentionally lightweight so anyone can use it without instructions. For social use cases, sharing and copy
+              actions are built in to reduce friction and make the result portable across messaging apps.
+            </p>
+            <p>
+              This makes the page suitable for casual daily use, themed events, and campaign-style social content where people compare
+              multiple results. While results are for entertainment, the clean structure and reliable flow make the experience engaging,
+              repeatable, and easy to understand for first-time visitors.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

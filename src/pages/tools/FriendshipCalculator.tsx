@@ -117,29 +117,6 @@ const FriendshipCalculator = () => {
           </Button>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Friendship tools are most useful when they create positive interaction rather than one-time novelty. This calculator is built
-              to encourage light group participation by giving people an easy way to test, compare, and share friendship scores with clear
-              labels and simple result language. It works well as an icebreaker in chats, events, and online communities.
-            </p>
-            <p>
-              The result is intentionally framed around encouragement and social play. Users receive a percentage, a friendship level, and
-              a short interpretation that is easy to understand. Because the output is consistent for the same name pair, friends can revisit
-              and compare results in a repeatable way. This makes the tool more engaging over time, not just on first use.
-            </p>
-            <p>
-              In practical terms, this tool is useful during Friendship Day campaigns, classroom activities, and social media challenges
-              where users want a fast, shareable interaction that feels positive. The interface keeps the process simple so the focus stays
-              on participation and conversation.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         <AnimatePresence>
           {result && (
             <motion.div ref={resultsRef} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
@@ -168,6 +145,29 @@ const FriendshipCalculator = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Friendship tools are most useful when they create positive interaction rather than one-time novelty. This calculator is built
+              to encourage light group participation by giving people an easy way to test, compare, and share friendship scores with clear
+              labels and simple result language. It works well as an icebreaker in chats, events, and online communities.
+            </p>
+            <p>
+              The result is intentionally framed around encouragement and social play. Users receive a percentage, a friendship level, and
+              a short interpretation that is easy to understand. Because the output is consistent for the same name pair, friends can revisit
+              and compare results in a repeatable way. This makes the tool more engaging over time, not just on first use.
+            </p>
+            <p>
+              In practical terms, this tool is useful during Friendship Day campaigns, classroom activities, and social media challenges
+              where users want a fast, shareable interaction that feels positive. The interface keeps the process simple so the focus stays
+              on participation and conversation.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">

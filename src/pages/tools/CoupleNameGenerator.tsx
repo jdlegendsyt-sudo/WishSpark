@@ -127,29 +127,6 @@ const CoupleNameGenerator = () => {
           </Button>
         </div>
 
-        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
-          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Couple names, often called ship names, are widely used in social bios, wedding hashtags, private jokes, and shared profile
-              identities. The challenge is that manual name blending often produces awkward combinations. This tool helps by generating
-              several viable options automatically so users can compare style, readability, and tone before choosing one.
-            </p>
-            <p>
-              The generator works best as a creative shortlist system. Instead of forcing a single output, it provides multiple combinations
-              based on different blending patterns. This gives users practical flexibility when they want something playful, elegant, or
-              social-media friendly. It is useful for couples, friends, event planning, and anyone creating a shared identity label online.
-            </p>
-            <p>
-              Because each result appears in a hashtag-ready format, users can move directly from idea selection to profile use. This is
-              particularly useful for wedding planning, anniversary posts, and co-managed social accounts where naming consistency matters.
-              The tool reduces trial-and-error and helps users select options that are memorable and easy to type.
-            </p>
-          </div>
-        </section>
-
-        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
-
         {names.length > 0 && (
           <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
             <div className="flex items-center justify-between">
@@ -179,6 +156,29 @@ const CoupleNameGenerator = () => {
             </div>
           </motion.div>
         )}
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Couple names, often called ship names, are widely used in social bios, wedding hashtags, private jokes, and shared profile
+              identities. The challenge is that manual name blending often produces awkward combinations. This tool helps by generating
+              several viable options automatically so users can compare style, readability, and tone before choosing one.
+            </p>
+            <p>
+              The generator works best as a creative shortlist system. Instead of forcing a single output, it provides multiple combinations
+              based on different blending patterns. This gives users practical flexibility when they want something playful, elegant, or
+              social-media friendly. It is useful for couples, friends, event planning, and anyone creating a shared identity label online.
+            </p>
+            <p>
+              Because each result appears in a hashtag-ready format, users can move directly from idea selection to profile use. This is
+              particularly useful for wedding planning, anniversary posts, and co-managed social accounts where naming consistency matters.
+              The tool reduces trial-and-error and helps users select options that are memorable and easy to type.
+            </p>
+          </div>
+        </section>
+
+        <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-8" />
 
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
