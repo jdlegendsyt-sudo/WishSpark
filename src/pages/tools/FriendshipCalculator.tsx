@@ -169,8 +169,6 @@ const FriendshipCalculator = () => {
           )}
         </AnimatePresence>
 
-        <RelatedToolsSection currentToolPath="/tools/friendship-calculator" />
-
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Measuring and Sharing Friendship Scores</h2>
@@ -203,6 +201,8 @@ const FriendshipCalculator = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/friendship-calculator" />
       </main>
       <Footer />
     </div>

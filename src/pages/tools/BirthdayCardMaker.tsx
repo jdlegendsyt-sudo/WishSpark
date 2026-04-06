@@ -161,8 +161,6 @@ const BirthdayCardMaker = () => {
         <AdBanner adSlot="TOOL_BOTTOM" adFormat="horizontal" className="mt-8" />
 
         <section className="mt-16 space-y-6">
-          <RelatedToolsSection currentToolPath="/tools/birthday-card-maker" />
-
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Building Personalized Birthday Cards That Feel Thoughtful</h2>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
@@ -195,6 +193,8 @@ const BirthdayCardMaker = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/birthday-card-maker" />
       </main>
       <Footer />
     </div>

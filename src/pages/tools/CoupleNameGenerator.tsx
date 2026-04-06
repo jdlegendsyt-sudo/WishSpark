@@ -180,8 +180,6 @@ const CoupleNameGenerator = () => {
           </motion.div>
         )}
 
-        <RelatedToolsSection currentToolPath="/tools/couple-name-generator" />
-
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Name Blending Produces Better Couple Tags</h2>
@@ -215,6 +213,8 @@ const CoupleNameGenerator = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/couple-name-generator" />
       </main>
       <Footer />
     </div>

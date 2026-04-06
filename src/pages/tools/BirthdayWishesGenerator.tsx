@@ -183,8 +183,6 @@ const BirthdayWishesGenerator = () => {
           )}
         </AnimatePresence>
 
-        <RelatedToolsSection currentToolPath="/tools/birthday-wishes-generator" />
-
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Creating Better Birthday Wishes in Less Time</h2>
@@ -218,6 +216,8 @@ const BirthdayWishesGenerator = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/birthday-wishes-generator" />
       </main>
       <Footer />
     </div>

@@ -149,8 +149,6 @@ const BirthdayCountdown = () => {
           </motion.div>
         ) : null}
 
-        <RelatedToolsSection currentToolPath="/tools/birthday-countdown" />
-
         <section className="mb-8 mt-8 bg-glass rounded-2xl p-6 border border-gold/10">
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
@@ -207,6 +205,8 @@ const BirthdayCountdown = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/birthday-countdown" />
       </main>
       <Footer />
     </div>

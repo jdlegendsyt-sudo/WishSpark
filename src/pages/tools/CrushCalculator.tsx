@@ -175,8 +175,6 @@ const CrushCalculator = () => {
           )}
         </AnimatePresence>
 
-        <RelatedToolsSection currentToolPath="/tools/crush-calculator" />
-
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: Using a Crush Calculator for Social Engagement</h2>
@@ -210,6 +208,8 @@ const CrushCalculator = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/crush-calculator" />
       </main>
       <Footer />
     </div>

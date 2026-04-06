@@ -231,8 +231,6 @@ const AgeCalculator = () => {
           </motion.div>
         )}
 
-        <RelatedToolsSection currentToolPath="/tools/age-calculator" />
-
         <section className="mt-16 space-y-6">
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Detailed Explanation: How Age Calculation Works and Why It Matters</h2>
@@ -270,6 +268,8 @@ const AgeCalculator = () => {
             ]} />
           </div>
         </section>
+
+        <RelatedToolsSection currentToolPath="/tools/age-calculator" />
       </main>
       <Footer />
     </div>
