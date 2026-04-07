@@ -129,7 +129,7 @@ const CoupleNameGenerator = () => {
         </div>
 
         {names.length > 0 && (
-          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto">
+          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto mb-8 md:mb-10">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-display font-semibold text-foreground">Your Couple Names 💕</h2>
               <div className="flex items-center gap-2">

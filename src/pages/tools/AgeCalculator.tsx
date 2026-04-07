@@ -164,7 +164,7 @@ const AgeCalculator = () => {
         </div>
 
         {result && (
-          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto">
+          <motion.div ref={resultsRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4 max-w-2xl mx-auto mb-8 md:mb-10">
             <div className="bg-glass rounded-2xl p-6 border border-gold/20 text-center">
               <h2 className="text-lg font-display font-semibold text-foreground mb-4">Your Age</h2>
               <div className="flex justify-center gap-4 mb-6">

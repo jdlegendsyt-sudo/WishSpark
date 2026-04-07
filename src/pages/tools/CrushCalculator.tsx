@@ -130,7 +130,7 @@ const CrushCalculator = () => {
 
           {result && (
             <motion.div ref={resultsRef} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4 max-w-2xl mx-auto">
+              className="bg-glass rounded-2xl p-8 border border-gold/20 shadow-gold text-center space-y-4 max-w-2xl mx-auto mb-8 md:mb-10">
               <p className="text-muted-foreground">{myName} 🔥 {crushName}</p>
               <motion.p className={`text-6xl font-bold ${result.color}`}
                 initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring" }}>
