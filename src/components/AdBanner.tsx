@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import { festivals } from "@/data/festivals";
 
 interface AdBannerProps {
   adSlot: string;
@@ -34,17 +36,43 @@ const resolveAdSlot = (slot: string) => {
   return mapped && isNumericSlot(mapped) ? mapped : "";
 };
 
+const ALLOWED_AD_PATHS = new Set([
+  "/",
+  "/blog",
+  "/about",
+  "/authors",
+  "/editorial-policy",
+  "/faq",
+  "/contact",
+  "/privacy-policy",
+  "/terms",
+  "/disclaimer",
+  "/sitemap",
+  "/how-it-works",
+]);
+
+const festivalPaths = new Set(festivals.map((festival) => `/${festival.slug}`));
+
+const isAdEligiblePath = (pathname: string) => {
+  if (pathname.startsWith("/blog/")) return true;
+  if (pathname.startsWith("/tools/")) return false;
+  if (festivalPaths.has(pathname)) return false;
+  return ALLOWED_AD_PATHS.has(pathname);
+};
+
 const AdBanner = ({ adSlot, adFormat = "auto", fullWidth = true, className = "" }: AdBannerProps) => {
   const adRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
   const resolvedAdSlot = resolveAdSlot(adSlot);
+  const location = useLocation();
 
   // Respect a user's explicit rejection of advertising cookies.
   const consent = typeof window !== "undefined" ? localStorage.getItem("cookie-consent") : null;
   const allowAds = consent !== "declined";
+  const allowAdsOnPath = isAdEligiblePath(location.pathname);
 
   useEffect(() => {
-    if (pushed.current || !allowAds || !resolvedAdSlot) return;
+    if (pushed.current || !allowAds || !allowAdsOnPath || !resolvedAdSlot) return;
     try {
       if (window.adsbygoogle) {
         window.adsbygoogle.push({});
@@ -53,9 +81,9 @@ const AdBanner = ({ adSlot, adFormat = "auto", fullWidth = true, className = "" 
     } catch (e) {
       console.log("AdSense not loaded yet");
     }
-  }, [allowAds, resolvedAdSlot]);
+  }, [allowAds, allowAdsOnPath, resolvedAdSlot]);
 
-  if (!allowAds || !resolvedAdSlot) return null;
+  if (!allowAds || !allowAdsOnPath || !resolvedAdSlot) return null;
 
   return (
     <div className={`w-full flex justify-center ${className}`} ref={adRef}>
