@@ -151,4 +151,12 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* festival-particles removed for performance */

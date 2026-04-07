@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getToolBlogPost, getToolExternalReferences } from "@/data/blogCoverage";
+import { getToolBlogPost } from "@/data/blogCoverage";
 
 const toolLinks = [
   { to: "/tools/birthday-wishes-generator", label: "Birthday Wishes Generator", emoji: "🎂" },
@@ -23,7 +23,6 @@ type RelatedToolsSectionProps = {
 const RelatedToolsSection = ({ currentToolPath }: RelatedToolsSectionProps) => {
   const related = toolLinks.filter((tool) => tool.to !== currentToolPath);
   const dedicatedGuide = getToolBlogPost(currentToolPath);
-  const toolReferences = getToolExternalReferences(currentToolPath);
 
   return (
     <section className="mt-10 bg-glass rounded-2xl p-6 border border-gold/10">
@@ -59,21 +58,6 @@ const RelatedToolsSection = ({ currentToolPath }: RelatedToolsSectionProps) => {
           Read practical celebration guides on our blog
         </Link>
       </div>
-
-      {toolReferences.length ? (
-        <div className="mt-6 rounded-2xl border border-gold/10 bg-primary/5 p-4">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-2">Useful References</p>
-          <ul className="space-y-1 text-sm">
-            {toolReferences.map((reference) => (
-              <li key={reference.url}>
-                <a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  {reference.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
     </section>
   );
 };

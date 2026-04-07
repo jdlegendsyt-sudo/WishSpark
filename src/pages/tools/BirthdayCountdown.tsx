@@ -109,7 +109,12 @@ const BirthdayCountdown = () => {
             </div>
             <div>
               <label className="text-sm font-medium text-foreground block mb-2">Date of Birth</label>
-              <Input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="bg-secondary/50 border-gold/20" />
+              <Input
+                type="date"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                className="bg-secondary/50 border-gold/20 h-11 text-base [&::-webkit-date-and-time-value]:text-left"
+              />
             </div>
             <Button onClick={start} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90">
               <Clock className="w-4 h-4 mr-2" /> Start Countdown
