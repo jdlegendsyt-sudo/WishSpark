@@ -148,19 +148,64 @@ const LoveCalculator = () => {
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
-              Love calculators remain popular because they combine curiosity, entertainment, and social sharing in one quick interaction.
-              Users often want a simple way to test name combinations and spark conversation with friends or partners. This page is designed
-              for that exact behavior, with a straightforward input flow and a result format that is easy to share.
+              Sometimes people just want a fun way to break the ice. That is exactly where a love calculator helps. You enter two names,
+              get a quick score, and turn that result into a playful chat moment with a partner, crush, or friend group.
             </p>
             <p>
-              The tool focuses on usability and consistency. After entering two names, users receive a percentage and a contextual message.
-              The experience is intentionally lightweight so anyone can use it without instructions. For social use cases, sharing and copy
-              actions are built in to reduce friction and make the result portable across messaging apps.
+              This tool is intentionally simple. You type names, tap once, and instantly get a percentage with a short interpretation.
+              No setup, no complicated steps. If you like the result, you can copy or share it in seconds.
             </p>
             <p>
-              This makes the page suitable for casual daily use, themed events, and campaign-style social content where people compare
-              multiple results. While results are for entertainment, the clean structure and reliable flow make the experience engaging,
-              repeatable, and easy to understand for first-time visitors.
+              While the score is for entertainment, the experience is built to be smooth, repeatable, and beginner-friendly. That makes it
+              useful for casual use, party games, and social posts where people enjoy trying multiple name combinations.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">The Psychology Behind Love Calculators</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Love calculators tap into something psychologists call the Barnum effect — the tendency to accept vague, general personality
+              descriptions as uniquely applicable to ourselves. When you see a high percentage next to two names, your brain naturally
+              starts looking for evidence that confirms the result. That is partly why these tools feel satisfying even when people know
+              they are not scientific.
+            </p>
+            <p>
+              Research in social psychology also shows that shared playful experiences strengthen bonds between people. When two people
+              laugh over a love calculator result together, they are engaging in what relationship scientists call "capitalization" — sharing
+              positive experiences that increase mutual closeness. The tool itself does not predict compatibility, but the conversation it
+              sparks genuinely can bring people closer.
+            </p>
+            <p>
+              From a behavioral design perspective, the instant feedback loop — enter names, see result, share — mirrors the reward
+              patterns that make social media engaging. The difference here is that the interaction is directed toward a specific person
+              rather than a feed, which makes it more personal and intentional.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Real-World Use Cases</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              <strong className="text-foreground">Valentine's Day conversations:</strong> Couples often try love calculators during Valentine's
+              week as a lighthearted activity. Sharing a high percentage screenshot on Instagram Stories or WhatsApp Status has become a
+              common Valentine's tradition for younger audiences.
+            </p>
+            <p>
+              <strong className="text-foreground">College and school icebreakers:</strong> In campus environments, love calculators are popular
+              during orientation weeks and cultural festivals. Students use them in group settings to test name combinations, which naturally
+              leads to laughter and new friendships.
+            </p>
+            <p>
+              <strong className="text-foreground">Date night fun:</strong> Some couples include love calculator results in their date night
+              routines — testing each other's names, ex-names (for laughs), and celebrity pairings. It works as a conversation prompt
+              when the evening needs a fun diversion.
+            </p>
+            <p>
+              <strong className="text-foreground">Social media content:</strong> Content creators and influencers use love calculator screenshots
+              as engagement bait in Stories and Reels. The visual result card with a percentage makes for an instantly shareable format.
             </p>
           </div>
         </section>
@@ -191,11 +236,12 @@ const LoveCalculator = () => {
           <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Love Calculator FAQ</h2>
             <FaqAccordion items={[
-              { question: "Is this love calculator scientifically accurate?", answer: "No. It is a fun name-based entertainment tool." },
-              { question: "Will I get the same result every time?", answer: "Usually yes for the same pair of names." },
-              { question: "Does name order affect score?", answer: "Yes. Reversing names can produce a different percentage." },
-              { question: "Can I share my result?", answer: "Yes. You can share directly on WhatsApp or copy the result link." },
-              { question: "What names work best for better readability?", answer: "Short first names usually produce cleaner and easier-to-read result cards." },
+              { question: "Is this love calculator scientifically accurate?", answer: "No. It is a fun name-based entertainment tool designed for light social interaction. The algorithm generates a compatibility-style percentage from name inputs, but it does not use any validated psychological or scientific methodology. Treat it as a playful conversation starter, not a relationship assessment." },
+              { question: "Will I get the same result every time?", answer: "Yes, entering the same two names in the same order will produce an identical percentage every time. The algorithm is deterministic, meaning it always maps the same input to the same output. This consistency lets you confidently share a result link knowing the recipient will see the exact same score." },
+              { question: "Does name order affect the score?", answer: "Yes. Reversing the names — for example, entering 'Alex' first versus second — can produce a different percentage. This is because the algorithm processes the combined string directionally. Many users try both orders for fun and compare the two results." },
+              { question: "Can I share my result on social media?", answer: "Absolutely. After calculating your love percentage, click the Copy button to get a shareable link or use the WhatsApp button to send the result directly. The shared link opens the same page with your names and score pre-loaded, so the recipient sees the exact result you saw." },
+              { question: "What names work best for better readability?", answer: "Short first names usually produce cleaner and easier-to-read result cards. Avoid special characters, numbers, or very long names. Nicknames and common first names work perfectly for a quick, readable output." },
+              { question: "Can I use this love calculator for celebrity or fictional names?", answer: "Yes. Many users test celebrity pairings, fictional character combinations, or even pet names for fun. The tool accepts any text input up to 30 characters, so you can get creative with the name combinations." },
             ]} />
           </div>
         </section>

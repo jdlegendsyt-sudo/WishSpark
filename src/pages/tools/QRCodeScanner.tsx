@@ -506,6 +506,24 @@ const QRCodeScanner = () => {
           </div>
         </section>
 
+        <section className="mb-10 bg-glass rounded-3xl p-6 md:p-8 border border-gold/10">
+          <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Real-World Use Cases for Online QR Scanning</h2>
+          <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              <strong className="text-foreground">Verifying payment QR codes:</strong> Before scanning and paying through a UPI or mobile banking app, you can upload the payment QR here first to verify the merchant URL or account details encoded inside. This simple verification step helps avoid scanning fraudulent sticker overlays placed on top of legitimate payment codes — a common scam at shops and restaurants.
+            </p>
+            <p>
+              <strong className="text-foreground">Extracting links from screenshots:</strong> When someone shares a QR code as a WhatsApp image or Instagram story screenshot, you cannot scan it directly from your phone screen. Upload that screenshot here and the scanner extracts the URL instantly, saving you from the awkward workaround of using a second device.
+            </p>
+            <p>
+              <strong className="text-foreground">Event and travel passes:</strong> Boarding passes, concert tickets, and event registrations often arrive as QR images in email confirmations. If you need to check the encoded booking reference or verify the pass details before the event, an online scanner lets you decode and copy the information without opening the ticketing app.
+            </p>
+            <p>
+              <strong className="text-foreground">Product and packaging labels:</strong> E-commerce sellers, warehouse staff, and quality inspectors frequently need to verify barcodes and QR codes on product packaging. Photographing the label and uploading it here provides a quick cross-check without dedicated barcode scanning hardware.
+            </p>
+          </div>
+        </section>
+
         <AdBanner adSlot="TOOL_MID" adFormat="horizontal" className="mb-10" />
 
         <section className="grid grid-cols-1 xl:grid-cols-[1fr_320px] gap-6">
@@ -563,11 +581,12 @@ const QRCodeScanner = () => {
             <div>
               <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions</h2>
               <FaqAccordion items={[
-                { question: "Can this scanner read a QR code from a screenshot?", answer: "Yes. Upload the screenshot as an image file and the scanner will try to decode it directly." },
-                { question: "Does my browser need special support for camera scanning?", answer: "You need a browser that supports camera access through getUserMedia and you must grant permission when prompted." },
-                { question: "Will the scanner work for text and links?", answer: "Yes. It can decode plain text, web links, contact information, and other standard QR content." },
-                { question: "Why did my uploaded image fail to scan?", answer: "The image may be blurry, too dark, cropped, low contrast, or the QR code itself may be damaged or too small." },
-                { question: "Is camera footage stored anywhere?", answer: "No. The scanning process runs in your browser session and this page does not upload your live camera stream to a server." },
+                { question: "Can this scanner read a QR code from a screenshot?", answer: "Yes. Upload the screenshot as an image file (PNG, JPG, or similar) and the scanner will attempt to decode it immediately. This works well for screenshots from WhatsApp, email, presentations, and social media posts. For best results, make sure the QR code in the screenshot is clear, not blurry, and has sufficient contrast against the background." },
+                { question: "Does my browser need special support for camera scanning?", answer: "You need a browser that supports camera access through the getUserMedia API and you must grant permission when prompted. Modern versions of Chrome, Firefox, Safari, and Edge all support this feature. If camera access fails, the page automatically falls back to image upload, so you can still scan codes without camera permissions." },
+                { question: "What types of codes can this scanner read?", answer: "This scanner supports QR codes and 12 additional barcode formats including EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, Data Matrix, Aztec, and PDF417. It covers the most common formats found on product labels, shipping packages, event tickets, and business documents." },
+                { question: "Why did my uploaded image fail to scan?", answer: "Common reasons include blurry or low-resolution images, poor lighting contrast between the QR code and background, partially cropped codes where finder patterns are cut off, heavy image compression artifacts, or a QR code that is damaged or printed too small. Try uploading a clearer version of the image or taking a fresh photo with better lighting and focus." },
+                { question: "Is camera footage stored or uploaded anywhere?", answer: "No. The entire scanning process runs locally in your browser session. No camera frames, images, or decoded results are ever uploaded to any server. Your scans are completely private. When you close or refresh the page, all data from the scanning session is cleared." },
+                { question: "Can I scan Wi-Fi QR codes to get the password?", answer: "Yes. If you scan a Wi-Fi network QR code (the kind printed on routers or shared by restaurants), the scanner will automatically extract and display the Wi-Fi password from the encoded data. You can then copy the password directly without needing to type it manually." },
               ]} />
             </div>
           </div>

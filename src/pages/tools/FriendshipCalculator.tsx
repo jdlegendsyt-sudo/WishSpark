@@ -151,19 +151,66 @@ const FriendshipCalculator = () => {
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
-              Friendship tools are most useful when they create positive interaction rather than one-time novelty. This calculator is built
-              to encourage light group participation by giving people an easy way to test, compare, and share friendship scores with clear
-              labels and simple result language. It works well as an icebreaker in chats, events, and online communities.
+              Friendship is already fun, and this calculator adds a playful way to celebrate it. You can test a name pair, compare scores,
+              and instantly share the result with friends for laughs and conversation.
             </p>
             <p>
-              The result is intentionally framed around encouragement and social play. Users receive a percentage, a friendship level, and
-              a short interpretation that is easy to understand. Because the output is consistent for the same name pair, friends can revisit
-              and compare results in a repeatable way. This makes the tool more engaging over time, not just on first use.
+              The output is intentionally positive: a percentage, a friendship level, and a short message that is easy to understand.
+              Results are consistent for the same pair, so groups can recheck and compare without confusion.
             </p>
             <p>
-              In practical terms, this tool is useful during Friendship Day campaigns, classroom activities, and social media challenges
-              where users want a fast, shareable interaction that feels positive. The interface keeps the process simple so the focus stays
-              on participation and conversation.
+              It works especially well for Friendship Day, classroom activities, group chats, and social challenges where people want a
+              quick, shareable interaction that feels light and inclusive.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">The Science of Friendship and Why It Matters</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Friendship is one of the strongest predictors of long-term happiness and health. A landmark Harvard study that followed
+              participants for over 80 years found that close relationships — more than money, fame, or career success — were the best
+              predictors of physical health and life satisfaction. Strong friendships reduce stress hormones, boost immune function, and
+              even extend lifespan.
+            </p>
+            <p>
+              Psychologist Robin Dunbar's research suggests that most people maintain about five close friendships at any given time, with
+              an outer circle of roughly 15 good friends. These inner-circle relationships require regular interaction and shared experiences
+              to stay strong. A friendship calculator, while playful, creates exactly that kind of shared moment — a tiny interaction that
+              reinforces the bond.
+            </p>
+            <p>
+              What makes friendships work long-term? Research consistently points to three factors: reciprocity (mutual effort), vulnerability
+              (willingness to share feelings), and shared positive experiences. Using a fun tool together and laughing at the results checks
+              the "shared positive experience" box in a small but meaningful way.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Best Occasions to Use the Friendship Calculator</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              <strong className="text-foreground">Friendship Day celebrations:</strong> International Friendship Day (first Sunday of August)
+              is the most popular time for friendship calculators. Groups create leaderboards of friendship scores and share the results
+              on WhatsApp Status and Instagram Stories. Some schools and colleges organize friendship calculator challenges as part of
+              their Friendship Week activities.
+            </p>
+            <p>
+              <strong className="text-foreground">Classroom and campus bonding:</strong> Teachers and student clubs use friendship calculators
+              during orientation weeks, cultural festivals, and team-building sessions. The tool helps break ice between new students
+              who might not know each other well yet.
+            </p>
+            <p>
+              <strong className="text-foreground">Group chat games:</strong> WhatsApp and Telegram groups use friendship calculators as
+              quick activities during boring evenings. Each person tests their name with every other member and the group creates a
+              fun ranking. The built-in WhatsApp sharing makes this seamless.
+            </p>
+            <p>
+              <strong className="text-foreground">Birthday and farewell messages:</strong> Friends include their friendship calculator
+              score in birthday messages or farewell cards as a fun personal touch. A screenshot of a high friendship percentage adds
+              a playful element to heartfelt messages.
             </p>
           </div>
         </section>
@@ -194,11 +241,12 @@ const FriendshipCalculator = () => {
           <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Friendship Calculator FAQ</h2>
             <FaqAccordion items={[
-              { question: "Why does friendship score start from 60%?", answer: "The tool uses a positive baseline for a friendly and fun experience." },
-              { question: "Can I test with multiple friends?", answer: "Yes. You can run unlimited name pairs and compare scores easily." },
-              { question: "Is this scientific compatibility testing?", answer: "No. It is designed for entertainment and social interaction." },
-              { question: "Can I share the friendship score?", answer: "Yes. Share directly on WhatsApp with the built-in button." },
-              { question: "How can groups use this tool best?", answer: "Run pairwise checks among friends and create a fun group leaderboard." },
+              { question: "Why does the friendship score start from 60%?", answer: "The tool uses a positive baseline intentionally. Since friendship is inherently positive, starting from 60% ensures every result feels encouraging and celebratory. Even the lowest possible score comes with a 'Growing Friendship' message that focuses on potential rather than negativity. The design philosophy is that no friendship test should make someone feel bad." },
+              { question: "Can I test with multiple friends at once?", answer: "You can run unlimited name pairs one at a time. Many groups take turns testing every pair combination and create a fun leaderboard. For a group of 5 friends, that means 10 unique pairs to test — which turns into a fun 10-minute activity with plenty of laughs and comparisons." },
+              { question: "Is this a scientific compatibility test?", answer: "No. The friendship calculator is designed entirely for entertainment and social interaction. It uses a name-based algorithm to generate a fun percentage, not any validated psychological assessment. Real friendship compatibility depends on shared values, communication styles, trust, and mutual effort — things no algorithm can measure from names alone." },
+              { question: "Can I share the friendship score on WhatsApp?", answer: "Yes. Click the WhatsApp button to send your friendship score directly to your friend or a group chat. The shared message includes both names, the percentage score, the friendship level title, and a link where anyone can try their own combination. The share format is clean and ready to post." },
+              { question: "How can groups use this tool during Friendship Day?", answer: "The most popular approach is creating a group leaderboard. Each person tests their name with every other group member, and you track who has the highest average friendship score. Some groups screenshot every result and create a collage or Stories compilation. Schools and colleges also use it during Friendship Week as an icebreaker activity." },
+              { question: "Does the name order matter for friendship scores?", answer: "Yes, entering names in a different order may produce a slightly different percentage. This is because the algorithm processes the combined string in sequence. Many friends try both orders and pick their favorite score for sharing." },
             ]} />
           </div>
         </section>

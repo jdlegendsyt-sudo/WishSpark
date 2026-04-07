@@ -68,28 +68,24 @@ const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     description: "Try the free love calculator by name and get a fun true love percentage instantly. Check love compatibility and share your result with friends.",
     keywords: ["love calculator", "love calculator by name", "true love percentage", "love compatibility test", "relationship percentage calculator"],
     type: "website",
-    robots: "noindex, follow",
   },
   "/tools/crush-calculator": {
     title: "Crush Calculator | Does My Crush Like Me? Free Test Online | WishSpark",
     description: "Use our free crush calculator to check crush compatibility by name. Get a fun answer to does my crush like me and share the result instantly.",
     keywords: ["crush calculator", "does my crush like me", "crush compatibility test", "crush love calculator", "name compatibility crush test"],
     type: "website",
-    robots: "noindex, follow",
   },
   "/tools/couple-name-generator": {
     title: "Couple Name Generator | Ship Name Creator Free Online | WishSpark",
     description: "Generate cute couple names and ship names online for free. Combine two names into fun romantic name ideas for bios, captions, and hashtags.",
     keywords: ["couple name generator", "ship name generator", "couple nickname generator", "combine names generator", "romantic name generator"],
     type: "website",
-    robots: "noindex, follow",
   },
   "/tools/friendship-calculator": {
     title: "Friendship Calculator | Friendship Percentage Test Free Online | WishSpark",
     description: "Check friendship percentage online with our free friendship calculator. Test best friend compatibility by name and share your friendship score.",
     keywords: ["friendship calculator", "friendship percentage test", "best friend compatibility", "friendship compatibility by name", "friendship score calculator"],
     type: "website",
-    robots: "noindex, follow",
   },
   "/tools/qr-code-generator": {
     title: "Free QR Code Generator Online | Create QR Code PNG | WishSpark",

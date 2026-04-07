@@ -162,19 +162,16 @@ const CoupleNameGenerator = () => {
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
-              Couple names, often called ship names, are widely used in social bios, wedding hashtags, private jokes, and shared profile
-              identities. The challenge is that manual name blending often produces awkward combinations. This tool helps by generating
-              several viable options automatically so users can compare style, readability, and tone before choosing one.
+              Couple names are fun, but making one manually can be surprisingly difficult. Most combinations sound awkward on the first try.
+              This tool solves that by generating multiple options instantly, so you can pick something that actually feels natural.
             </p>
             <p>
-              The generator works best as a creative shortlist system. Instead of forcing a single output, it provides multiple combinations
-              based on different blending patterns. This gives users practical flexibility when they want something playful, elegant, or
-              social-media friendly. It is useful for couples, friends, event planning, and anyone creating a shared identity label online.
+              Instead of forcing one output, the generator gives a shortlist based on different blending patterns. That helps when you want
+              different styles, such as cute, clean, classy, or hashtag-friendly names.
             </p>
             <p>
-              Because each result appears in a hashtag-ready format, users can move directly from idea selection to profile use. This is
-              particularly useful for wedding planning, anniversary posts, and co-managed social accounts where naming consistency matters.
-              The tool reduces trial-and-error and helps users select options that are memorable and easy to type.
+              Every result is shown in hashtag-ready format, so you can use it directly in bios, reels, wedding posts, or couple pages.
+              The goal is simple: less trial-and-error, faster decisions, and names that are easy to remember and type.
             </p>
           </div>
         </section>

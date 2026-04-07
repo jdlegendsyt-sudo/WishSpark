@@ -157,19 +157,60 @@ const CrushCalculator = () => {
           <h2 className="text-lg font-display font-semibold text-foreground mb-3">Introduction</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
-              Crush-related tools are popular because they provide a low-pressure way to express curiosity and start conversations. While no
-              algorithm can determine real emotions, interactive calculators can still play a useful social role: they create shareable
-              moments, reduce awkwardness, and add humor to early relationship conversations.
+              Crush calculators are popular for one simple reason: they make awkward curiosity feel easy. Instead of overthinking, you can
+              check a name pair in seconds and turn that moment into a light, fun conversation.
             </p>
             <p>
-              This page is designed as entertainment with a clear user flow. You enter two names, generate a compatibility-style score, and
-              receive a verdict card that can be shared privately or in groups. The experience is intentionally fast and optimistic, making
-              it suitable for casual use, friend groups, and social content creation without overpromising real-world accuracy.
+              This page is built for entertainment with a clean flow: enter names, get a score, and view a verdict card you can share in
+              private chat or group chat. It is quick, playful, and easy to use even if someone is trying it for the first time.
             </p>
             <p>
-              A structured result format also helps users compare multiple entries quickly while keeping the activity light and respectful.
-              Whether used for private curiosity or playful conversation among friends, the tool provides a predictable experience with
-              clear output language and straightforward sharing controls.
+              The result format is consistent, so users can try multiple combinations without confusion. Whether the goal is private fun or
+              friendly group banter, the tool keeps the experience positive and straightforward.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Why Crush Curiosity Is Completely Normal</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Psychologists describe having a crush as a natural phase of emotional development that most people experience multiple times
+              throughout life. The uncertainty — "does this person like me back?" — activates the same dopamine reward pathways that make
+              puzzles and games feel exciting. A crush calculator channels that uncertainty into a playful, low-stakes interaction.
+            </p>
+            <p>
+              Studies on adolescent social behavior show that shared activities around crushes — comparing notes, discussing signals,
+              analyzing interactions — actually help people develop emotional intelligence and social skills. Using a crush calculator
+              in a group setting mimics this process in a light, digital-friendly way.
+            </p>
+            <p>
+              The tool is designed to always produce positive outputs (50% to 100%) because the goal is entertainment, not anxiety. Even
+              the lowest score comes with an encouraging message, so nobody walks away feeling bad about a result.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-8 bg-glass rounded-2xl p-6 border border-gold/10">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-3">Creative Ways People Use Crush Calculators</h2>
+          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              <strong className="text-foreground">Sleepover and party games:</strong> Groups of friends take turns entering their crush's
+              name and comparing scores. The person with the highest percentage "wins" bragging rights for the evening. It is a quick
+              activity that fits between other games and conversations.
+            </p>
+            <p>
+              <strong className="text-foreground">Social media challenges:</strong> TikTok and Instagram Reels creators screen-record
+              their crush calculator result with dramatic reactions. The format — suspenseful animation followed by a reveal — naturally
+              fits short-form video content.
+            </p>
+            <p>
+              <strong className="text-foreground">Confession prompts:</strong> Some users share their result directly with their crush
+              as a subtle way to signal interest. The playful framing makes it less intimidating than a direct statement.
+            </p>
+            <p>
+              <strong className="text-foreground">Fictional character matchups:</strong> Fans test their name against fictional characters
+              or K-pop idols for fun. Celebrity and character pairings are among the most popular combinations tested on crush calculators.
             </p>
           </div>
         </section>
@@ -201,11 +242,12 @@ const CrushCalculator = () => {
           <div>
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">Crush Calculator FAQ</h2>
             <FaqAccordion items={[
-              { question: "Will my crush know I used this calculator?", answer: "No, unless you share the result yourself." },
-              { question: "Why do scores start from 50%?", answer: "The calculator is designed as a fun experience with a positive range from 50% to 100%." },
-              { question: "Should I send this result to my crush?", answer: "Your choice. Many users share it as a playful conversation starter." },
-              { question: "Can I test multiple name combinations?", answer: "Yes. You can try unlimited combinations any time." },
-              { question: "Is this scientifically accurate?", answer: "No. It is for entertainment and social fun." },
+              { question: "Will my crush know I used this calculator?", answer: "No, not unless you decide to share the result yourself. The calculator runs entirely in your browser and does not send any data to anyone. Your name entries and results are not stored or tracked. You have full control over whether to keep the result private or share it." },
+              { question: "Why do scores start from 50%?", answer: "The calculator is designed as a positive entertainment experience. Starting from 50% ensures that every result feels encouraging rather than discouraging. Even the lowest possible score comes with a warm message about slow-burn connections, so nobody feels bad about their result." },
+              { question: "Should I send this result to my crush?", answer: "That is entirely your choice. Many users share their result as a playful, low-pressure conversation starter. The lighthearted format makes it easier to express interest without it feeling too serious. If your crush has a sense of humor, they will likely appreciate the gesture." },
+              { question: "Can I test multiple name combinations?", answer: "Yes, you can test unlimited combinations. Just clear the fields and enter new names. Many users try their name with different people, reverse the name order, or test celebrity and fictional character pairings for fun." },
+              { question: "Is this crush calculator scientifically accurate?", answer: "No. This is purely an entertainment tool that generates a percentage from name inputs using an algorithm. It does not measure psychological compatibility, attraction signals, or relationship potential. Treat it as a fun game to spark conversation, not as relationship advice." },
+              { question: "What makes the animation before the result?", answer: "The brief loading animation is designed to build anticipation and make the reveal feel more exciting. Research on gamification shows that a short delay before showing a result increases perceived value and enjoyment. The spinning heart animation adds a dramatic, fun moment before your score appears." },
             ]} />
           </div>
         </section>
