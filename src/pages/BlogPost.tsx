@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import { getBlogPostBySlug, blogPosts, getAuthorProfile } from "@/data/blogPosts";
 import { festivals } from "@/data/festivals";
 import {
-  getAutoReferencesForBlogSlug,
   getFestivalSlugByBlogSlug,
   getToolPathByBlogSlug,
 } from "@/data/blogCoverage";
@@ -146,8 +145,6 @@ const BlogPost = () => {
     ? festivals.find((festivalItem) => festivalItem.slug === mappedFestivalSlug)
     : undefined;
   const mappedToolPath = post.toolPath ?? getToolPathByBlogSlug(post.slug);
-  const autoReferences = getAutoReferencesForBlogSlug(post.slug);
-  const effectiveReferences = post.references?.length ? post.references : autoReferences;
   const callToActionPath = mappedToolPath ?? (mappedFestival ? `/${mappedFestival.slug}` : "/");
   const callToActionLabel = mappedToolPath
     ? (post.toolLabel ?? "Open Matching Tool")
@@ -284,21 +281,6 @@ const BlogPost = () => {
                 </Link>
               ) : null}
             </div>
-          </section>
-        ) : null}
-
-        {effectiveReferences.length ? (
-          <section className="bg-glass rounded-2xl p-6 border border-gold/10 mt-10">
-            <h2 className="text-lg font-display font-semibold text-foreground mb-3">References</h2>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {effectiveReferences.map((reference) => (
-                <li key={reference.url}>
-                  <a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    {reference.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </section>
         ) : null}
 

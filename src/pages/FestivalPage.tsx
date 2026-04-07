@@ -30,7 +30,6 @@ const FestivalPage = () => {
   const [showCreate, setShowCreate] = useState(!senderName);
   const [timeoutExpired, setTimeoutExpired] = useState(false);
   const dedicatedBlogPost = festival ? getFestivalBlogPost(festival.slug) : undefined;
-  const festivalQuery = encodeURIComponent(festival?.name ?? "festival");
 
   const isEaster = festival?.slug === "easter-wishes";
   const isDiwali = festival?.slug === "diwali-wishes";
@@ -241,34 +240,6 @@ const FestivalPage = () => {
                 answer: faq.answer,
               }))}
             />
-          </div>
-
-          <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4">
-              External References
-            </h2>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a
-                  href={`https://en.wikipedia.org/wiki/Special:Search?search=${festivalQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  Wikipedia resources about {festival.name}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`https://www.timeanddate.com/holidays/?query=${festivalQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  timeanddate.com observance details for {festival.name}
-                </a>
-              </li>
-            </ul>
           </div>
         </section>
       </main>

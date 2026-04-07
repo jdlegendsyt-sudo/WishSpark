@@ -1,10 +1,4 @@
 import { getBlogPostBySlug } from "@/data/blogPosts";
-import { festivals } from "@/data/festivals";
-
-export type CoverageReference = {
-  label: string;
-  url: string;
-};
 
 export const toolBlogSlugByPath: Record<string, string> = {
   "/tools/birthday-wishes-generator": "birthday-wishes-generator-personalized-messages-relationships",
@@ -77,83 +71,6 @@ const toolPathByBlogSlug = Object.fromEntries(
   Object.entries(toolBlogSlugByPath).map(([toolPath, blogSlug]) => [blogSlug, toolPath]),
 ) as Record<string, string>;
 
-const toolReferencesByPath: Record<string, CoverageReference[]> = {
-  "/tools/age-calculator": [
-    { label: "CDC - Growth and Age Resources", url: "https://www.cdc.gov/growthcharts/" },
-    { label: "NIST - Date and Time Standards", url: "https://www.nist.gov/pml/time-and-frequency-division" },
-  ],
-  "/tools/birthday-wishes-generator": [
-    { label: "APA - Positive Social Connection", url: "https://www.apa.org/news" },
-    { label: "Pew Research - Messaging and Communication", url: "https://www.pewresearch.org/internet/" },
-  ],
-  "/tools/birthday-card-maker": [
-    { label: "Nielsen Norman Group - Writing for Web Users", url: "https://www.nngroup.com/articles/how-users-read-on-the-web/" },
-    { label: "Canva Design School - Visual Communication Basics", url: "https://www.canva.com/learn/" },
-  ],
-  "/tools/birthday-countdown": [
-    { label: "APA - The Psychology of Anticipation", url: "https://www.apa.org/monitor" },
-    { label: "timeanddate.com - Date Duration Tools", url: "https://www.timeanddate.com/date/duration.html" },
-  ],
-  "/tools/love-calculator": [
-    { label: "Gottman Institute - Relationship Research", url: "https://www.gottman.com/blog/" },
-    { label: "APA - Human Relationships and Wellbeing", url: "https://www.apa.org/topics/relationships" },
-  ],
-  "/tools/crush-calculator": [
-    { label: "APA - Adolescent and Social Development", url: "https://www.apa.org/topics/teens" },
-    { label: "Verywell Mind - Reading Social Signals", url: "https://www.verywellmind.com/" },
-  ],
-  "/tools/couple-name-generator": [
-    { label: "Merriam-Webster - Portmanteau Definition", url: "https://www.merriam-webster.com/dictionary/portmanteau" },
-    { label: "Oxford Reference - Naming and Language", url: "https://www.oxfordreference.com/" },
-  ],
-  "/tools/friendship-calculator": [
-    { label: "Harvard Health - Social Connection", url: "https://www.health.harvard.edu/topics/mental-health" },
-    { label: "APA - Friendship and Mental Health", url: "https://www.apa.org/monitor" },
-  ],
-  "/tools/qr-code-generator": [
-    { label: "ISO/IEC 18004 QR Code Standard Overview", url: "https://www.iso.org/standard/62021.html" },
-    { label: "Google - QR Codes in Chrome", url: "https://support.google.com/chrome/" },
-  ],
-  "/tools/qr-code-scanner": [
-    { label: "OWASP - Safer Link Handling", url: "https://owasp.org/www-project-top-ten/" },
-    { label: "NCSC - Phishing and Suspicious Links", url: "https://www.ncsc.gov.uk/guidance/phishing" },
-  ],
-  "/tools/instagram-hashtag-generator": [
-    { label: "Instagram Creators - Best Practices", url: "https://creators.instagram.com/" },
-    { label: "Meta Business - Content Performance", url: "https://www.facebook.com/business/learn" },
-  ],
-  "/tools/emi-calculator": [
-    { label: "RBI - Consumer Education", url: "https://www.rbi.org.in/commonperson/English/default.aspx" },
-    { label: "Investopedia - EMI and Loan Basics", url: "https://www.investopedia.com/" },
-  ],
-};
-
 export const getFestivalSlugByBlogSlug = (blogSlug: string) => festivalSlugByBlogSlug[blogSlug];
 
 export const getToolPathByBlogSlug = (blogSlug: string) => toolPathByBlogSlug[blogSlug];
-
-export const getToolExternalReferences = (toolPath: string): CoverageReference[] =>
-  toolReferencesByPath[toolPath] ?? [];
-
-export const getAutoReferencesForBlogSlug = (blogSlug: string): CoverageReference[] => {
-  const festivalSlug = getFestivalSlugByBlogSlug(blogSlug);
-  if (festivalSlug) {
-    const festival = festivals.find((item) => item.slug === festivalSlug);
-    const festivalName = festival?.name ?? festivalSlug.replace(/-wishes$/, "").replace(/-/g, " ");
-    const query = encodeURIComponent(festivalName);
-
-    return [
-      {
-        label: `Wikipedia - ${festivalName}`,
-        url: `https://en.wikipedia.org/wiki/Special:Search?search=${query}`,
-      },
-      {
-        label: `timeanddate.com - ${festivalName} and related observances`,
-        url: `https://www.timeanddate.com/holidays/?query=${query}`,
-      },
-    ];
-  }
-
-  const toolPath = getToolPathByBlogSlug(blogSlug);
-  return toolPath ? getToolExternalReferences(toolPath) : [];
-};
