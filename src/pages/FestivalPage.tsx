@@ -5,6 +5,7 @@ import { Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GiftBox from "@/components/GiftBox";
+import JsonLd from "@/components/JsonLd";
 import { getFestivalBlogPost } from "@/data/blogCoverage";
 import DiwaliLamp from "@/components/DiwaliLamp";
 import EasterEgg from "@/components/EasterEgg";
@@ -241,6 +242,21 @@ const FestivalPage = () => {
               }))}
             />
           </div>
+
+          {festivalFaqs.length > 0 && (
+            <JsonLd data={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: festivalFaqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            }} />
+          )}
         </section>
       </main>
       <Footer />

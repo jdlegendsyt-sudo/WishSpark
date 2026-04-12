@@ -352,9 +352,13 @@ const BlogPost = () => {
               "@type": "BlogPosting",
               headline: post.title,
               description: post.excerpt,
-              mainEntityOfPage: `https://www.wishspark.xyz/blog/${post.slug}`,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://www.wishspark.xyz/blog/${post.slug}`,
+              },
               wordCount,
               keywords: post.seoKeywords?.join(", "),
+              image: "https://www.wishspark.xyz/og-image.png",
               author: {
                 "@type": "Person",
                 name: authorProfile.name,
@@ -362,16 +366,65 @@ const BlogPost = () => {
                 description: authorProfile.bio,
                 url: authorProfile.profileUrl,
               },
-              datePublished: post.date,
-              dateModified: post.updatedDate ?? post.date,
+              datePublished: new Date(post.date).toISOString(),
+              dateModified: new Date(post.updatedDate ?? post.date).toISOString(),
               publisher: {
                 "@type": "Organization",
                 name: "WishSpark",
                 url: "https://www.wishspark.xyz",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.wishspark.xyz/og-image.png",
+                },
               },
             }),
           }}
         />
+
+        {/* FAQ Schema — auto-extracted from ### headings inside FAQ section */}
+        {(() => {
+          const faqPairs: Array<{ question: string; answer: string }> = [];
+          let inFaq = false;
+          for (let i = 0; i < post.content.length; i++) {
+            const block = post.content[i];
+            if (block.startsWith("## ") && /faq|frequently asked/i.test(block)) {
+              inFaq = true;
+              continue;
+            }
+            if (inFaq && block.startsWith("## ")) break;
+            if (inFaq && block.startsWith("### ")) {
+              const question = block.replace(/^###\s*/, "");
+              const answerParts: string[] = [];
+              for (let j = i + 1; j < post.content.length; j++) {
+                if (post.content[j].startsWith("## ") || post.content[j].startsWith("### ")) break;
+                answerParts.push(post.content[j]);
+              }
+              if (answerParts.length > 0) {
+                faqPairs.push({ question, answer: answerParts.join(" ") });
+              }
+            }
+          }
+          if (faqPairs.length === 0) return null;
+          return (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqPairs.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: faq.answer,
+                    },
+                  })),
+                }),
+              }}
+            />
+          );
+        })()}
       </main>
       <Footer />
     </div>
