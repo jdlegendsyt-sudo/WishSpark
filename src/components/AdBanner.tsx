@@ -90,7 +90,7 @@ const AdBanner = ({ adSlot, adFormat = "auto", fullWidth = true, className = "" 
       <ins
         className="adsbygoogle"
         style={{ display: "block", width: fullWidth ? "100%" : "auto" }}
-        data-ad-client="ca-pub-4104175069708345"
+        data-ad-client="ca-pub-3907372619896669"
         data-ad-slot={resolvedAdSlot}
         data-ad-format={adFormat}
         data-full-width-responsive="true"
