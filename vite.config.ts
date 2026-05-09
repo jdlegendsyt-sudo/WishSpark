@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Avoid Windows/OneDrive file-lock failures when Vite tries to wipe dist.
-    emptyOutDir: false,
+    emptyOutDir: true,
   },
 }));
