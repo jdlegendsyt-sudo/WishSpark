@@ -152,7 +152,7 @@ const AdBanner = ({ adSlot, adFormat = "auto", fullWidth = true, className = "" 
               ? "90px"
               : "100px", // "auto" format — 100px is safe baseline
         }}
-        data-ad-client="ca-pub-3907372619896669"
+        data-ad-client="ca-pub-4917647661317247"
         data-ad-slot={resolvedAdSlot}
         data-ad-format={adFormat}
         data-full-width-responsive="true"
